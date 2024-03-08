@@ -1,11 +1,12 @@
-import './globals.css'
+import './globals.css';
+import React from 'react';
+import ReactDOM from 'react-dom'; // Correct import statement
 
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { App } from './App.jsx'
+import { App } from './App.jsx'; // Verify the import path for App.jsx
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-)
+  document.getElementById('root')
+);
