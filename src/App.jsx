@@ -8,7 +8,7 @@ import ModalOrdemCertificado from "./components/modals/ordem-certificado";
 import LoginPage from "./components/layout/login";
 import ForgetPage from "./components/layout/forget-senha";
 import { CardGestor } from "./components/cards/cards";
-import SideBarMobile from "./components/layout/sidebarmenu";
+import SideBarMobile from "./components/layout/sidebar-mobile";
 
 export function App() {
   return (
@@ -18,6 +18,7 @@ export function App() {
         <div className="p-5 mt-20">
           <h1 className="text-4xl text-azul font-bold">Visão Geral</h1>
             <div className="flex flex-wrap gap-2">
+              <ModalPeca />
             </div>
         </div>
       </div>

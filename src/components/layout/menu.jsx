@@ -1,5 +1,6 @@
 import logo from "../../assets/logo.svg";
-import SideBarMobile from "./sidebarmenu";
+import SideBarMobile from "./sidebar-mobile";
+import Dropdown from "../modals/dropdown";
 
 
 export default function Menu() {
@@ -8,19 +9,15 @@ export default function Menu() {
       {/* INICIO HEADER */}
       <nav className="fixed top-0 z-50 w-full bg-white border-gray-200">
         <div className="flex justify-between items-center p-3 px-6 border-b border-slate-200">
-          
+
           {/* SIDEBAR MENU QUE APARECE EM TELAS MENOR DO QUE 640PX */}
           <div className="hidden max-sm:block items-center">
             <SideBarMobile />
           </div>
           {/* FIM */}
-          
-          <img className="w-8 h-8" src={logo} alt="logo" />
-          <img
-            className="rounded-full w-10 h-10"
-            src="https://static01.nyt.com/newsgraphics/2020/11/12/fake-people/4b806cf591a8a76adfc88d19e90c8c634345bf3d/fallbacks/mobile-03.jpg"
-            alt="profile-icon"
-          />
+
+          <img className="w-8 h-8 max-sm:invisible" src={logo} alt="logo" />
+          <Dropdown />
         </div>
       </nav>
       {/* FIM HEADER */}
