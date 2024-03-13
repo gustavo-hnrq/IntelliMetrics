@@ -1,4 +1,5 @@
 import logo from "../../assets/logo.svg";
+import SideBarMobile from "./sidebarmenu";
 
 
 export default function Menu() {
@@ -7,6 +8,13 @@ export default function Menu() {
       {/* INICIO HEADER */}
       <nav className="fixed top-0 z-50 w-full bg-white border-gray-200">
         <div className="flex justify-between items-center p-3 px-6 border-b border-slate-200">
+          
+          {/* SIDEBAR MENU QUE APARECE EM TELAS MENOR DO QUE 640PX */}
+          <div className="hidden max-sm:block items-center">
+            <SideBarMobile />
+          </div>
+          {/* FIM */}
+          
           <img className="w-8 h-8" src={logo} alt="logo" />
           <img
             className="rounded-full w-10 h-10"
