@@ -10,30 +10,26 @@ export default function ForgotPassword() {
     <div class="flex flex-wrap max-sm:">
       <div class="flex w-full flex-col md:w-1/2">
         <div class="lg:w-[28rem] max-sm:w-[18rem] mx-auto my-auto flex flex-col justify-center pt-32 md:justify-start md:px-6 md:pt-0">
-          <p class="text-left text-3xl font-bold">Esqueceu sua senha?</p>
+          <p class="text-left text-3xl font-bold">Redefinir senha</p>
           <Alert className="flex flex-col w-full my-5">
             <RocketIcon className="h-4 w-4" />
             <AlertTitle>Bem-vindo!</AlertTitle>
             <AlertDescription>
-            Insira seu endereço de e-mail abaixo para redefinir sua senha.
+            Insira uma uma nova senha para acessar o nosso sistema.
             </AlertDescription>
           </Alert>
           <form class="flex flex-col pt-3 gap-5">
             <div class="flex flex-col gap-2">
-              <Label>Email</Label>
-              <Input type="email" placeholder="Digite aqui o seu email" />
+              <Label>Senha</Label>
+              <Input type="email" placeholder="Minimo 8 caracteres" />
             </div>
             <div class="flex flex-col gap-2">
-              <Label>Senha</Label>
-              <Input type="password" placeholder="Digite aqui sua senha" />
+              <Label>Confirmar Senha</Label>
+              <Input type="password" placeholder="Minimo 8 caracteres" />
             </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox />
-              <Label>Manter logado</Label>
-            </div>
-            <Button>Logar</Button>
+            <Button>Redefinir</Button>
             <a href="#" className="hover:underline text-blue-600 text-sm">
-              Esqueceu a sua senha?
+              Já possui uma conta?
             </a>
           </form>
         </div>
