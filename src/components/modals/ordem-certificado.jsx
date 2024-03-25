@@ -60,7 +60,7 @@ export default function ModalOrdemCertificado() {
                 <EscolherData />
               </div>
               <div className="col-span-2">
-                <Label>Descricação</Label>
+                <Label>Descrição</Label>
                 <Textarea placeholder="Digite a descrição aqui..." />
               </div>
             </div>
