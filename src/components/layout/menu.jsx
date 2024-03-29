@@ -23,7 +23,7 @@ export default function Menu() {
       {/* FIM HEADER */}
 
       {/* INICIO MENU LATERAL */}
-      <aside className="fixed left-0 top-16 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-white border-r border-slate-200">
+      <aside className="left-0 top-16 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-white border-r border-slate-200">
         <div className="h-full px-4 py-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
             <li>
