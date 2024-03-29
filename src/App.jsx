@@ -9,11 +9,12 @@ import LoginPage from "./pages/login";
 import ForgotPage from "./pages/forgot-password";
 import { CardGestor } from "./components/cards/cards";
 import SideBarMobile from "./components/layout/sidebar-mobile";
+import AddRelatorio from "./pages/add-relatorio";
 
 export function App() {
   return (
     <div>
-      <LoginPage />
+      <AddRelatorio />
     </div>
   )
 }
