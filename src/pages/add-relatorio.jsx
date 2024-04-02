@@ -215,46 +215,621 @@ export default function AddRelatorio() {
               </h4>
 
               {/* tabela */}
-            </div>
-
-            <div>
-              <div className="flex flex-col w-full py-3 px-4">
-                <Label className="text-[#3F3F3F] font-extrabold text-base w-full py-1 px-4 bg-[#DBDBDB] rounded-t-lg">
-                  Notas (Peça):
-                </Label>
-                <Input
-                  type="text"
-                  placeholder="Digite o nome..."
-                  className="rounded-b-lg rounded-t-none h-[200px]"
-                />
+              <div className="overflow-x-auto w-full py-3 px-4">
+                <table className="min-w-full border-collapse border border-black rounded-lg">
+                  <thead className="bg-[#DBDBDB]">
+                    <tr>
+                      <th scope="col" className="py-4 tracking-wider border-collapse border border-black">M</th>
+                      <th scope="col" className="py-4 border-collapse border border-black">Dimensão Nominal</th>
+                      <th scope="col" className="py-4 border-collapse border border-black">1° Valor</th>
+                      <th scope="col" className="py-4 border-collapse border border-black">2° Valor</th>
+                      <th scope="col" className="py-4 border-collapse border border-black">3° Valor</th>
+                      <th scope="col" className="py-4 border-collapse border border-black">4° Valor</th>
+                      <th scope="col" className="py-4 border-collapse border border-black">Média</th>
+                      <th scope="col" className="py-4 border-collapse border border-black">Amplitude</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white border-collapse border border-black">
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                      <td className="whitespace-nowrap p-0 border-collapse border border-black">
+                        <Input
+                          type="text"
+                          className="border-x-2 border-y-none m-0 rounded-none"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
+              <div>
+                <div className="flex flex-col w-full py-3 px-4">
+                  <Label className="text-[#3F3F3F] font-extrabold text-base w-full py-1 px-4 bg-[#DBDBDB] rounded-t-lg">
+                    Notas (Peça):
+                  </Label>
+                  <Input
+                    type="text"
+                    placeholder="Digite o nome..."
+                    className="rounded-b-lg rounded-t-none h-[200px]"
+                  />
+                </div>
 
-              {/* inputs com inici, termini e tempo total */}
-
-              <div className="flex flex-col w-full justify-between py-6 px-4">
-                {/* COLUNA DE INPUT */}
                 <div className="flex flex-row w-full justify-between py-3 gap-7 px-4">
-                  <div className="flex flex-row gap-3 w-3/4 items-center">
-                    <Label className="font-bold text-[#3F3F3F] text-base w-[15%]">
-                      Local
+                  <div className="flex flex-row gap-3 w-[30%] items-center">
+                    <Label className="font-bold text-[#828282] text-base w-[70%]">
+                      Início:
                     </Label>
-                    <Input type="text" placeholder="Digite o nome..." />
+                    <Input
+                      type="number"
+                      placeholder="h"
+                      max="24"
+                      min="0"
+                      className="placeholder:text-[#828282] font-bold"
+                    />
+                    <Input
+                      type="number"
+                      placeholder="min"
+                      max="60"
+                      min="0"
+                      className="placeholder:text-[#828282] font-bold"
+                    />
                   </div>
-
-                  <div className="flex flex-row gap-3 w-1/4 items-center">
-                    <Label className="font-bold text-[#3F3F3F] text-base  ">
-                      Data
+                  <div className="flex flex-row gap-3 w-[30%] items-center">
+                    <Label className="font-bold text-[#828282] text-base w-[70%]">
+                      Termino:
                     </Label>
-                    <Input type="text" placeholder="Digite o nome..." />
+                    <Input
+                      type="number"
+                      placeholder="h"
+                      max="24"
+                      min="0"
+                      className="placeholder:text-[#828282] font-bold"
+                    />
+                    <Input
+                      type="number"
+                      placeholder="min"
+                      max="60"
+                      min="0"
+                      className="placeholder:text-[#828282] font-bold"
+                    />
+                  </div>
+                  <div className="flex flex-row gap-3 w-[30%] items-center">
+                    <Label className="font-bold text-[#828282] text-base w-[500px]">
+                      Tempo Total:
+                    </Label>
+                    <Input
+                      type="number"
+                      placeholder="h"
+                      max="24"
+                      min="0"
+                      className="placeholder:text-[#828282] font-bold"
+                    />
+                    <Input
+                      type="number"
+                      placeholder="min"
+                      max="60"
+                      min="0"
+                      className="placeholder:text-[#828282] font-bold"
+                    />
                   </div>
                 </div>
-                {/* COLUNA DE INPUT */}
-                <div className="flex flex-row w-full justify-between py-3 gap-7 px-4">
-                  <div className="flex flex-row gap-3 w-full items-center">
-                    <Label className="font-bold text-[#3F3F3F] text-base w-[10%]">
-                      Assinatura
-                    </Label>
-                    <Input type="text" placeholder="Digite o nome..." />
+
+                <div className="flex flex-col w-full justify-between py-6 px-4">
+                  {/* COLUNA DE INPUT */}
+                  <div className="flex flex-row w-full justify-between py-3 gap-7 ">
+                    <div className="flex flex-row gap-3 w-3/4 items-center">
+                      <Label className="font-bold text-[#3F3F3F] text-base w-[15%]">
+                        Local
+                      </Label>
+                      <Input type="text" placeholder="Digite o nome..." />
+                    </div>
+
+                    <div className="flex flex-row gap-3 w-1/4 items-center">
+                      <Label className="font-bold text-[#3F3F3F] text-base  ">
+                        Data
+                      </Label>
+                      <Input type="text" placeholder="Digite o nome..." />
+                    </div>
+                  </div>
+                  {/* COLUNA DE INPUT */}
+                  <div className="flex flex-row w-full justify-between py-3 gap-7">
+                    <div className="flex flex-row gap-3 w-full items-center">
+                      <Label className="font-bold text-[#3F3F3F] text-base w-[10%]">
+                        Assinatura
+                      </Label>
+                      <Input type="text" placeholder="Digite o nome..." />
+                    </div>
                   </div>
                 </div>
               </div>
