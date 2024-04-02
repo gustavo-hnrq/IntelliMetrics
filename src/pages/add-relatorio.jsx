@@ -13,19 +13,19 @@ export default function AddRelatorio() {
     },
   ]);
 
+  const [inputs, setInputs] = useState(["", ""]);
+
+  const adicionarMetrologistas = () => {
+    // Clonar o array inputs e adicionar um novo elemento vazio
+    setInputs([...inputs, '']);
+  }
+
   const adicionarLinha = () => {
     const novaLinha = {
       id: linhas.length + 1,
       valores: ["", "", "", "", "", "", "", ""],
     };
-    setLinhas([...linhas, novaLinha]); // Adicionando a nova linha ao estado
-  };
- 
-
-  const handleChange = (e, linhaIndex, colunaIndex) => {
-    const novasLinhas = [...linhas];
-    novasLinhas[linhaIndex].valores[colunaIndex] = e.target.value;
-    setLinhas(novasLinhas); // Atualizando o estado com os novos valores
+    setLinhas([...linhas, novaLinha]);
   };
 
   return (
@@ -50,23 +50,21 @@ export default function AddRelatorio() {
               <h4 className="text-[#3F3F3F] font-bold text-sm pb-2">
                 METROLOGISTAS
               </h4>
-              <div className="flex flex-row w-full justify-between">
-                {/* COLUNA DE INPUT */}
-                <div className="flex flex-col gap-3 w-[49%]">
-                  <Input type="text" placeholder="Digite o nome..." />
-                  <Input type="text" placeholder="Digite o nome..." />
-                  <Input type="text" placeholder="Digite o nome..." />
-                  <Input type="text" placeholder="Digite o nome..." />
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-                {/* COLUNA DE INPUT */}
-                <div className="flex flex-col gap-3 w-[49%]">
-                  <Input type="text" placeholder="Digite o nome..." />
-                  <Input type="text" placeholder="Digite o nome..." />
-                  <Input type="text" placeholder="Digite o nome..." />
-                  <Input type="text" placeholder="Digite o nome..." />
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
+              <div className="flex flex-wrap w-full justify-between gap-3">
+                {inputs.map((input, index) => (
+                  <Input
+                    key={index}
+                    type="text"
+                    placeholder="Digite o nome..."
+                    className="w-[49%]"
+                    value={input}
+                  />
+                ))}
+              </div>
+              <div className="w-full flex flex-row justify-end items-center py-5 gap-3">
+                <Button onClick={adicionarMetrologistas}>
+                  Adicionar Metrologistas
+                </Button>
               </div>
             </div>
 
