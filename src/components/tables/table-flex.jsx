@@ -19,7 +19,7 @@ import {
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 
-export function Tabela({ data, columns }) {
+export function Tabela({ data, columns, button }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const rowsPerPage = 9;
@@ -43,13 +43,14 @@ export function Tabela({ data, columns }) {
 
   return (
     <div className="mx-auto w-1/2">
-      <div className="flex items-center py-4">
+      <div className="flex justify-between items-center py-4">
         <Input
           placeholder="Pesquisar..."
           className="max-w-sm"
           value={searchQuery}
           onChange={handleSearch}
         />
+        {button}
       </div>
       <div className="rounded-md border">
         <Table>
