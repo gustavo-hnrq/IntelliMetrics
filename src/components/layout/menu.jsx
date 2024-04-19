@@ -1,35 +1,27 @@
-import logo from "../../assets/logo.svg";
-import SideBarMobile from "./sidebar-mobile";
-import Dropdown from "../modals/dropdown";
-
+import logo from "@/assets/logo.svg";
+import logo1 from "@/assets/logo1.svg";
+import SideBarMobile from "@/components/layout/sidebar-mobile";
 
 export default function Menu() {
   return (
-    <div className="bg-white text-azul">
+    <div>
       {/* INICIO HEADER */}
-      <nav className="fixed top-0 z-50 w-full bg-white border-gray-200">
-        <div className="flex justify-between items-center p-3 px-6 border-b border-slate-200">
-
-          {/* SIDEBAR MENU QUE APARECE EM TELAS MENOR DO QUE 640PX */}
-          <div className="hidden max-sm:block items-center">
-            <SideBarMobile />
-          </div>
-          {/* FIM */}
-
-          <img className="w-8 h-8 max-sm:invisible" src={logo} alt="logo" />
-          <Dropdown />
-        </div>
-      </nav>
+      <SideBarMobile />
       {/* FIM HEADER */}
 
       {/* INICIO MENU LATERAL */}
-      <aside className="left-0 top-16 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-white border-r border-slate-200">
-        <div className="h-full px-4 py-4 overflow-y-auto">
+      <div className="fixed top-0 left-0 bottom-0 w-80 text-azul transition-transform -translate-x-full md:translate-x-0 bg-white border-r-2 border-slate-200">
+        <div className="p-4">
           <ul className="space-y-2 font-medium">
+            <div className="m-5">
+              <a href="">
+                <img src={logo1} alt="logo" />
+              </a>
+            </div>
             <li>
               <a
                 href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-blue-200 hover:text-blue-600 group"
+                className="flex items-center p-2 transition-all	ease-in	text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="ms-3">Início</span>
               </a>
@@ -37,7 +29,7 @@ export default function Menu() {
             <li>
               <a
                 href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-200 hover:text-blue-600"
+                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Certificados
@@ -47,7 +39,7 @@ export default function Menu() {
             <li>
               <a
                 href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-200 hover:text-blue-600"
+                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Relatórios
@@ -57,7 +49,7 @@ export default function Menu() {
             <li>
               <a
                 href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-200 hover:text-blue-600"
+                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Instrumentos
@@ -67,32 +59,26 @@ export default function Menu() {
             <li>
               <a
                 href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-200 hover:text-blue-600"
+                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">Peças</span>
               </a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-200 hover:text-blue-600"
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Ordens de Serviço
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-blue-200 hover:text-blue-600"
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">Clientes</span>
-              </a>
-            </li>
           </ul>
         </div>
-      </aside>
+
+        <div className="flex items-center p-2 rounded-lg m-5 fixed bottom-0 space-x-2">
+          <img
+            className="rounded-full w-12 h-12"
+            src="https://static01.nyt.com/newsgraphics/2020/11/12/fake-people/4b806cf591a8a76adfc88d19e90c8c634345bf3d/fallbacks/mobile-03.jpg"
+            alt="profile-icon"
+          />
+          <div className="flex flex-col">
+            <p className="font-bold">Ronaldo Freitas</p>
+            <p className="text-sm	">ronaldofreitas@gmail.com</p>
+          </div>
+        </div>
+      </div>
       {/* FIM MENU LATERAL */}
     </div>
   );

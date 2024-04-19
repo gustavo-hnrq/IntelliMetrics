@@ -19,7 +19,7 @@ module.exports = {
     extend: {
       colors: {
         azul: "#111827",
-        backgroundcinza: "#F9F9F9",
+        backgroundcinza: "#F3F4F8",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -76,4 +76,6 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  plugins: ["prettier-plugin-tailwindcss"]
+
 }

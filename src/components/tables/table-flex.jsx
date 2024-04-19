@@ -19,10 +19,10 @@ import {
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 
-export function Tabela({ data, columns, button }) {
+export function TabelaFlex({ nome, data, columns, button }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
-  const rowsPerPage = 9;
+  const rowsPerPage = 10;
 
   const filteredData = data.filter(item =>
     Object.values(item).some(value =>
@@ -42,7 +42,8 @@ export function Tabela({ data, columns, button }) {
   };
 
   return (
-    <div className="mx-auto w-1/2">
+    <div className="ml-80 max-md:ml-0 p-10">
+      <h1 className="text-3xl font-bold mb-4">{nome}</h1>
       <div className="flex justify-between items-center py-4">
         <Input
           placeholder="Pesquisar..."
@@ -52,7 +53,7 @@ export function Tabela({ data, columns, button }) {
         />
         {button}
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border bg-white">
         <Table>
           <TableHeader>
             <TableRow className="font-bold">

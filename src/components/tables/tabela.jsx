@@ -1,4 +1,4 @@
-import { Tabela } from './table-flex';
+import { TabelaFlex } from './table-flex';
 import clientes from './data';
 import ModalInstrumento from '../modals/instrumento';
 
@@ -8,11 +8,10 @@ const columns = [
   { key: 'cargo', label: 'Cargo' },
 ];
 
-export function MinhaTabela() {
+export function Tabela() {
   return(
     <div>
-
-      <Tabela data={clientes} columns={columns} button={<ModalInstrumento/>} />
+      <TabelaFlex nome={"Adicionar Instrumento"} data={clientes} columns={columns} button={<ModalInstrumento/>} />
     </div>
   )
   
