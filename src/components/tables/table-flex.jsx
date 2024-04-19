@@ -42,7 +42,7 @@ export function TabelaFlex({ nome, data, columns, button }) {
   };
 
   return (
-    <div className="ml-80 max-md:ml-0 p-10">
+    <div className="ml-80 max-md:ml-0 px-10">
       <h1 className="text-3xl font-bold mb-4">{nome}</h1>
       <div className="flex justify-between items-center py-4">
         <Input

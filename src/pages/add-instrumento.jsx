@@ -15,7 +15,7 @@ export default function TelaInstrumentos() {
   return (
     <div>
       <Menu />
-      <div className="h-screen bg-backgroundcinza pt-10">
+      <div className="h-max	 bg-backgroundcinza pt-10">
         <TabelaFlex
           nome={"Adicionar Instrumentos"}
           data={clientes}
