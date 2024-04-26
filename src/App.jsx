@@ -3,15 +3,17 @@ import ModalCliente from "./components/modals/cliente";
 import ModalMembro from "./components/modals/membro";
 import ModalPeca from "./components/modals/peca";
 import ModalInstrumento from "./components/modals/instrumento";
-import ModalOrdemRelatorio from "./components/modals/ordem-relatorio"
-import ModalOrdemCertificado from "./components/modals/ordem-certificado";
+import ModalOrdem from "./components/modals/ordem";
 import LoginPage from "./pages/login";
 import ForgotPage from "./pages/forgot-password";
 import { CardGestor } from "./components/cards/cards";
 import SideBarMobile from "./components/layout/sidebar-mobile";
 import AddRelatorio from "./pages/add-relatorio";
-import TelaInstrumento from "@/pages/add-instrumento"
-import TelaGestor from "@/pages/gestor";
+import TelaRelatorios from "./pages/Tela-relatorios";
+import TelaCertificados from "./pages/Tela-certificado";
+import TelaOrdenseRecebidos from "./pages/Tela-ordemerecebido";
+import AddCertificadoPaqui from "./pages/add-certificado_paqui";
+import AddCertificadoMicro from "./pages/add-certificado_micro";
 
 export function App() {
   return (
