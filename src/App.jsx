@@ -14,6 +14,7 @@ import TelaCertificados from "./pages/Tela-certificado";
 import TelaOrdenseRecebidos from "./pages/Tela-ordemerecebido";
 import AddCertificadoPaqui from "./pages/add-certificado_paqui";
 import AddCertificadoMicro from "./pages/add-certificado_micro";
+import TelaGestor from "./pages/gestor";
 
 export function App() {
   return (
