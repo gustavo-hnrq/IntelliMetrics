@@ -1,8 +1,8 @@
 import Menu from "@/components/layout/menu";
 import { Tabs , TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ResulPaquimetro from "@/components/paquimetro/resultadoPaquimetro";
-import IncertPaquimetro from "@/components/paquimetro/incertezaPaquimetro";
-import CertPaquimetro from "@/components/paquimetro/certificadoPaquimetro";
+import ResulPaquimetro from "@/components/certificados/paquimetro/resultadoPaquimetro";
+import IncertPaquimetro from "@/components/certificados/paquimetro/incertezaPaquimetro";
+import CertPaquimetro from "@/components/certificados/paquimetro/certificadoPaquimetro";
 
 export default function AddCertificadoPaqui() {
 
@@ -10,8 +10,7 @@ export default function AddCertificadoPaqui() {
     <div className="flex">
       <Menu />
 
-      <div className="flex flex-col bg-[#E5F1FF] pt-20 items-center  w-screen gap-5 ">
-
+      <div className="flex flex-col ml-80 pl-10 h-full bg-backgroundcinza pt-20 items-center  w-screen gap-5 ">
 
         <Tabs defaultValue="Calc" >
              

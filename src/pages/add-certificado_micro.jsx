@@ -1,8 +1,8 @@
 import Menu from "@/components/layout/menu";
 import { Tabs , TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ResulMicrometro from "@/components/micrometro/resultadoMicrometro";
-import IncertMicrometro from "@/components/micrometro/incertezaMicrometro";
-import CertMicrometro from "@/components/micrometro/certificadoMicrometro";
+import ResulMicrometro from "@/components/certificados/micrometro/resultadoMicrometro";
+import IncertMicrometro from "@/components/certificados/micrometro/incertezaMicrometro";
+import CertMicrometro from "@/components/certificados/micrometro/certificadoMicrometro";
 
 
 export default function AddCertificadoMicro() {
@@ -11,7 +11,7 @@ export default function AddCertificadoMicro() {
     <div className="flex">
       <Menu />
 
-      <div className="flex flex-col bg-[#E5F1FF] pt-20 items-center  w-screen gap-5 ">
+      <div className="flex flex-col ml-80 pl-10 bg-backgroundcinza pt-20 items-center  w-screen gap-5 ">
 
 
         <Tabs defaultValue="Calc" >

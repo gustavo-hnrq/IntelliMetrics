@@ -39,7 +39,7 @@ export default function AddRelatorio() {
       <Menu />
 
       {/* RELTÓRIO */}
-      <div className="flex flex-col bg-[#E5F1FF] pt-20 items-center  w-screen gap-5 ">
+      <div className="flex flex-col bg-backgroundcinza pt-20 ml-80 pl-10 items-center  w-screen gap-5 ">
         {/* TITULO E NÚMERO DO RELATÓRIO */}
         <div className="flex flex-row justify-between w-[90%]">
           <h1 className="text-black font-bold text-3xl">
