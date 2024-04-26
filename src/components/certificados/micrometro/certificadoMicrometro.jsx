@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import selo from "../../assets/selo certificado.png";
-import senai from "../../assets/Senai Logotipo_destaque.png";
+import selo from "../../../assets/selo certificado.png";
+import senai from "../../../assets/Senai Logotipo_destaque.png";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
 
