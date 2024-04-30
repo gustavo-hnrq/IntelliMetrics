@@ -15,11 +15,12 @@ import TelaOrdenseRecebidos from "./pages/Tela-ordemerecebido";
 import AddCertificadoPaqui from "./pages/add-certificado_paqui";
 import AddCertificadoMicro from "./pages/add-certificado_micro";
 import TelaGestor from "./pages/gestor";
+import IncertMicrometro from "./components/certificados/micrometro/incertezaMicrometro";
 
 export function App() {
   return (
     <div>
-      <TelaGestor />
+      <IncertMicrometro />
     </div>
   )
 }

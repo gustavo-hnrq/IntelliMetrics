@@ -1,7 +1,7 @@
+import Menu from "@/components/layout/menu";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Menu from "../layout/menu";
-import { Button } from "../ui/button";
 
 export default function ResulPaquimetro() {
   const renderizarTable = () => {
