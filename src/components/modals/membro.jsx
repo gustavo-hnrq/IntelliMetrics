@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { PlusCircle } from "lucide-react"
+import { Switch } from "@/components/ui/switch"
  
 export default function ModalMembro() {
   return (
@@ -22,9 +23,15 @@ export default function ModalMembro() {
           <PlusCircle className="mr-2 h-4 w-4"/> Adicionar Membro
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className="w-80">
+      <AlertDialogContent className="w-96">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-3xl font-bold mb-3">Adicionar Membro</AlertDialogTitle>
+        <div className="flex flex-row w-full justify-between">
+            <AlertDialogTitle className="text-3xl font-bold mb-3">Adicionar Membro</AlertDialogTitle>
+            <div className="flex flex-col">
+              <Label>status</Label>
+              <Switch aria-readonly />
+            </div>
+          </div>
           <AlertDialogDescription>
           <div className="grid gap-2">
             <Label>Nome</Label>

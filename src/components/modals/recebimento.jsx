@@ -24,7 +24,7 @@ import {
         </AlertDialogTrigger>
         <AlertDialogContent className="max-w-4xl">
           <AlertDialogHeader>
-            <div className="flex flex-row  justify-between pb-6">
+            <div className="flex flex-row justify-between pb-6">
                 <AlertDialogTitle className="text-3xl font-bold mb-3">Recebimento de Itens</AlertDialogTitle>
                 <Input className="w-52" placeholder="N° da Proposta" />
             </div>

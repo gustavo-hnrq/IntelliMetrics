@@ -22,17 +22,21 @@ export default function ModalInstrumento() {
           <PlusCircle className="mr-2 h-4 w-4"/> Adicionar Instrumento
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="max-w-4xl">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-3xl font-bold mb-3">Adicionar Instrumento</AlertDialogTitle>
           <AlertDialogDescription>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-3 gap-3">
             <div className="gap-2">
-              <Label>Código de Identificação</Label>
+              <Label>Interessado/Cliente</Label>
               <Input placeholder="Digite aqui " />
             </div>
             <div>
-              <Label>Resolução</Label>
+              <Label>Código da Ordem de Serviço</Label>
+              <Input placeholder="Digite aqui " />
+            </div>
+            <div>
+              <Label>Categoria</Label>
               <Input placeholder="Digite aqui " />
             </div>
             <div>
@@ -40,11 +44,11 @@ export default function ModalInstrumento() {
               <Input placeholder="Digite aqui " />
             </div>
             <div>
-              <Label>Tipo de Instrumento</Label>
+              <Label>Nº de Série</Label>
               <Input placeholder="Digite aqui " />
             </div>
             <div>
-              <Label>Nº de Série</Label>
+              <Label>Identificação do Cliente</Label>
               <Input placeholder="Digite aqui " />
             </div>
             <div>
@@ -52,19 +56,23 @@ export default function ModalInstrumento() {
               <Input placeholder="Digite aqui " />
             </div>
             <div>
-              <Label>Faixa nominal</Label>
+              <Label>Faixa Nominal - FN</Label>
               <Input placeholder="Digite aqui " />
             </div>
             <div>
-              <Label>Unidade de Medida</Label>
+              <Label>Unidade de Medida / FN</Label>
               <Input placeholder="Digite aqui " />
             </div>
             <div>
-              <Label>Interessado/Cliente</Label>
+              <Label>Divisão/Resolução</Label>
               <Input placeholder="Digite aqui " />
             </div>
             <div>
-              <Label>Contratante</Label>
+              <Label>Unidade de medida - Div/Res</Label>
+              <Input placeholder="Digite aqui " />
+            </div>
+            <div>
+              <Label>Órgão Responsável</Label>
               <Input placeholder="Digite aqui " />
             </div>
           </div>

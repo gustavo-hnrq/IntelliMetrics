@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { EscolherData } from "@/components/ui/date-picker";
 import { PlusCircle } from "lucide-react";
+import { Switch } from "@/components/ui/switch"
 
 export default function ModalOrdem() {
   return (
@@ -24,45 +25,59 @@ export default function ModalOrdem() {
           <PlusCircle className="mr-2 h-4 w-4" /> Ordem de Serviço
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="max-w-4xl">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-3xl font-bold mb-3">
-            Ordem de Serviço
-          </AlertDialogTitle>
+          <div className="flex flex-row w-full justify-between">
+            <AlertDialogTitle className="text-3xl font-bold mb-3">Ordem de Serviço</AlertDialogTitle>
+            <div className="flex flex-col">
+              <Label>status</Label>
+              <Switch aria-readonly />
+            </div>
+          </div>
           <AlertDialogDescription>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="col-span-2">
+            <div className="grid grid-cols-3 gap-3">
+              <div>
                 <Label>Titulo</Label>
                 <Input placeholder="Digite aqui " />
               </div>
               <div>
-                <Label>Código da Ordem</Label>
+                <Label>Tipo</Label>
                 <Input placeholder="Digite aqui " />
               </div>
               <div>
-                <Label>Responsável</Label>
+                <Label>Responsável/Usuario</Label>
                 <Input placeholder="Digite aqui " />
               </div>
               <div>
-                <Label>Tipo </Label>
+                <Label>Contratante</Label>
+                <Input placeholder="Digite aqui " />
+              </div>
+              
+              <div>
+                <Label>Contato do Contratante</Label>
                 <Input placeholder="Digite aqui " />
               </div>
               <div>
-                <Label>Peça</Label>
+                <Label>E-mail do Contratante</Label>
                 <Input placeholder="Digite aqui " />
               </div>
               <div>
-                <Label>Data de Início</Label>
-                <EscolherData />
+                <Label>Cliente</Label>
+                <Input placeholder="Digite aqui " />
               </div>
               <div>
-                <Label>Data de Término</Label>
-                <EscolherData />
-              </div>
-              <div className="col-span-2">
-                <Label>Descricação</Label>
-                <Textarea placeholder="Digite a descrição aqui..." />
-              </div>
+                  <Label>Data de Início</Label>
+                  <EscolherData />
+                </div>
+                <div>
+                  <Label>Data de Término</Label>
+                  <EscolherData />
+                </div>
+            </div>
+
+            <div className="mt-4">
+              <Label>Descrição</Label>
+              <Input className="h-24" placeholder="Digite aqui " />
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
