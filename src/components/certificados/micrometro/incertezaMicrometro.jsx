@@ -6,17 +6,9 @@ import { useState } from "react";
 
 export default function IncertMicrometro() {
   return (
-    <div>
-      {/* ------------------ MENU ------------------ */}
-      <Menu />
-
-      {/* ------------------ DIV COM O CONTEÚDO ------------------ */}
-      <div className="max-md:ml-0 bg-[#E5F1FF] ml-80 h-full flex flex-col pt-20">
-        {/* ------------------ PARTE DO MENU DE CIMA ------------------ */}
-        <div> menuzim brabo</div>
-
-        {/* ------------------ FORMULÁRIO ------------------ */}
+    
         <div className="flex flex-col justify-between w-full">
+          {/* ------------------ FORMULÁRIO ------------------ */}
           <form className="flex flex-col w-full items-center">
             {/* ------------------ DIV PARA COLOCAR A BORDA E  OS BOTÕES FICAREM PARA FORA ------------------ */}
             <div className="w-[95%] flex flex-col justify-between rounded-xl bg-white shadow-xl box-shadow border-primary border ">
@@ -444,7 +436,5 @@ export default function IncertMicrometro() {
             </div>
           </form>
         </div>
-      </div>
-    </div>
   );
 }
