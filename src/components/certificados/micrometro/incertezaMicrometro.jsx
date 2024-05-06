@@ -11,7 +11,7 @@ export default function IncertMicrometro() {
           {/* ------------------ FORMULÁRIO ------------------ */}
           <form className="flex flex-col w-full items-center">
             {/* ------------------ DIV PARA COLOCAR A BORDA E  OS BOTÕES FICAREM PARA FORA ------------------ */}
-            <div className="w-[95%] flex flex-col justify-between rounded-xl bg-white shadow-xl box-shadow border-primary border ">
+            <div className="w-[95%] flex flex-col justify-between rounded-xl bg-white shadow-xl box-shadow border ">
               {/* DIV PARA A PARTE DE CIMA, COM O TITULO E OS NUMERO DE CERTIFICADO */}
               <div className="flex flex-col items-center py-10 px-4 justify-between xl:flex-row lg:flex-row 2xl:flex-row md:flex-col">
                 <h1 className="text-black font-bold text-3xl ">
