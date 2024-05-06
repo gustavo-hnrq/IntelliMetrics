@@ -38,7 +38,7 @@ export default function ResulMicrometro() {
   return (
     <div>
         <form class="flex flex-col w-full items-center">
-          <div className="flex flex-col justify-between w-[90%] border border-primary rounded-lg bg-[#FCFCFC]">
+          <div className="flex flex-col justify-between w-[90%] border rounded-lg bg-[#FCFCFC]">
             {/* METROLOGISTAS */}
             <div className="full p-6">
               <h4 className="text-[#3F3F3F] font-bold text-sm pb-2">
