@@ -208,8 +208,6 @@ export default function ResulPaquimetro() {
   return (
     <div>
       <Menu />
-      <div className="max-md:ml-0 flex flex-col bg-primary pt-20 items-center gap-5 ml-80">
-        <div className="flex flex-row justify-between w-[90%]"></div>
         {/* form */}
         <form className="flex flex-col w-full items-center">
           <div className="flex flex-col justify-between w-[90%] rounded-lg bg-white shadow-lg  box-shadow">
@@ -956,6 +954,5 @@ export default function ResulPaquimetro() {
           </div>
         </form>
       </div>
-    </div>
   );
 }
