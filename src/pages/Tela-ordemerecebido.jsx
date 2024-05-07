@@ -1,7 +1,6 @@
 import Menu from "@/components/layout/menu";
 import { TabelaFlex } from "@/components/tables/table-flex";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import ModalRecebimento from "@/components/modals/recebimento";
 import ModalOrdem from "@/components/modals/ordem";
 
 // ALTERAR O DATABASE
@@ -39,7 +38,6 @@ export default function TelaOrdenseRecebidos() {
                 nome={"Itens Recebidos"}
                 data={clientes}
                 columns={columns}
-                button={<ModalRecebimento/>}
                 />         
             </TabsContent>
         </Tabs>
