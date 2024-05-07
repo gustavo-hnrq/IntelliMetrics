@@ -11,7 +11,7 @@ export default function CertPaquimetro() {
     return (
       
             <form class="flex flex-col w-full items-center">
-              <div className="flex flex-col justify-between w-[90%] border border-primary rounded-lg bg-[#FCFCFC]">
+              <div className="flex flex-col justify-between w-[90%] border rounded-lg bg-[#FCFCFC]">
 
                 <div className="flex flex-row justify-between p-6">
                   <img  className="w-60 h-40" src={senai}/>
