@@ -1,68 +1,64 @@
-import logo from "@/assets/logo.svg";
 import logo1 from "@/assets/logo1.svg";
 import SideBarMobile from "@/components/layout/sidebar-mobile";
+import { Link } from "react-router-dom";
 
 export default function Menu() {
   return (
     <div>
-      {/* INICIO HEADER */}
       <SideBarMobile />
-      {/* FIM HEADER */}
-
       {/* INICIO MENU LATERAL */}
       <div className="fixed top-0 left-0 bottom-0 w-80 text-azul transition-transform -translate-x-full md:translate-x-0 bg-white border-r-2 border-slate-200">
         <div className="p-4">
           <ul className="space-y-2 font-medium">
             <div className="m-5">
-              <a href="">
+              <Link to="/gestor">
                 <img src={logo1} alt="logo" />
-              </a>
+              </Link>
             </div>
             <li>
-              <a
-                href="#"
+              <Link to="/gestor"
                 className="flex items-center p-2 transition-all	ease-in	text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="ms-3">Início</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/certificados"
                 className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Certificados
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/relatorios"
                 className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Relatórios
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/instrumentos"
                 className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Instrumentos
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/pecas"
                 className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">Peças</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
