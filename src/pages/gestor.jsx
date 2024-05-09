@@ -4,7 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabelaFlex } from "@/components/tables/table-flex";
 // ALTERAR O DATABASE
 import clientes from "@/components/tables/data";
-import ModalInstrumento from "@/components/modals/instrumento";
+import ModalMembro from "@/components/modals/membro";
+import ModalCliente from "@/components/modals/cliente";
 
 import proposta from "@/assets/proposta.svg"
 import relatorio from "@/assets/relatorios.svg"
@@ -49,7 +50,7 @@ export default function TelaGestor() {
                 nome={"Adicionar Membros"}
                 data={clientes}
                 columns={columns1}
-                button={<ModalInstrumento />}
+                button={<ModalMembro />}
               />
             </TabsContent>
 
@@ -59,7 +60,7 @@ export default function TelaGestor() {
                 nome={"Adicionar Cliente"}
                 data={clientes}
                 columns={columns2}
-                button={<ModalInstrumento />}
+                button={<ModalCliente />}
               />
             </TabsContent>
           </Tabs>
