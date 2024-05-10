@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,24 +9,35 @@ import {
 } from "@/components/ui/table";
 
 import {
-  Button
-} from "@/components/ui/button";
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
+import { Button } from "@/components/ui/button";
+
+import { Input } from "@/components/ui/input";
+
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
-  Input
-} from "@/components/ui/input";
-
-import { ChevronLeft, ChevronRight } from "lucide-react"
+  DotsHorizontalIcon
+} from "@radix-ui/react-icons"
 
 
 export function TabelaFlex({ nome, data, columns, button }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const rowsPerPage = 10;
 
-  const filteredData = data.filter(item =>
-    Object.values(item).some(value =>
-      typeof value === 'string' && value.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredData = data.filter((item) =>
+    Object.values(item).some(
+      (value) =>
+        typeof value === "string" &&
+        value.toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
 
@@ -58,7 +69,9 @@ export function TabelaFlex({ nome, data, columns, button }) {
           <TableHeader>
             <TableRow className="font-bold">
               {columns.map((column, index) => (
-                <TableHead className="font-bold text-md	" key={index}>{column.label}</TableHead>
+                <TableHead className="font-bold text-md	" key={index}>
+                  {column.label}
+                </TableHead>
               ))}
             </TableRow>
           </TableHeader>
@@ -68,6 +81,21 @@ export function TabelaFlex({ nome, data, columns, button }) {
                 {columns.map((column, columnIndex) => (
                   <TableCell key={columnIndex}>{item[column.key]}</TableCell>
                 ))}
+
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" className="h-7 w-7 p-0">
+                        <span className="sr-only">Open menu</span>
+                        <DotsHorizontalIcon className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem>Alterar</DropdownMenuItem>
+                      <DropdownMenuItem>Deletar</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -81,8 +109,8 @@ export function TabelaFlex({ nome, data, columns, button }) {
             onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
           >
-          <ChevronLeft className="h-4 w-4"  />
-          </Button> 
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
 
           <Button
             className=""
@@ -91,7 +119,7 @@ export function TabelaFlex({ nome, data, columns, button }) {
             onClick={() => paginate(currentPage + 1)}
             disabled={indexOfLastItem >= filteredData.length}
           >
-            <ChevronRight className="h-4 w-4"  />
+            <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
       </div>
