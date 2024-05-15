@@ -12,6 +12,7 @@ import TelaCertificados from "./pages/Tela-certificado";
 import TelaOrdenseRecebidos from "./pages/Tela-ordemerecebido";
 import AddCertificadoPaqui from "./pages/add-certificado_paqui";
 import AddCertificadoMicro from "./pages/add-certificado_micro";
+import AddRecebimento from './pages/add-recebimento';
 import TelaGestor from "./pages/gestor";  
 import { App } from './App.jsx';
 import TelaInstrumentos from './pages/Tela-instrumento';
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/certificados",
         element: <TelaCertificados />
+      },
+      {
+        path: "/recebimento",
+        element: <AddRecebimento/>
       }
     ],
   },
