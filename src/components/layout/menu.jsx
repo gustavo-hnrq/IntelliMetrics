@@ -60,6 +60,16 @@ export default function Menu() {
                 <span className="flex-1 ms-3 whitespace-nowrap">Peças</span>
               </Link>
             </li>
+            <li>
+              <Link
+                to="/ordenserecebidos"
+                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
+              >
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Ordens e Recebidos
+                </span>
+              </Link>
+            </li>
           </ul>
         </div>
 
