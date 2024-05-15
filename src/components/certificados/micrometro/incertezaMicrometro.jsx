@@ -11,20 +11,11 @@ import {
 
 export default function IncertMicrometro() {
   return (
-    <div>
-      {/* ------------------ MENU ------------------ */}
-      <Menu />
-
-      {/* ------------------ DIV COM O CONTEÚDO ------------------ */}
-      <div className="max-md:ml-0 bg-[#E5F1FF] ml-80 h-full flex flex-col pt-20 px-5">
-        {/* ------------------ PARTE DO MENU DE CIMA ------------------ */}
-        <div> menuzim brabo</div>
-
-        {/* ------------------ FORMULÁRIO ------------------ */}
+  
         <div className="flex flex-col justify-between w-full">
           <form className="flex flex-col w-full items-center">
             {/* ------------------ DIV PARA COLOCAR A BORDA E  OS BOTÕES FICAREM PARA FORA ------------------ */}
-            <div className="w-full flex flex-col justify-between rounded-xl bg-white shadow-xl box-shadow border-primary border ">
+            <div className="w-full flex flex-col justify-between rounded-xl bg-white shadow-xl box-shadow  border ">
               {/* DIV PARA A PARTE DE CIMA, COM O TITULO E OS NUMERO DE CERTIFICADO */}
               <div className="flex flex-col items-center py-5 px-4 justify-between sm:flex-row lg:flex-row xl:flex-row 2xl:flex-row md:gap-5">
                 <h1 className="font-bold text-3xl">
@@ -1241,7 +1232,5 @@ export default function IncertMicrometro() {
             </div>
           </form>
         </div>
-      </div>
-    </div>
   );
 }

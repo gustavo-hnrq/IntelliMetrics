@@ -2,6 +2,8 @@ import Menu from "@/components/layout/menu";
 import { TabelaFlex } from "@/components/tables/table-flex";
 // ALTERAR O DATABASE
 import clientes from "@/components/tables/data";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 // ALTERAR PARA AS COLUNAS NECESSARIAS PARA TELA DE INSTRUMENTOS
 const columns = [
@@ -20,6 +22,7 @@ export default function TelaRelatorios() {
           nome={"Adicionar Relatorios"}
           data={clientes}
           columns={columns}
+          button={<Link to="/relatorioadd"><Button>Adicionar Relatório</Button></Link>}
         />
       </div>
     </div>

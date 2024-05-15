@@ -1,7 +1,8 @@
 import Menu from "@/components/layout/menu";
 import { TabelaFlex } from "@/components/tables/table-flex";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 // ALTERAR O DATABASE
 import clientes from "@/components/tables/data";
@@ -27,16 +28,18 @@ export default function TelaCertificados() {
 
             <TabsContent  value="Paqui">
                 <TabelaFlex
-                nome={"Adicionar Certificado"}
+                nome={"Certificado Paquímetro"}
                 data={clientes}
                 columns={columns}
+                button={<Link to="/paquimetro"><Button>Adicionar Certificado</Button></Link>}
                 />          
             </TabsContent>
             <TabsContent  value="Micro">
                 <TabelaFlex
-                nome={"Adicionar Certificado"}
+                nome={"Certificado Micrômetro"}
                 data={clientes}
                 columns={columns}
+                button={<Link to="/micrometro"><Button>Adicionar Certificado</Button></Link>}
                 />         
             </TabsContent>
         </Tabs>

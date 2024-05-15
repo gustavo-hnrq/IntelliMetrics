@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   return (
@@ -31,7 +32,8 @@ export default function LoginPage() {
               <Checkbox />
               <Label>Manter logado</Label>
             </div>
-            <Button>Logar</Button>
+            <Link to="/gestor"><Button className="w-full">Logar</Button></Link>
+            
             <a href="#" className="hover:underline text-blue-600 text-sm">
               Esqueceu a sua senha?
             </a>

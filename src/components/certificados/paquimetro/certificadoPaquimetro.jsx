@@ -16,7 +16,7 @@ export default function CertPaquimetro() {
                 <div className="flex flex-row justify-between p-6">
                   <img  className="w-60 h-40" src={senai}/>
                     <div className="static mr-5  w-[70%]">
-                        <h1 className="text-black text-center tracking-tighter font-bold font-serif text-6xl"> CERTIFICADO DE CALIBRAÇÃO </h1>
+                        <h1 className="text-black text-center tracking-tighter font-bold font-serif text-5xl"> CERTIFICADO DE CALIBRAÇÃO </h1>
                         <h1 className="text-black text-center font-serif font-bold text-2xl"> LABORATÓRIO DE CALIBRAÇÃO SUICLAB </h1>
                         <h1 className="text-black text-center font-semibold text-2xl"> Rede Brasileira de Calibração</h1>
                         <h1 className="text-black text-center font-semibold text-2xl"> Laboratório de Calibração Acreditado pela Cgcre </h1>

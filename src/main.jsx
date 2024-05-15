@@ -66,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/recebimento",
         element: <AddRecebimento/>
+      },
+      {
+        path: "/relatorioadd",
+        element: <AddRelatorio/>
       }
     ],
   },
