@@ -5,8 +5,42 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Link } from "react-router-dom";
+import { Signin } from "../services/collaborator";
+import { useForm } from "react-hook-form";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signinSchema } from "@/schemas/signinSchema";
 
 export default function LoginPage() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(signinSchema) });
+  const [apiErrors, setApiErrors] = useState("");
+
+  const navigate = useNavigate();
+
+  async function handleSubimitForm(data) {
+    try {
+      const response = await Signin(data);
+      if (response && response.token) {
+        Cookies.set("token", response.token, { expires: 1 });
+        navigate("/addRelatorio");
+      }
+    } catch (error) {
+      console.log("ErrorStatus:", error.response.status);
+    }
+  }
+
+  const data = {
+    email: "sophia@teste.com",
+    senha: "Suiclab123",
+  };
+  Signin(data);
+
   return (
     <div class="flex flex-wrap max-sm:">
       <div class="flex w-full flex-col md:w-1/2">
@@ -16,24 +50,52 @@ export default function LoginPage() {
             <RocketIcon className="h-4 w-4" />
             <AlertTitle>Bem-vindo!</AlertTitle>
             <AlertDescription>
-            Por favor, faça login para acessar sua conta.
+              Por favor, faça login para acessar sua conta.
             </AlertDescription>
           </Alert>
-          <form class="flex flex-col pt-3 gap-5">
-            <div class="flex flex-col gap-2">
+          {apiErrors && (
+            <Alert variant="destructive">
+              <AlertTitle>Erro ao fazer o login</AlertTitle>
+              <AlertDescription>{apiErrors}</AlertDescription>
+            </Alert>
+          )}
+          <form
+            className="flex flex-col pt-3 gap-5"
+            onSubmit={handleSubmit(handleSubimitForm)}
+          >
+            <div className="flex flex-col gap-2">
               <Label>Email</Label>
-              <Input type="email" placeholder="Digite aqui o seu email" />
+              <Input
+                type="email"
+                placeholder="Digite aqui o seu email"
+                register={register}
+                name="email"
+              />
+              {errors.email && (
+                <Alert variant="destructive">
+                  <AlertDescription>{errors.email.message}</AlertDescription>
+                </Alert>
+              )}
             </div>
-            <div class="flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <Label>Senha</Label>
-              <Input type="password" placeholder="Digite aqui sua senha" />
+              <Input
+                type="password"
+                placeholder="Digite aqui sua senha"
+                register={register}
+                name="senha"
+              />
+              {errors.senha && (
+                <Alert variant="destructive">
+                  <AlertDescription>{errors.senha.message}</AlertDescription>
+                </Alert>
+              )}
             </div>
             <div className="flex items-center space-x-2">
               <Checkbox />
               <Label>Manter logado</Label>
             </div>
-            <Link to="/gestor"><Button className="w-full">Logar</Button></Link>
-            
+            <Button type="submit">Logar</Button>
             <a href="#" className="hover:underline text-blue-600 text-sm">
               Esqueceu a sua senha?
             </a>
