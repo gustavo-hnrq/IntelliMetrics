@@ -2,26 +2,13 @@ import Menu from "@/components/layout/menu";
 import { CardGestor } from "@/components/cards/cards";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabelaFlex } from "@/components/tables/table-flex";
-// ALTERAR O DATABASE
-import clientes from "@/components/tables/data";
-import ModalMembro from "@/components/modals/membro";
-import ModalCliente from "@/components/modals/cliente";
 
 import proposta from "@/assets/proposta.svg"
 import relatorio from "@/assets/relatorios.svg"
 import certificado from "@/assets/certificados.svg"
 
-const columns1 = [
-  { key: "name", label: "Nome" },
-  { key: "email", label: "Email" },
-  { key: "cargo", label: "Membro" },
-];
-
-const columns2 = [
-  { key: "name", label: "Nome" },
-  { key: "email", label: "Email" },
-  { key: "cargo", label: "Cliente" },
-];
+import TabelaMembros from "@/components/tables/table-membros";
+import TabelaClientes from "@/components/tables/table-cliente";
 
 export default function TelaGestor() {
   return (
@@ -46,22 +33,11 @@ export default function TelaGestor() {
 
             {/* TABELA DE MEMBRO */}
             <TabsContent value="tabela-membro">
-              <TabelaFlex
-                nome={"Adicionar Membros"}
-                data={clientes}
-                columns={columns1}
-                button={<ModalMembro />}
-              />
+              <TabelaMembros />
             </TabsContent>
 
-            {/* TABELA DE CLIENTES */}
             <TabsContent value="tabela-clientes">
-              <TabelaFlex
-                nome={"Adicionar Cliente"}
-                data={clientes}
-                columns={columns2}
-                button={<ModalCliente />}
-              />
+              <TabelaClientes />
             </TabsContent>
           </Tabs>
         </div>

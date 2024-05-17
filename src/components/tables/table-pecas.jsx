@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../../../axiosConfig"; // Importando o axiosInstance
 import { TabelaFlex } from "@/components/tables/table-flex";
 import ModalPeca from "@/components/modals/peca";
 
@@ -16,11 +16,11 @@ export default function TabelaPecas() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const pecasResponse = await axios.get("https://api-intelli.calmsand-31c018e9.brazilsouth.azurecontainerapps.io/getAllPieces");
+        const pecasResponse = await axiosInstance.get("/getAllPieces");
         const pecas = pecasResponse.data;
 
         const pecasCompletos = await Promise.all(pecas.map(async (peca) => {
-          const clienteResponse = await axios.get(`https://api-intelli.calmsand-31c018e9.brazilsouth.azurecontainerapps.io/client/${peca.fk_idCliente}`);
+          const clienteResponse = await axiosInstance.get(`/client/${peca.fk_idCliente}`);
           const cliente = clienteResponse.data[0];
 
           return {
