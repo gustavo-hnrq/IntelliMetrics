@@ -23,54 +23,18 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      {
-        path: "/",
-        element: <LoginPage />,
-      },
-      {
-        path: "/forgot",
-        element: <ForgotPage />
-      },
-      {
-        path: "/gestor",
-        element: <TelaGestor />
-      },
-      {
-        path: "/instrumentos",
-        element: <TelaInstrumentos />
-      },
-      {
-        path: "/pecas",
-        element: <TelaPecas />
-      },
-      {
-        path: "/relatorios",
-        element: <TelaRelatorios />
-      },
-      {
-        path: "/ordenserecebidos",
-        element: <TelaOrdenseRecebidos />
-      },
-      {
-        path: "/paquimetro",
-        element: <AddCertificadoPaqui />
-      },
-      {
-        path: "/micrometro",
-        element: <AddCertificadoMicro />
-      },
-      {
-        path: "/certificados",
-        element: <TelaCertificados />
-      },
-      {
-        path: "/recebimento",
-        element: <AddRecebimento/>
-      },
-      {
-        path: "/relatorioadd",
-        element: <AddRelatorio/>
-      }
+      { path: "/", element: <LoginPage /> },
+      { path: "/forgot", element: <ForgotPage /> },
+      { path: "/gestor", element: <TelaGestor /> },
+      { path: "/instrumentos", element: <TelaInstrumentos /> },
+      { path: "/pecas", element: <TelaPecas /> },
+      { path: "/relatorios", element: <TelaRelatorios /> },
+      { path: "/ordenserecebidos", element: <TelaOrdenseRecebidos /> },
+      { path: "/paquimetro", element: <AddCertificadoPaqui /> },
+      { path: "/micrometro", element: <AddCertificadoMicro /> },
+      { path: "/certificados", element: <TelaCertificados /> },
+      { path: "/recebimento", element: <AddRecebimento /> },
+      { path: "/relatorioadd", element: <AddRelatorio /> }
     ],
   },
 ]);

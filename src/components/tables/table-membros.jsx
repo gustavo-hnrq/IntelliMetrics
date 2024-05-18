@@ -15,19 +15,22 @@ export default function TabelaMembros() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const usersResponse = await axiosInstance.get("/allUsers");
-        const users = usersResponse.data;
-
-        setData(users); // Define os usuários recuperados na state 'data'
-      } catch (error) {
-        console.error('Erro ao carregar dados da API:', error);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const usersResponse = await axiosInstance.get("/allUsers");
+      const users = usersResponse.data;
+      setData(users); // Define os usuários recuperados na state 'data'
+    } catch (error) {
+      console.error('Erro ao carregar dados da API:', error);
+    }
+  };
+
+  const handleAddSuccess = () => {
+    fetchData(); // Atualiza os dados da tabela
+  };
 
   return (
     <div>
@@ -35,7 +38,7 @@ export default function TabelaMembros() {
         nome={"Adicionar Membro"}
         data={data}
         columns={columns}
-        button={<ModalMembro />}
+        button={<ModalMembro onAddSuccess={handleAddSuccess} />}
       />
     </div>
   );

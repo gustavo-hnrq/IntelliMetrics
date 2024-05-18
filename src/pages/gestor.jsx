@@ -17,12 +17,7 @@ export default function TelaGestor() {
       <div className="max-md:ml-0 p-10 bg-backgroundcinza">
         <div className="ml-80 px-10">
           <h1 className="text-3xl font-bold mb-4">Seja bem-vindo</h1>
-          <div className="flex gap-2">
-            <CardGestor numero={27} texto={"Propostas Recebidas"} svg={proposta} />
-            <CardGestor numero={32} texto={"Relatórios Gerados"} svg={relatorio} />
-            <CardGestor numero={129} texto={"Certificados Cadastrados"} svg={certificado} />
-            <CardGestor numero={129} texto={"Clientes Adicionados"} svg={proposta}  />   
-          </div>
+
         </div>
         <div>
           <Tabs defaultValue="tabela-membro">
