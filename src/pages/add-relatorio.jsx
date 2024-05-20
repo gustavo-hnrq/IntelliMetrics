@@ -245,7 +245,7 @@ export default function AddRelatorio() {
             <div>
               {/* TITULO */}
               <h4 className="text-black font-extrabold text-base w-full py-3 px-4 bg-[#DBDBDB] uppercase">
-                mensurados(m)
+                mensurandos(m)
               </h4>
 
               {/* tabela */}
