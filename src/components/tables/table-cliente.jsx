@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../axiosConfig"; // Importando o axiosInstance
 import { TabelaFlex } from "@/components/tables/table-flex";
-import ModalCliente from "@/components/modals/membro";
+import ModalCliente from "../modals/cliente";
+// import ModalCliente from "@/components/modals/cliente";
 
 const columns = [
   { key: "pk_idCliente", label: "ID" },
