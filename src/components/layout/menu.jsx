@@ -24,16 +24,6 @@ export default function Menu() {
             </li>
             <li>
               <Link
-                to="/certificados"
-                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Certificados
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="/relatorios"
                 className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
@@ -67,6 +57,26 @@ export default function Menu() {
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Ordens e Recebidos
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/paquimetro"
+                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
+              >
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Certificado Paquímetro
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/micrometro"
+                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
+              >
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Certificado Micrômetro
                 </span>
               </Link>
             </li>

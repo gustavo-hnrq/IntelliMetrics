@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosInstance from "../../../axiosConfig"; // Importando o axiosInstance
+import axiosInstance from "../../../axiosConfig"; 
 import { TabelaFlex } from "@/components/tables/table-flex";
 import ModalPeca from "@/components/modals/peca";
 

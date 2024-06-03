@@ -8,7 +8,6 @@ import LoginPage from "./pages/login";
 import ForgotPage from "./pages/forgot-password";
 import AddRelatorio from "./pages/add-relatorio";
 import TelaRelatorios from "./pages/Tela-relatorios";
-import TelaCertificados from "./pages/Tela-certificado";
 import TelaOrdenseRecebidos from "./pages/Tela-ordemerecebido";
 import AddCertificadoPaqui from "./pages/add-certificado_paqui";
 import AddCertificadoMicro from "./pages/add-certificado_micro";
@@ -58,10 +57,6 @@ const router = createBrowserRouter([
       {
         path: "/micrometro",
         element: <AddCertificadoMicro />
-      },
-      {
-        path: "/certificados",
-        element: <TelaCertificados />
       },
       {
         path: "/recebimento",
