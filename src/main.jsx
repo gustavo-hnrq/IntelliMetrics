@@ -1,6 +1,6 @@
 import './globals.css';
 import React from 'react';
-import ReactDOM from 'react-dom'; // Correct import statement
+import ReactDOM from 'react-dom/client'; // Correct import statement
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // COMPONENTES

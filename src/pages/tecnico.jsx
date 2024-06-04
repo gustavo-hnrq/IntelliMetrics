@@ -8,6 +8,9 @@ import ModalMembro from "@/components/modals/membro";
 import proposta from "@/assets/proposta.svg";
 import relatorio from "@/assets/relatorios.svg";
 import certificado from "@/assets/certificados.svg";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const columns1 = [
   { key: "name", label: "Nome" },
@@ -20,6 +23,15 @@ const columns2 = [
   { key: "email", label: "Email" },
   { key: "cargo", label: "Cliente" },
 ];
+const navigate = useNavigate();
+function validateToken() {
+  const token = Cookies.get("token");
+  if (!token) navigate("/");
+}
+
+useEffect(() => {
+  validateToken();
+}, []);
 
 export default function TelaTecnico() {
   return (

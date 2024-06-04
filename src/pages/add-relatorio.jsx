@@ -3,7 +3,9 @@ import Menu from "@/components/layout/menu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddRelatorio() {
   // // Define um estado 'linhas' que inicialmente contém uma matriz com um objeto representando uma linha vazia.
@@ -33,6 +35,16 @@ export default function AddRelatorio() {
     // Clona o array 'linhas' existente e adiciona a nova linha ao final
     setLinhas([...linhas, novaLinha]);
   };
+  const navigate = useNavigate();
+  function validateToken() {
+    const token = Cookies.get("token");
+    if (!token) navigate("/");
+  }
+  
+  useEffect(() => {
+    validateToken();
+  }, []);
+
 
   return (
     <div className="flex">

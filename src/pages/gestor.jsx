@@ -3,14 +3,28 @@ import { CardGestor } from "@/components/cards/cards";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabelaFlex } from "@/components/tables/table-flex";
 
-import proposta from "@/assets/proposta.svg"
-import relatorio from "@/assets/relatorios.svg"
-import certificado from "@/assets/certificados.svg"
+import proposta from "@/assets/proposta.svg";
+import relatorio from "@/assets/relatorios.svg";
+import certificado from "@/assets/certificados.svg";
 
 import TabelaMembros from "@/components/tables/table-membros";
 import TabelaClientes from "@/components/tables/table-cliente";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function TelaGestor() {
+  function validateToken() {
+    const token = Cookies.get("token");
+    if (!token) navigate("/");
+  }
+  const navigate = useNavigate();
+  useEffect(() => {
+    validateToken();
+  }, []);
+
+  
+
   return (
     <div>
       <Menu />
@@ -18,10 +32,26 @@ export default function TelaGestor() {
         <div className="ml-80 px-10">
           <h1 className="text-3xl font-bold mb-4">Seja bem-vindo</h1>
           <div className="flex gap-2">
-            <CardGestor numero={27} texto={"Propostas Recebidas"} svg={proposta} />
-            <CardGestor numero={32} texto={"Relatórios Gerados"} svg={relatorio} />
-            <CardGestor numero={129} texto={"Certificados Cadastrados"} svg={certificado} />
-            <CardGestor numero={129} texto={"Clientes Adicionados"} svg={proposta}  />   
+            <CardGestor
+              numero={27}
+              texto={"Propostas Recebidas"}
+              svg={proposta}
+            />
+            <CardGestor
+              numero={32}
+              texto={"Relatórios Gerados"}
+              svg={relatorio}
+            />
+            <CardGestor
+              numero={129}
+              texto={"Certificados Cadastrados"}
+              svg={certificado}
+            />
+            <CardGestor
+              numero={129}
+              texto={"Clientes Adicionados"}
+              svg={proposta}
+            />
           </div>
         </div>
         <div>

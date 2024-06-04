@@ -3,8 +3,21 @@ import { Tabs , TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ResulPaquimetro from "@/components/certificados/paquimetro/resultadoPaquimetro";
 import IncertPaquimetro from "@/components/certificados/paquimetro/incertezaPaquimetro";
 import CertPaquimetro from "@/components/certificados/paquimetro/certificadoPaquimetro";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function AddCertificadoPaqui() {
+  const navigate = useNavigate();
+  function validateToken() {
+    const token = Cookies.get("token");
+    if (!token) navigate("/");
+  }
+  
+  useEffect(() => {
+    validateToken();
+  }, []);
+
 
   return (
     <div className="flex">

@@ -3,9 +3,22 @@ import { Tabs , TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ResulMicrometro from "@/components/certificados/micrometro/resultadoMicrometro";
 import IncertMicrometro from "@/components/certificados/micrometro/incertezaMicrometro";
 import CertMicrometro from "@/components/certificados/micrometro/certificadoMicrometro";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 
 export default function AddCertificadoMicro() {
+  const navigate = useNavigate();
+  function validateToken() {
+    const token = Cookies.get("token");
+    if (!token) navigate("/");
+  }
+  
+  useEffect(() => {
+    validateToken();
+  }, []);
+
 
   return (
     <div className="flex">

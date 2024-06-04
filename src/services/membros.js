@@ -1,16 +1,17 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
-const BASE_URL = 'https://api-intelli9.calmsand-31c018e9.brazilsouth.azurecontainerapps.io';
+const BASE_URL =
+  "https://api-intelli9.calmsand-31c018e9.brazilsouth.azurecontainerapps.io";
 
-export async function regiserMembro(data){
-    try{
-        const response = await axios.post(`${BASE_URL}/newUser`, data);
-        console.log(response);
-
-    }catch(error){
-        console.log('Erro na requisição: ', error.message);
-    }
+export async function regiserMembro(data) {
+  const response = await axios.post(`${BASE_URL}/newUser`, data, {
+    headers: { Authorization: `${Cookies.get("token")}` },
+  });
+  return response;
 }
+<<<<<<< HEAD
+=======
 
 
 
@@ -22,3 +23,4 @@ export async function getAllUsers(){
         return error.message;
     }
 }
+>>>>>>> e9726fb434048eb80fbd91ab257e4eafd0091f08

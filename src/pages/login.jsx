@@ -9,9 +9,10 @@ import { Signin } from "../services/collaborator";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signinSchema } from "@/schemas/signinSchema";
+import Swal from "sweetalert2";
 
 export default function LoginPage() {
   const {
@@ -23,29 +24,72 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
+  useEffect(() => {
+    Cookies.remove('token')
+  }, [])
+
   async function handleSubimitForm(data) {
     try {
       const response = await Signin(data);
       if (response && response.token) {
         Cookies.set("token", response.token, { expires: 1 });
-        navigate("/addRelatorio");
+        navigate("/gestor");
+        return Toast.fire({
+          title: `${response.mensagem}`,
+          text: `Bem vindo ${response.Nome}`,
+          icon: "success",
+        });
       }
     } catch (error) {
-      console.log("ErrorStatus:", error.response.status);
+      // console.log("Erro:", error);
+      
+      if(error.response.status === 401){
+        return Toast.fire({
+          title: `Credenciais Inválidas`,
+          icon: "error",
+        });
+      }
+      else if(error.response.status === 403){
+        return Toast.fire({
+          title: `Usuário não autorizado`,
+          text: "status: Inativo",
+          icon: "error",
+        });
+      }
+      else if(error.response.status === 404){
+        return Toast.fire({
+          title: `Usuário não encontrado`,
+          icon: "error",
+        });
+      }else{
+        console.log(error.response);
+        return Toast.fire({
+          title: `Erro interno no servidor`,
+          icon: "error",
+        });
+      }
+
     }
   }
 
-  const data = {
-    email: "sophia@teste.com",
-    senha: "Suiclab123",
-  };
-  Signin(data);
 
   return (
-    <div class="flex flex-wrap max-sm:">
-      <div class="flex w-full flex-col md:w-1/2">
-        <div class="lg:w-[28rem] max-sm:w-[18rem] mx-auto my-auto flex flex-col justify-center pt-32 md:justify-start md:px-6 md:pt-0">
-          <p class="text-left text-3xl font-bold">Login</p>
+    <div className="flex flex-wrap max-sm:">
+      <div className="flex w-full flex-col md:w-1/2">
+        <div className="lg:w-[28rem] max-sm:w-[18rem] mx-auto my-auto flex flex-col justify-center pt-32 md:justify-start md:px-6 md:pt-0">
+          <p className="text-left text-3xl font-bold">Login</p>
           <Alert className="flex flex-col w-full my-5">
             <RocketIcon className="h-4 w-4" />
             <AlertTitle>Bem-vindo!</AlertTitle>
@@ -68,8 +112,7 @@ export default function LoginPage() {
               <Input
                 type="email"
                 placeholder="Digite aqui o seu email"
-                register={register}
-                name="email"
+                {...register("email")}
               />
               {errors.email && (
                 <Alert variant="destructive">
@@ -82,8 +125,7 @@ export default function LoginPage() {
               <Input
                 type="password"
                 placeholder="Digite aqui sua senha"
-                register={register}
-                name="senha"
+                {...register("senha")}
               />
               {errors.senha && (
                 <Alert variant="destructive">
@@ -96,15 +138,15 @@ export default function LoginPage() {
               <Label>Manter logado</Label>
             </div>
             <Button type="submit">Logar</Button>
-            <a href="#" className="hover:underline text-blue-600 text-sm">
+            <Link href="#" className="hover:underline text-blue-600 text-sm" to={"/forgot"}>
               Esqueceu a sua senha?
-            </a>
+            </Link>
           </form>
         </div>
       </div>
-      <div class="pointer-events-none relative hidden h-screen select-none bg-gradient-to-r from-blue-800 to-indigo-900 md:block md:w-1/2 ">
-        <div class="absolute bottom-0 z-10 px-8 text-white opacity-100">
-          <p class="mb-8 text-3xl font-semibold leading-10">
+      <div className="pointer-events-none relative hidden h-screen select-none bg-gradient-to-r from-blue-800 to-indigo-900 md:block md:w-1/2 ">
+        <div className="absolute bottom-0 z-10 px-8 text-white opacity-100">
+          <p className="mb-8 text-3xl font-semibold leading-10">
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
             officiis ratione ad quas, blanditiis minus ut! Dolorem voluptatum
             cumque mollitia illo explicabo".
