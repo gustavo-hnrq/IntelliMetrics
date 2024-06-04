@@ -103,7 +103,7 @@ export default function AddRelatorio() {
             <div>
               {/* TITULO */}
               <h4 className="text-black font-extrabold text-base w-full py-3 px-4 bg-[#DBDBDB] uppercase">
-                instumento de medição
+                instrumento de medição
               </h4>
               <div className="flex flex-row w-full justify-between py-6 gap-7 px-4">
                 {/* COLUNA DE INPUT */}
@@ -334,7 +334,7 @@ export default function AddRelatorio() {
               <div>
                 <div className="flex flex-col w-full py-3 px-4">
                   <Label className="text-[#3F3F3F] font-extrabold text-base w-full py-1 px-4 bg-[#DBDBDB] rounded-t-lg">
-                    Notas (Peça):
+                    Notas Gerais:
                   </Label>
                   <Input
                     type="text"

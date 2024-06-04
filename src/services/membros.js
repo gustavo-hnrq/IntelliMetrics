@@ -13,3 +13,12 @@ export async function regiserMembro(data){
 }
 
 
+
+export async function getAllUsers(){
+    try{
+        const response = await axios.get(`${BASE_URL}/allUsers`);
+        return response;
+    }catch(error){
+        return error.message;
+    }
+}

@@ -1,18 +1,26 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import selo from "../../../assets/selo certificado.png";
 import senai from "../../../assets/Senai Logotipo_destaque.png";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useReactToPrint } from "react-to-print" ;
 
 
-export default function CertPaquimetro() {
+export default function CertMicrometro() {
 
+  // esta função pega as informações da parte citada, para poder imprimir
+  const contentDocument = useRef();
+  
+  // isto tras as informações para a tema de impreção
+  const handlePrint = useReactToPrint({
+    content: () => contentDocument.current
+  })
     return (
       
             <form class="flex flex-col w-full items-center">
-              <div className="flex flex-col justify-between w-[90%] border  rounded-lg bg-[#FCFCFC]">
+              <div ref={contentDocument} id="relatorio" className="flex flex-col justify-between  border  rounded-lg bg-[#FCFCFC]">
 
                 <div className="flex flex-row justify-between  p-6">
                   <img  className="w-60 h-40" src={senai}/>
@@ -373,6 +381,7 @@ export default function CertPaquimetro() {
             <Button className="w-[200px] border-[#858585] border-2 bg-transparent text-[#949494] font-semibold hover:bg-[#858585] hover:text-white">
               Cancelar
             </Button>
+            <Button onClick={handlePrint} >Imprimir</Button>
           </div>
         </form>
 

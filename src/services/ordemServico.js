@@ -10,3 +10,14 @@ export async function getAllOrders(){
         return error;
     }
 }
+
+export async function regiserOrders(data) {
+    try {
+      const response = await axios.post(`${BASE_URL}/registerOrders`, data);
+      return response;
+    } catch (error) {
+      console.log(data);
+      return error;
+      
+    }
+  }
