@@ -4,9 +4,10 @@ import Cookies from "js-cookie";
 const BASE_URL =
   "https://api-intelli9.calmsand-31c018e9.brazilsouth.azurecontainerapps.io";
 
+
 export async function regiserMembro(data) {
   const response = await axios.post(`${BASE_URL}/newUser`, data, {
-    headers: { Authorization: `${Cookies.get("token")}` },
+    headers: { Authorization: `Bearer ${Cookies.get("token")}` },
   });
   return response;
 }
