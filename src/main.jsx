@@ -16,6 +16,7 @@ import TelaGestor from "./pages/gestor";
 import { App } from './App.jsx';
 import TelaInstrumentos from './pages/Tela-instrumento';
 import TelaPecas from './pages/Tela-pecas';
+import ModalCategoria from './components/modals/categoria';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/relatorioadd",
         element: <AddRelatorio/>
+      },
+      {
+        path: "/categoriaadd",
+        element: <ModalCategoria/>
       }
     ],
   },

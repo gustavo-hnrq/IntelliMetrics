@@ -1,4 +1,5 @@
 import Menu from "@/components/layout/menu";
+import ModalCategoria from "@/components/modals/categoria";
 import TabelaInstrumentos from "@/components/tables/table-instrumentos";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
@@ -18,8 +19,11 @@ export default function TelaInstrumentos() {
   return (
     <div>
       <Menu />
+      
       <div className="h-screen bg-backgroundcinza pt-10">
+         <div className="float-right mr-10"><ModalCategoria/></div>
         <TabelaInstrumentos />
+        
       </div>
     </div>
   );

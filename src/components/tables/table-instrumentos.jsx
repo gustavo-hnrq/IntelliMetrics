@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../axiosConfig"; // Importando o axiosInstance
 import { TabelaFlex } from "@/components/tables/table-flex";
 import ModalInstrumento from "@/components/modals/instrumento";
+import ModalCategoria from "../modals/categoria";
   
 const columns = [
   { key: "pk_idInstrumento", label: "ID" },

@@ -12,17 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { ScrollArea } from "../ui/scroll-area";
 import { PlusCircle } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 import { getAllClient } from "@/services/cliente";
 import { getAllOrders } from "@/services/ordemServico";
@@ -32,9 +22,7 @@ import { regiserTools } from "@/services/instrumentos";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
-
-
-
+import { SelectA } from "../ui/select2";
 
 
 export default function ModalInstrumento() {
@@ -51,6 +39,37 @@ export default function ModalInstrumento() {
     },
   });
 
+
+  const [clientes, setClients] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [category, setCategory] = useState([]);
+  const estadoEmabalagemOption = [
+    {value: "bom", label: "Bom"},
+    {value: "medio", label: "Médio"},
+    {value: "ruim", label: "Ruim"}
+  ]
+
+  const faixaNominalOption = [
+    {value: "1-25", label: "1-25"},
+    {value: "25-50", label: "25-50"},
+    {value: "50-75", label: "50-75"},
+    {value: "75-100", label: "75-100"},
+    {value: "100-125", label: "100-125"},
+    {value: "125-150", label: "125-150"},
+    {value: "150-175", label: "150-175"},
+    {value: "175-200", label: "175-200"}
+  ]
+
+  const unidadeFN = [
+    {value: "mm", label: "mm"},
+    {value: "pol", label: "pol"}
+  ]
+
+  const unidadeRD = [
+    {value: "mm", label: "mm"},
+    {value: "pol", label: "pol"}
+  ]
+
   const {
     register,
     handleSubmit,
@@ -63,6 +82,8 @@ export default function ModalInstrumento() {
       data.idCliente = parseInt(data.idCliente);
       data.idOs = parseInt(data.idOs);
       data.idCategoria = parseInt(data.idCategoria);
+      data.nSerie = parseInt(data.nSerie);
+      data.divisaoResolucaoNum = parseFloat(data.divisaoResolucaoNum);
       
       // console.log("estou chamandooo", data);
       const response = await regiserTools(data);
@@ -80,10 +101,7 @@ export default function ModalInstrumento() {
       });
     }
   }
-
-  const [clients, setClients] = useState([]);
-  const [orders, setOrders] = useState([]);
-  const [category, setCategory] = useState([]);
+    
 
   async function getClientes() {
     try {
@@ -116,6 +134,7 @@ export default function ModalInstrumento() {
     getCategory();
   }, []);
 
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -127,68 +146,58 @@ export default function ModalInstrumento() {
         <AlertDialogHeader>
           <div className="flex flex-row w-full justify-between">
             <AlertDialogTitle className="text-3xl font-bold mb-3">
-              Adicionar Membro
+              Adicionar Instrumento
             </AlertDialogTitle>
             <div className="flex flex-col">
-              <Select {...register("idOs")}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione a Ordem" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {/* {orders.map((orders) => (
-                        <SelectItem value={orders.pk_idOs}>{orders.pk_idOs}</SelectItem>
-                      ))} */}
-                      </SelectGroup>
-                      
-                    </SelectContent>
-                  </Select>
+              <SelectA
+                    options={orders.map((item) => ({
+                      value: item.pk_idOs,
+                      label: item.pk_idOs,
+                    }))}
+                    {...register("idOs")}
+                  />
+                  {errors.idOs && <Error message={errors.idOs.message} />}
             </div>
           </div>
           <AlertDialogDescription>
             <div className="grid grid-cols-3 gap-3">
               <div className="gap-2">
                 <Label>Interessado/Cliente</Label>
-                <Select {...register("idCliente")}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <ScrollArea className="h-[180px] rounded-md border p-2">
-                      {/* {clients.map((clients) => (
-                        <SelectItem value={clients.pk_idCliente}>{clients.nomeEmpresa}</SelectItem>
-                      ))} */}
-                      </ScrollArea>
-                    </SelectContent>
-                  </Select>
+                <SelectA
+                  options={clientes.map((item) => ({
+                    value: item.pk_idCliente,
+                    label: item.nomeEmpresa,
+                  }))}
+                  {...register("idCliente")}
+                />
+                {errors.idCliente && (
+                  <Error message={errors.idCliente.message} />
+                )}
               </div>
               <div>
                 <Label>Estado da Embalagem</Label>
-                <Select {...register("estadoEmbalagem")}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="bom1">Bom</SelectItem>
-                    <SelectItem value="medio">Médio</SelectItem>
-                    <SelectItem value="ruim">Ruim</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <SelectA
+                    options={estadoEmabalagemOption.map((item) => ({
+                      value: item.value,
+                      label: item.label,
+                    }))}
+                    {...register("estadoEmbalagem")}
+                  />
+                  
+
+                  {errors.estadoEmbalagem && (
+                    <Error message={errors.estadoEmbalagem.message} />
+                  )}
               </div>
               <div>
                 <Label>Categoria</Label>
-                <Select {...register("idCategoria")}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <ScrollArea className="h-[150px] rounded-md border p-2">
-                        {/* {category.map((category) => (
-                          <SelectItem value={category.pk_idCategoria}>{category.nome}</SelectItem>
-                        ))} */}
-                      </ScrollArea>
-                    </SelectContent>
-                  </Select>
+                  <SelectA
+                    options={category.map((item) => ({
+                      value: item.pk_idCategoria,
+                      label: item.nome,
+                    }))}
+                    {...register("idCategoria")}
+                  />
               </div>
               <div>
                 <Label>Nome</Label>
@@ -196,7 +205,7 @@ export default function ModalInstrumento() {
               </div>
               <div>
                 <Label>Nº de Série</Label>
-                <Input {...register("nSerie")} placeholder="Digite aqui " />
+                <Input type="number" {...register("nSerie")} placeholder="Digite aqui " />
               </div>
               <div>
                 <Label>Identificação do Cliente</Label>
@@ -208,52 +217,41 @@ export default function ModalInstrumento() {
               </div>
               <div>
                 <Label>Faixa Nominal - FN</Label>
-                <Select {...register("faixaNominalNum")}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <ScrollArea className="h-[180px] rounded-md border p-2">
-                      <SelectItem value="0-2">0-2</SelectItem>
-                      <SelectItem value="1-25">1-25</SelectItem>
-                      <SelectItem value="25-50">25-50</SelectItem>
-                      <SelectItem value="50-75">50-75</SelectItem>
-                      <SelectItem value="75-100">75-100</SelectItem>
-                      <SelectItem value="100-125">100-125</SelectItem>
-                      <SelectItem value="125-150">125-150</SelectItem>
-                      <SelectItem value="150-175">150-175</SelectItem>
-                      <SelectItem value="175-200">175-200</SelectItem>
-                    </ScrollArea>
-                  </SelectContent>
-                </Select>
+                  <SelectA
+                    options={faixaNominalOption.map((item) => ({
+                      value: item.value,
+                      label: item.label,
+                    }))}
+                    {...register("faixaNominalNum")}
+                  />
+
+                  {/* {errors.estadoEmbalagem && (
+                    <Error message={errors.estadoEmbalagem.message} />
+                  )} */}
               </div>
               <div>
-                <Label>Unidade de Medida / FN</Label>
-                <Select {...register("faixaNominalUni")}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="mm">mm</SelectItem>
-                    <SelectItem value="pol">pol</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label>Unidade de Medida / FN</Label> 
+                <SelectA
+                    options={unidadeFN.map((item) => ({
+                      value: item.value,
+                      label: item.label,
+                    }))}
+                    {...register("faixaNominalUni")}
+                  />
               </div>
               <div>
                 <Label>Divisão/Resolução</Label>
                 <Input {...register("divisaoResolucaoNum")} placeholder="Digite aqui " />
               </div>
               <div>
-                <Label>Unidade de medida - Div/Res</Label>
-                <Select {...register("divisaoResolucaoUni")}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="mm">mm</SelectItem>
-                    <SelectItem value="pol">pol</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label>Unidade de medida - Div/Res</Label> 
+                <SelectA
+                    options={unidadeRD.map((item) => ({
+                      value: item.value,
+                      label: item.label,
+                    }))}
+                    {...register("divisaoResolucaoUni")}
+                  />
               </div>
               <div>
                 <Label>Órgão Responsável</Label>

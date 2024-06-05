@@ -17,6 +17,7 @@ import { Switch } from "@/components/ui/switch";
 import { registerClient } from "@/services/cliente";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { SelectA } from "../ui/select2";
 
 export default function ModalCliente() {
   const {
@@ -24,6 +25,11 @@ export default function ModalCliente() {
     handleSubmit,
     formState: { errors },
   } = useForm({});
+
+  const status = [
+    {value: "ativo", label: "ativo"},
+    {value: "inativo", label: "inativo"}
+  ]
 
    // BIBLIOTECA PARA RETORNAR MENSAGEM DA RESPOSTA DA API
    const Toast = Swal.mixin({
@@ -42,13 +48,13 @@ export default function ModalCliente() {
     try {
       const response = await registerClient(data);
       // return response;
-      // console.log(data);
+      console.log(data);
       return Toast.fire({
         title: `${response.data}`,
         icon: "success",
       });
     } catch (err) {
-      // console.log("Erro: ", err);
+      console.log("Erro: ", err);
       return Toast.fire({
         title: `${err.message}`,
         icon: "error",
@@ -69,10 +75,6 @@ export default function ModalCliente() {
             <AlertDialogTitle className="text-3xl font-bold mb-3">
               Adicionar Cliente
             </AlertDialogTitle>
-            <div className="flex flex-col">
-              <Label>status</Label>
-              <Switch aria-readonly />
-            </div>
           </div>
 
           <AlertDialogDescription>

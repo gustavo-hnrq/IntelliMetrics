@@ -18,13 +18,7 @@ import { EscolherData } from "@/components/ui/date-picker";
 import { PlusCircle } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { SelectA } from "../ui/select2";
 
 import { getAllClient } from "@/services/cliente";
 import { getAllUsers } from "@/services/membros";
@@ -61,25 +55,32 @@ export default function ModalOrdem() {
       const [clients, setClients] = useState([]);
       const [users, setUsers] = useState([]);
 
+      const tipoOptions = [
+        {value: "calibracao", label: "calibracao"},
+        {value: "medicao", label: "medicao"}
+      ]
+
+      const statusOptions = [
+        {value: "em espera", label: "Em espera"},
+        {value: "concluida", label: "Concluída"}
+      ]
+
       async function handleRegisterOrder(data) {
         try {
           
           data.idOs = parseInt(data.idOs);
           data.idCliente = parseInt(data.idCliente);
           data.idUsuario = parseInt(data.idUsuario);
-          // data.estadoEmbalagem.toLowerCase();
           
-          // const response = await regiserOrders(data);
-          console.log(data)
-    
+          const response = await regiserOrders(data);
+
           // retorna o resultado com a bliblioteca de alert, que foi definido la em cima
-          // return Toast.fire({
-          //   title: `${response.data}`,
-          //   icon: "success",
-          // });
+          return Toast.fire({
+            title: `${response.data}`,
+            icon: "success",
+          });
         } catch (error) {
           // retorna o erro
-          
           return Toast.fire({
             title: `${error}`,
             icon: "error",
@@ -131,44 +132,35 @@ export default function ModalOrdem() {
                 </div>
                 <div>
                   <Label>Responsável/Usuario</Label>
-                  <Select {...register("idUsuario")}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <ScrollArea className="h-[180px] rounded-md border p-2">
-                        {users.map((users) => (
-                          <SelectItem value={users.pk_idUsuario}>{users.nome}</SelectItem>
-                        ))}
-                      </ScrollArea>
-                    </SelectContent>
-                  </Select>
+                  <SelectA
+                    options={users.map((item) => ({
+                      value: item.pk_idUsuario,
+                      label: item.nome,
+                    }))}
+                    {...register("idUsuario")}
+                  />
                   </div>
               </div>
             <div className="grid grid-cols-4 gap-3">
                 <div>
                   <Label>Tipo</Label>
-                  <Select {...register("tipo")}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="calibracao">Calibração</SelectItem>
-                      <SelectItem value="medicao">Medição</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <SelectA
+                    options={tipoOptions.map((item) => ({
+                      value: item.value,
+                      label: item.label,
+                    }))}
+                    {...register("tipo")}
+                  />
                 </div>
                 <div>
                   <Label>Status</Label>
-                  <Select {...register("status")}>
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Selecione" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="em espera">Em espera</SelectItem>
-                      <SelectItem value="concluida">Concluída</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <SelectA
+                    options={statusOptions.map((item) => ({
+                      value: item.value,
+                      label: item.label,
+                    }))}
+                    {...register("status")}
+                  />
                 </div>
                 <div>
                     <Label>Data de Início</Label>
@@ -182,18 +174,13 @@ export default function ModalOrdem() {
                   </div>
                   <div>
                   <Label>Cliente</Label>
-                  <Select {...register("idCliente")}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <ScrollArea className="h-[180px] rounded-md border p-2">
-                      {clients.map((clients) => (
-                        <SelectItem value={clients.pk_idCliente}>{clients.nomeEmpresa}</SelectItem>
-                      ))} 
-                    </ScrollArea>
-                  </SelectContent>
-                </Select>
+                <SelectA
+                    options={clients.map((item) => ({
+                      value: item.pk_idCliente,
+                      label: item.nomeEmpresa,
+                    }))}
+                    {...register("idCliente")}
+                  />
                 </div>
                 <div>
                   <Label>Contratante</Label>

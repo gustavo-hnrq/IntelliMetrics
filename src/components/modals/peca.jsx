@@ -156,7 +156,7 @@ export default function ModalPeca() {
                 <SelectA
                   options={orders.map((item) => ({
                     value: item.pk_idOs,
-                    label: item.titulo,
+                    label: item.pk_idOs,
                   }))}
                   {...register("idOs")}
                 />
