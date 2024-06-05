@@ -10,10 +10,6 @@ export async function regiserMembro(data) {
   });
   return response;
 }
-<<<<<<< HEAD
-=======
-
-
 
 export async function getAllUsers(){
     try{
@@ -23,4 +19,4 @@ export async function getAllUsers(){
         return error.message;
     }
 }
->>>>>>> e9726fb434048eb80fbd91ab257e4eafd0091f08
+

@@ -19,8 +19,28 @@ import { useForm } from "react-hook-form";
 import { pecaValidation } from "@/services/validations/pecaValidations";
 import { Error } from "@/components/ui/error";
 import Swal from "sweetalert2";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { ScrollArea } from "../ui/scroll-area";
+import { useEffect, useState } from "react";
+import { getAllClient } from "@/services/cliente";
+import { getAllOrders } from "@/services/ordemServico";
+import { SelectA } from "../ui/select2";
 
 export default function ModalPeca() {
+  const [clientes, setClients] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const estadoEmabalagemOption = [
+    {value: "bom", label: "Bom"},
+    {value: "medio", label: "Médio"},
+    {value: "ruim", label: "Ruim"}
+  ]
+
   // BIBLIOTECA PARA RETORNAR MENSAGEM DA RESPOSTA DA API
   const Toast = Swal.mixin({
     toast: true,
@@ -34,7 +54,6 @@ export default function ModalPeca() {
     },
   });
 
-
   // USEFORM PARA PEGAR OS DADOS
   const {
     register,
@@ -44,7 +63,6 @@ export default function ModalPeca() {
     resolver: zodResolver(pecaValidation),
   });
 
-  
   // função de registrar a peça
   async function handleRegisterPiece(data) {
     try {
@@ -52,9 +70,11 @@ export default function ModalPeca() {
       data.idCliente = parseInt(data.idCliente);
       data.idOs = parseInt(data.idOs);
       data.nDesenho = parseInt(data.nDesenho);
-      data.estadoEmbalagem.toLowerCase();
-      
-      // console.log("estou chamandooo", data);
+
+      // aqui deixa o oq vem em minusculo porque não pode ir com letra maiuscula
+      // data.estadoEmbalagem.toLowerCase();
+
+      console.log("estou chamandooo", data);
       // chama a função da api e coloca na variavel response a resposta
       const response = await regiserPieces(data);
 
@@ -71,6 +91,29 @@ export default function ModalPeca() {
       });
     }
   }
+
+  async function getClientes() {
+    try {
+      const response = await getAllClient();
+      setClients(response.data);
+    } catch (error) {
+      return error.message;
+    }
+  }
+  async function getOrders() {
+    try {
+      const response = await getAllOrders();
+      console.log(response.data);
+      setOrders(response.data);
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  useEffect(() => {
+    getClientes();
+    getOrders();
+  }, []);
 
   return (
     <AlertDialog>
@@ -91,39 +134,45 @@ export default function ModalPeca() {
               <div className="gap-2">
                 <Label>Cliente</Label>
                 {/* select para agilizar na hora de adicionar o cliente */}
-                <Input
-                  placeholder="Id Cliente "
+                <SelectA
+                  options={clientes.map((item) => ({
+                    value: item.pk_idCliente,
+                    label: item.nomeEmpresa,
+                  }))}
                   {...register("idCliente")}
                 />
-
                 {errors.idCliente && (
                   <Error message={errors.idCliente.message} />
                 )}
               </div>
               <div>
                 <Label>Nome</Label>
-                <Input
-                  placeholder="Digite aqui "
-                  {...register("nome")}
-                />
+                <Input placeholder="Digite aqui " {...register("nome")} />
                 {errors.nome && <Error message={errors.nome.message} />}
               </div>
               <div>
                 <Label>Cód. da Ordem de Serviço</Label>
                 {/* select para agilizar na hora de adicionar a order */}
-                <Input
-                  placeholder="Id da Ordem "
+                <SelectA
+                  options={orders.map((item) => ({
+                    value: item.pk_idOs,
+                    label: item.titulo,
+                  }))}
                   {...register("idOs")}
                 />
                 {errors.idOs && <Error message={errors.idOs.message} />}
               </div>
               <div>
                 <Label>Estado da Embalagem</Label>
-                <Input
-                  placeholder="bom / ruim / medio"
+                <SelectA
+                  options={estadoEmabalagemOption.map((item) => ({
+                    value: item.value,
+                    label: item.label,
+                  }))}
                   {...register("estadoEmbalagem")}
                 />
                 
+
                 {errors.estadoEmbalagem && (
                   <Error message={errors.estadoEmbalagem.message} />
                 )}
@@ -140,10 +189,7 @@ export default function ModalPeca() {
               </div>
               <div>
                 <Label>Material</Label>
-                <Input
-                  placeholder="Digite aqui "
-                  {...register("material")}
-                />
+                <Input placeholder="Digite aqui " {...register("material")} />
                 {errors.material && <Error message={errors.material.message} />}
               </div>
             </div>

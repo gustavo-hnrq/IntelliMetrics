@@ -69,13 +69,14 @@ export default function ModalOrdem() {
           data.idUsuario = parseInt(data.idUsuario);
           // data.estadoEmbalagem.toLowerCase();
           
-          const response = await regiserOrders(data);
+          // const response = await regiserOrders(data);
+          console.log(data)
     
           // retorna o resultado com a bliblioteca de alert, que foi definido la em cima
-          return Toast.fire({
-            title: `${response.data}`,
-            icon: "success",
-          });
+          // return Toast.fire({
+          //   title: `${response.data}`,
+          //   icon: "success",
+          // });
         } catch (error) {
           // retorna o erro
           
@@ -187,9 +188,9 @@ export default function ModalOrdem() {
                   </SelectTrigger>
                   <SelectContent>
                     <ScrollArea className="h-[180px] rounded-md border p-2">
-                      {/* {clients.map((clients) => (
+                      {clients.map((clients) => (
                         <SelectItem value={clients.pk_idCliente}>{clients.nomeEmpresa}</SelectItem>
-                      ))} */}
+                      ))} 
                     </ScrollArea>
                   </SelectContent>
                 </Select>
