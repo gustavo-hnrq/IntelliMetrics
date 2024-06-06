@@ -64,7 +64,7 @@ export function TabelaFlex({ nome, data, columns, button }) {
         />
         {button}
       </div>
-      <div className="rounded-md border bg-white">
+      <div className="rounded-md border bg-white uppercase">
         <Table>
           <TableHeader>
             <TableRow className="font-bold">

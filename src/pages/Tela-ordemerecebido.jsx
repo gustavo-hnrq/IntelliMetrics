@@ -1,9 +1,9 @@
 import Menu from "@/components/layout/menu";
-import { TabelaFlex } from "@/components/tables/table-flex";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import TabelaOrdens from "@/components/tables/table-ordem";
+import TabelaRecebidos from "@/components/tables/table-recebidos";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 
@@ -32,6 +32,12 @@ export default function TelaOrdenseRecebidos() {
           <TabsContent value="Ordem">
             <TabelaOrdens />
           </TabsContent>
+
+          <TabsContent value="Recebido">
+            <TabelaRecebidos />
+          </TabsContent>
+
+
         </Tabs>
       </div>
     </div>

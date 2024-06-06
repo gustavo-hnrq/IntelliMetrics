@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axiosInstance from "../../../axiosConfig"; // Importando o axiosInstance
+import axiosInstance from "../../../axiosConfig"; 
 import { TabelaFlex } from "@/components/tables/table-flex";
 import ModalOrdem from "@/components/modals/ordem";
 
 const columns = [
   { key: "titulo", label: "Titulo" },
   { key: "tipo", label: "Tipo" },
-  { key: "representante", label: "Representante" },
   { key: "email", label: "Email" },
   { key: "telefone", label: "Telefone" },
   { key: "status", label: "Status" },

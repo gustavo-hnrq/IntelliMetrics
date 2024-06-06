@@ -53,7 +53,6 @@ export default function LoginPage() {
         });
       }
     } catch (error) {
-      // console.log("Erro:", error);
       
       if(error.response.status === 401){
         return Toast.fire({
