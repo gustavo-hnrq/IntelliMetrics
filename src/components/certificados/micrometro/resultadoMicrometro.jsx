@@ -11,12 +11,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { useForm } from "react-hook-form";
+import { calcmicrometro } from "@/services/micrometro";
 import { EscolherData } from "@/components/ui/date-picker";
 import { ptBR } from 'date-fns/locale';
 
 
 
 export default function ResulMicrometro() {
+  const [response, setResponse] = useState("")
   const [linhas, setLinhas] = useState([
     {
       id: 1,
@@ -43,6 +46,55 @@ export default function ResulMicrometro() {
     // Clona o array 'linhas' existente e adiciona a nova linha ao final
     setLinhas([...linhas, novaLinha]);
   };
+
+  const {
+    register,
+    handleSubmit,
+  } = useForm();
+
+  async function handleCalculate(data) {
+    try{
+      const cMovel = [parseFloat(data.cm1), parseFloat(data.cm2), parseFloat(data.cm3)]
+      const cFixo = [parseFloat(data.cf1), parseFloat(data.cf2), parseFloat(data.cf3)]
+
+      const paralelismo = [parseFloat(data.valPara1), parseFloat(data.valPara2), parseFloat(data.valPara3), parseFloat(data.valPara4), parseFloat(data.valPara5), parseFloat(data.valPara6)]
+      const dadosControle = []
+
+      for (let i = 1; i <= 11; i++) {
+        const controle = [
+          parseFloat(data[`controle${i}_1`]),
+          parseFloat(data[`controle${i}_2`]),
+          parseFloat(data[`controle${i}_3`])
+        ];
+        dadosControle.push(controle);
+      }
+
+      const dataSatanais = {
+        cMovel,
+        cFixo,
+        paralelismo,
+        dadosControle,
+        faixaCalibrada: parseFloat(data.faixaCalibrada),
+        valorDivResolucao: parseFloat(data.valorDivResolucao),
+        dig_anal: parseInt(data.dig_anal)
+      }
+
+      const response = await calcmicrometro(dataSatanais);
+      setResponse(response.data)
+
+      return Toast.fire({
+        title: `${response.data}`,
+        icon: "success",
+      });
+    } catch (error) {
+      // retorna o erro
+      return Toast.fire({
+        title: `${error}`,
+        icon: "error",
+      });
+    }
+  }
+
 
   return (
     <div>
@@ -101,9 +153,9 @@ export default function ResulMicrometro() {
 
                   <div className="flex flex-row items-center col-span-4 gap-2">
                     <Label className="w-[23%]">Resolução</Label>
-                    <Input placeholder="Digite aqui " />
+                    <Input placeholder="Digite aqui " {...register("valorDivResolucao")}/>
                     <Label className="w-[23%]">Faixa Calibrada</Label>
-                    <Input placeholder="Digite aqui " />
+                    <Input placeholder="Digite aqui " {...register("faixaCalibrada")}/>
                   </div>
 
                   <div className="flex flex-row items-center col-span-4 gap-2">
@@ -116,8 +168,8 @@ export default function ResulMicrometro() {
                       Inspeção do instrumento (OK / NOK)
                     </Label>
                     <Input placeholder="Digite aqui " />
-                    <Label className="w-[23%]">Faixa Calibrada</Label>
-                    <Input placeholder="Digite aqui " />
+                    <Label className="w-[23%]">Digital ou Analogico?</Label>
+                    <Input placeholder="Digite aqui " {...register("dig_anal")}/>
                   </div>
                 </div>
               </div>
@@ -150,19 +202,19 @@ export default function ResulMicrometro() {
                   <TableBody>
                     <TableRow className="hover:bg-white">
                       <TableCell className="border min-w-24">C. Móvel</TableCell>
-                      <TableCell className="border p-0"><input className="p-5" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className=" p-5" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className=" p-5" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className=" p-5" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5" type="number" {...register("cm1")} /></TableCell>
+                      <TableCell className="border p-0"><input className=" p-5" type="number" {...register("cm2")}/></TableCell>
+                      <TableCell className="border p-0"><input className=" p-5" type="number" {...register("cm3")}/></TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">0</TableCell>
                       <TableCell className="border">#DIV/0!</TableCell>
                       <TableCell className="border text-center" rowSpan={2}>0,0000</TableCell>
                     </TableRow>
                     <TableRow className="hover:bg-white">
                       <TableCell className="border min-w-24">C. Fixo</TableCell>
-                      <TableCell className="border p-0"><input className="p-5" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5" type="number" {...register("cf1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5" type="number" {...register("cf2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5" type="number" {...register("cf3")}/></TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">0</TableCell>
                       <TableCell className="border">#DIV/0!</TableCell>
                     </TableRow>
                   </TableBody>
@@ -196,7 +248,7 @@ export default function ResulMicrometro() {
                   <TableBody>
                     <TableRow className="hover:bg-white">
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara1")}/></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
                       <TableCell className="text-center border p-0 min-w-full">0</TableCell>
@@ -206,7 +258,7 @@ export default function ResulMicrometro() {
 
                     <TableRow className="hover:bg-white">
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara2")}/></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
                       <TableCell className="text-center border p-0 min-w-full">0</TableCell>
@@ -215,7 +267,7 @@ export default function ResulMicrometro() {
 
                     <TableRow className="hover:bg-white">
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara3")}/></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
                       <TableCell className="text-center border p-0 min-w-full">0</TableCell>
@@ -224,9 +276,9 @@ export default function ResulMicrometro() {
 
                     <TableRow className="hover:bg-white">
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara4")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara5")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara6")}/></TableCell>
                       <TableCell className="text-center border p-0 min-w-full">0</TableCell>
                       <TableCell colSpan={2} className="border p-0 min-w-full bg-gray-300"></TableCell>
                     </TableRow>
@@ -263,9 +315,9 @@ export default function ResulMicrometro() {
                   <TableBody>
                     <TableRow>
                       <TableCell className="text-center">0,000</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle1_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle1_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle1_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -274,9 +326,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">2,500</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle2_1")} /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle2_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle2_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -284,9 +336,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">5,100</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle3_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle3_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle3_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -294,9 +346,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">7,700</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle4_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle4_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle4_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -304,9 +356,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">10,300</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle5_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle5_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle5_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -314,9 +366,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">12,900</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle6_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle6_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle6_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -324,9 +376,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">15,000</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle7_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle7_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle7_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -334,9 +386,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">17,600</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle8_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle8_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle8_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -344,9 +396,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">20,200</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle9_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle9_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle9_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -354,9 +406,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">22,800</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle10_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle10_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle10_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -364,9 +416,9 @@ export default function ResulMicrometro() {
 
                     <TableRow>
                       <TableCell className="text-center">25,000</TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
-                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" /></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle11_1")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle11_2")}/></TableCell>
+                      <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle11_3")}/></TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
                       <TableCell className="text-center border">#DIV/0!</TableCell>
@@ -438,6 +490,7 @@ export default function ResulMicrometro() {
         </div>
         {/* BOTÕES DO FORMULÁRIO */}
         <div className="w-[90%] flex flex-row justify-end items-center py-5 gap-3">
+        <Button className="w-[200px]"  onClick={() => handleSubmit(handleCalculate)()}>Calcular </Button>
           <Button className="w-[200px]">Adicionar</Button>
           <Button variant="outline">
             Cancelar
