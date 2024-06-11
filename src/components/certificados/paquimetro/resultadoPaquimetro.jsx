@@ -25,62 +25,79 @@ export default function ResulPaquimetro() {
 
       const valorIndicadoMedInterna = [];
       const valorNominalMedInterna = [];
+
       const valorNominalMedRessalto = [];
       const valorIndicadoMedRessalto = [];
 
-      // Itera sobre as linhas da tabela
-      for (let i = 0; i < 5; i++) {
-        // Cria arrays para armazenar os valores indicados e nominais de cada linha
+      const valorNominalMedProfundidade = [];
+      const valorIndicadoMedProfundidade = [];
+
+      // MEDIÇÃO DE PROFUNDIDADE
+      for (let i = 0; i < 3; i++) {
+        // TODO: funcionando
         const rowValuesIndicado = [];
-        const valueNominal = parseFloat(data[`vn${i + 1}`]); // Obtém o valor nominal para esta linha
+        const valueNominal = parseFloat(data[`vnmp${i + 1}`]);
 
-        // Itera sobre as células da linha
         for (let j = 0; j < 3; j++) {
-          // Obtém os valores indicados das células atuais
-          const valueIndicado = parseFloat(data[`vi${i * 3 + j + 1}`]);
-
-          // Adiciona os valores aos arrays das linhas
+          const valueIndicado = parseFloat(data[`vimp${i * 3 + j + 1}`]);
           rowValuesIndicado.push(valueIndicado);
         }
 
-        // Adiciona o valor nominal ao array
-        valorNominalMedExterna.push(valueNominal);
-        // Adiciona os arrays das linhas aos arrays principais
-        valorIndicado.push(rowValuesIndicado);
+        valorNominalMedProfundidade.push(valueNominal);
+        valorIndicadoMedProfundidade.push(rowValuesIndicado);
       }
 
+      // MEDIÇÃO INTERNA
       for (let i = 0; i < 3; i++) {
-        // Cria arrays para armazenar os valores indicados e nominais de cada linha
-        const rowValuesIndicadoInterna = [];
-        const rowValuesIndicadoRessalto = [];
+        // TODO:funcionando
+        const rowValuesIndicado = [];
+        const valueNominal = parseFloat(data[`vnmi${i + 1}`]);
 
-        // Itera sobre as células da linha
         for (let j = 0; j < 3; j++) {
-          // Obtém os valores indicados das células atuais
-          const valueIndicadoInterna = parseFloat(data[`vimi${i * 3 + j + 1}`]);
+          const valueIndicado = parseFloat(data[`vimi${i * 3 + j + 1}`]);
+          rowValuesIndicado.push(valueIndicado);
+        }
+
+        valorNominalMedInterna.push(valueNominal);
+        valorIndicadoMedInterna.push(rowValuesIndicado);
+      }
+
+      // MEDIÇÃO DE RESSALTO
+      for (let i = 0; i < 3; i++) {
+        // TODO: funcionando
+        const rowValuesIndicadoRessalto = [];
+        const valueNominalMedRessalto = parseFloat(data[`vnmr${i + 1}`]);
+
+        for (let j = 0; j < 3; j++) {
           const valueIndicadoRessalto = parseFloat(
             data[`vimr${i * 3 + j + 1}`]
           );
-
-          // Adiciona os valores aos arrays das linhas
-          rowValuesIndicadoInterna.push(valueIndicadoInterna);
           rowValuesIndicadoRessalto.push(valueIndicadoRessalto);
         }
 
-        // Adiciona os arrays das linhas aos arrays principais
-        valorIndicadoMedInterna.push(rowValuesIndicadoInterna);
         valorIndicadoMedRessalto.push(rowValuesIndicadoRessalto);
 
-        // Obtém os valores nominais das células atuais
-        const valueNominalMedInterna = parseFloat(data[`vnmi${i + 1}`]);
-        const valueNominalMedRessalto = parseFloat(data[`vnmr${i + 1}`]);
-
-        // Adiciona os valores nominais aos arrays correspondentes
-        valorNominalMedInterna.push(valueNominalMedInterna);
         valorNominalMedRessalto.push(valueNominalMedRessalto);
       }
 
+      // MEDIÇÃO EXTERNA
+      for (let i = 0; i < 5; i++) {
+        // TODO: TEM QUE ARRUMAR ESSA BOMBAAAAAAAAAAAAAA
+        const rowValuesIndicado = [];
+        const valueNominal = parseFloat(data[`vn${i + 1}`]);
+
+        for (let j = 0; j < 6; j++) {
+          const valueIndicado = parseFloat(data[`vi${i * 3 + j + 1}`]);
+          rowValuesIndicado.push(valueIndicado);
+        }
+
+        valorNominalMedExterna.push(valueNominal);
+        valorIndicado.push(rowValuesIndicado);
+      }
+
+      // VALOR INDICADO PROXIMO DA ORELHA
       const valorIndicadoProxOrelhas = [
+        // TODO: funcionando
         [
           parseFloat(data.vipo1),
           parseFloat(data.vipo2),
@@ -93,7 +110,9 @@ export default function ResulPaquimetro() {
         ],
       ];
 
+      // VALOR INDICADO AFASTADO DA ORELHA
       const valorIndicadoAfasOrelhas = [
+        // TODO: funcionando
         [
           parseFloat(data.viao1),
           parseFloat(data.viao2),
@@ -106,7 +125,8 @@ export default function ResulPaquimetro() {
         ],
       ];
 
-      // Extrai o valor do input para o valor nominal
+      // VALOR NOMINAL PARARELISMO
+      // TODO: funcionando
       const valorNominalPara = [parseFloat(data.vnp1), parseFloat(data.vnp2)];
 
       // Estrutura os dados totais a serem enviados para a API
@@ -120,9 +140,10 @@ export default function ResulPaquimetro() {
         valorNominalMedInterna,
         valorNominalMedRessalto,
         valorIndicadoMedRessalto,
+        valorIndicadoMedProfundidade,
+        valorNominalMedProfundidade,
       };
 
-      // Agora você pode enviar os dados para a API
       console.log(dataTotal);
 
       // const response = await registerCalcPaq(dataTotal);
@@ -323,7 +344,7 @@ export default function ResulPaquimetro() {
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vn${index + 1}`)}
                       />
                     </TableCell>
@@ -331,21 +352,21 @@ export default function ResulPaquimetro() {
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vi${index * 3 + 1}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vi${index * 3 + 2}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vi${index * 3 + 3}`)}
                       />
                     </TableCell>
@@ -354,28 +375,28 @@ export default function ResulPaquimetro() {
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vn${index + 1}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vi${index * 3 + 4}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vi${index * 3 + 5}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vi${index * 3 + 6}`)}
                       />
                     </TableCell>
@@ -421,7 +442,7 @@ export default function ResulPaquimetro() {
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("vnp1")}
                     />
                   </TableCell>
@@ -438,21 +459,21 @@ export default function ResulPaquimetro() {
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("vipo1")}
                     />
                   </TableCell>
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("vipo2")}
                     />
                   </TableCell>
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("vipo3")}
                     />
                   </TableCell>
@@ -469,21 +490,21 @@ export default function ResulPaquimetro() {
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("viao1")}
                     />
                   </TableCell>
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("viao2")}
                     />
                   </TableCell>
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("viao3")}
                     />
                   </TableCell>
@@ -521,7 +542,7 @@ export default function ResulPaquimetro() {
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("vnp2")}
                     />
                   </TableCell>
@@ -538,21 +559,21 @@ export default function ResulPaquimetro() {
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("vipo4")}
                     />
                   </TableCell>
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("vipo5")}
                     />
                   </TableCell>
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("vipo6")}
                     />
                   </TableCell>
@@ -569,21 +590,21 @@ export default function ResulPaquimetro() {
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("viao4")}
                     />
                   </TableCell>
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("viao5")}
                     />
                   </TableCell>
                   <TableCell className="border text-center p-0">
                     <input
                       className="p-5 w-full h-full"
-                      type="number"
+                      type="text"
                       {...register("viao6")}
                     />
                   </TableCell>
@@ -669,58 +690,58 @@ export default function ResulPaquimetro() {
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vnmi${index + 1}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
-                        {...register(`vimi${index + 1}`)}
+                        type="text"
+                        {...register(`vimi${index * 3 + 1}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
-                        {...register(`vimi${index + 2}`)}
+                        type="text"
+                        {...register(`vimi${index * 3 + 2}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
-                        {...register(`vimi${index + 3}`)}
+                        type="text"
+                        {...register(`vimi${index * 3 + 3}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center "></TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
+                        type="text"
                         {...register(`vnmr${index + 1}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
-                        {...register(`vimr${index + 1}`)}
+                        type="text"
+                        {...register(`vimr${index * 3 + 1}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
-                        {...register(`vimr${index + 2}`)}
+                        type="text"
+                        {...register(`vimr${index * 3 + 2}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
-                        type="number"
-                        {...register(`vimr${index + 3}`)}
+                        type="text"
+                        {...register(`vimr${index * 3 + 3}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center"></TableCell>
@@ -763,29 +784,29 @@ export default function ResulPaquimetro() {
                         <TableCell className="border text-center p-0">
                           <input
                             className="p-5 w-full h-full"
-                            type="number"
-                            {...register(`vnmi${index + 1}`)}
+                            type="text"
+                            {...register(`vnmp${index + 1}`)}
                           />
                         </TableCell>
                         <TableCell className="border text-center p-0">
                           <input
                             className="p-5 w-full h-full"
-                            type="number"
-                            {...register(`vimi${index * 3 + 1}`)}
+                            type="text"
+                            {...register(`vimp${index * 3 + 1}`)}
                           />
                         </TableCell>
                         <TableCell className="border text-center p-0">
                           <input
                             className="p-5 w-full h-full"
-                            type="number"
-                            {...register(`vimi${index * 3 + 2}`)}
+                            type="text"
+                            {...register(`vimp${index * 3 + 2}`)}
                           />
                         </TableCell>
                         <TableCell className="border text-center p-0">
                           <input
                             className="p-5 w-full h-full"
-                            type="number"
-                            {...register(`vimi${index * 3 + 3}`)}
+                            type="text"
+                            {...register(`vimp${index * 3 + 3}`)}
                           />
                         </TableCell>
                         <TableCell className="border text-center "></TableCell>
