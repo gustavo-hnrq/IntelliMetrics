@@ -1,5 +1,6 @@
 import Menu from "@/components/layout/menu";
 import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -10,6 +11,36 @@ import {
 } from "@/components/ui/table";
 
 export default function IncertMicrometro() {
+
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    const storedResponse = localStorage.getItem('response');
+    if (storedResponse) {
+      setResponse(JSON.parse(storedResponse));
+    }
+  }, []);
+
+// Desestruturação com valores padrão
+const {
+  incerteza_medAU = {incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_medEader = {incerteza_PD: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_medl1 = {incerteza_medl1: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_medl2 = {incerteza_medl2: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incertezaUC =  {UC: '=DIV/0!', veff: '=DIV/0!', K: '=DIV/0!', U: '=DIV/0!'},
+  incerteza_UP = {incerteza_PD: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_medEres = {incerteza_medERES: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_medPAR = {incerteza_medPAR: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_Para0_25 = {incerteza_AU: '=DIV/0!', incerteza_Ubloco: '=DIV/0!' ,contribuiçao_incerteza: '=DIV/0!', contriIncertezaUbloco: '=DIV/0!' ,contribuiçao_incerteza_Up: '=DIV/0!', contribuoção_incereteza_Eres: '=DIV/0!', Uc: '=DIV/0!', veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incerteza_Para25_50 = {incerteza_AU: '=DIV/0!', incerteza_Ubloco: '=DIV/0!' ,contribuiçao_incerteza: '=DIV/0!', contriIncertezaUbloco: '=DIV/0!' ,contribuiçao_incerteza_Up: '=DIV/0!', contribuoção_incereteza_Eres: '=DIV/0!', Uc: '=DIV/0!', veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incerteza_Para50_100 = {incerteza_AU: '=DIV/0!', incerteza_Ubloco: '=DIV/0!' ,contribuiçao_incerteza: '=DIV/0!', contriIncertezaUbloco: '=DIV/0!' ,contribuiçao_incerteza_Up: '=DIV/0!', contribuoção_incereteza_Eres: '=DIV/0!', Uc: '=DIV/0!', veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incerteza_planeza0_25 = { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incerteza_planeza25_50 =  { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incerteza_planeza50_100 =  { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'}
+} = response || {};
+
+  console.log(incerteza_medAU)
+  console.log("response",response)
   return (
   
         <div className="flex flex-col justify-between w-full">

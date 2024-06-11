@@ -19,6 +19,7 @@ import { ptBR } from 'date-fns/locale';
 
 
 export default function ResulMicrometro() {
+  
   const [response, setResponse] = useState("")
   const [linhas, setLinhas] = useState([
     {
@@ -79,9 +80,10 @@ export default function ResulMicrometro() {
         dig_anal: parseInt(data.dig_anal)
       }
 
-      console.log("data", dataSatanais)
+      // console.log("data", dataSatanais)
       const response = await calcmicrometro(dataSatanais);
       setResponse(response.data)
+      localStorage.setItem('response', JSON.stringify(response.data));
 
       return Toast.fire({
         title: `${response.data}`,
@@ -108,7 +110,19 @@ export default function ResulMicrometro() {
   // Desestruturação da parte de PARALELISMO e definição de repostas nulas caso não haja resposta
   const { calculoParalelismo: {resultado1 = 0, resultado2 = 0, resultaod3 = 0, resultado4 = 0, nFranjas= 0, valorEmMilimetro = 0.0000} = {}} = response || {};
 
-  // const { controleDimensional: { desvioPadraoMedio = 0, resultado1 = {}, resultado2 = {}, resultado3 = {}, resultado4 = {}, resultado5 = {}, resultado6 = {}, resultado7 = {}, resultado8 = {}, resultado9 = {}, resultado10 = {}, resultado11 = {} } = {} } = response || {};
+  const { controleDimensional: { desvioPadraoMedio = "#DIV/0", 
+    resultadoControle1 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle2 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"},
+    resultadoControle3 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle4 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle5 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle6 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle7 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle8 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle9 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle10 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle11 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"} 
+  } = {} } = response || {};
   
 console.log("asd", response)
   return (
@@ -333,10 +347,10 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle1_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle1_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle1_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell rowSpan={11} className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle1.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle1.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle1.desvioPadrao}</TableCell>
+                      <TableCell rowSpan={11} className="text-center border">{desvioPadraoMedio}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -344,9 +358,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle2_1")} /></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle2_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle2_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle2.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle2.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle2.desvioPadrao}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -354,9 +368,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle3_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle3_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle3_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle3.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle3.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle3.desvioPadrao}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -364,9 +378,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle4_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle4_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle4_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle4.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle4.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle4.desvioPadrao}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -374,9 +388,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle5_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle5_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle5_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle5.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle5.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle5.desvioPadrao}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -384,9 +398,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle6_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle6_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle6_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle6.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle6.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle6.desvioPadrao}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -394,9 +408,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle7_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle7_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle7_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle7.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle7.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle7.desvioPadrao}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -404,9 +418,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle8_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle8_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle8_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle8.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle8.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle8.desvioPadrao}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -414,9 +428,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle9_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle9_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle9_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle9.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle9.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle9.desvioPadrao}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -424,9 +438,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle10_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle10_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle10_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle10.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle10.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle10.desvioPadrao}</TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -434,9 +448,9 @@ console.log("asd", response)
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle11_1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle11_2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("controle11_3")}/></TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
-                      <TableCell className="text-center border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border">{resultadoControle11.mediaValor}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle11.tendência}</TableCell>
+                      <TableCell className="text-center border">{resultadoControle11.desvioPadrao}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
