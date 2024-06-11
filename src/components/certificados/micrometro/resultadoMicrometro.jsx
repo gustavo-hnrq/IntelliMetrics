@@ -57,7 +57,7 @@ export default function ResulMicrometro() {
       const cMovel = [parseFloat(data.cm1), parseFloat(data.cm2), parseFloat(data.cm3)]
       const cFixo = [parseFloat(data.cf1), parseFloat(data.cf2), parseFloat(data.cf3)]
 
-      const paralelismo = [parseFloat(data.valPara1), parseFloat(data.valPara2), parseFloat(data.valPara3), parseFloat(data.valPara4), parseFloat(data.valPara5), parseFloat(data.valPara6)]
+      const dadosParalelismo = [parseFloat(data.valPara1), parseFloat(data.valPara2), parseFloat(data.valPara3), parseFloat(data.valPara4), parseFloat(data.valPara5), parseFloat(data.valPara6)]
       const dadosControle = []
 
       for (let i = 1; i <= 11; i++) {
@@ -72,13 +72,14 @@ export default function ResulMicrometro() {
       const dataSatanais = {
         cMovel,
         cFixo,
-        paralelismo,
+        dadosParalelismo,
         dadosControle,
         faixaCalibrada: parseFloat(data.faixaCalibrada),
         valorDivResolucao: parseFloat(data.valorDivResolucao),
         dig_anal: parseInt(data.dig_anal)
       }
 
+      console.log("data", dataSatanais)
       const response = await calcmicrometro(dataSatanais);
       setResponse(response.data)
 
@@ -94,8 +95,22 @@ export default function ResulMicrometro() {
       });
     }
   }
+  
+  // Desestruturação da parte de PLANEZA e definição de repostas nulas caso não haja resposta
+  // let media_CFixo = response.calculoPlaneza?.media_CFixo ?? 0;
+  // let media_CMovel = response.calculoPlaneza?.media_CMovel ?? 0;
+  // let desvpadCFixo = response.calculoPlaneza?.desvioPadraoCFixo ?? "#DIV/0!";
+  // let desvpadCMovel = response.calculoPlaneza?.desvioPadraoCMovel ?? "#DIV/0!";
+  // let planezaMedia = response.calculoPlaneza?.planezaMedia ?? 0.00000;
 
+// Desestruturação da parte de PLANEZA e definição de repostas nulas caso não haja resposta
+  const { calculoPlaneza: { media_CFixo = 0, media_CMovel = 0, desvioPadraoCFixo = "#DIV/0!", desvioPadraoCMovel = "#DIV/0!", planezaMedia = 0.00000 } = {} } = response || {};
+  // Desestruturação da parte de PARALELISMO e definição de repostas nulas caso não haja resposta
+  const { calculoParalelismo: {resultado1 = 0, resultado2 = 0, resultaod3 = 0, resultado4 = 0, nFranjas= 0, valorEmMilimetro = 0.0000} = {}} = response || {};
 
+  // const { controleDimensional: { desvioPadraoMedio = 0, resultado1 = {}, resultado2 = {}, resultado3 = {}, resultado4 = {}, resultado5 = {}, resultado6 = {}, resultado7 = {}, resultado8 = {}, resultado9 = {}, resultado10 = {}, resultado11 = {} } = {} } = response || {};
+  
+console.log("asd", response)
   return (
     <div>
       <form class="flex flex-col w-full items-center">
@@ -205,17 +220,17 @@ export default function ResulMicrometro() {
                       <TableCell className="border p-0"><input className="p-5" type="number" {...register("cm1")} /></TableCell>
                       <TableCell className="border p-0"><input className=" p-5" type="number" {...register("cm2")}/></TableCell>
                       <TableCell className="border p-0"><input className=" p-5" type="number" {...register("cm3")}/></TableCell>
-                      <TableCell className="text-center border p-0 min-w-full">0</TableCell>
-                      <TableCell className="border">#DIV/0!</TableCell>
-                      <TableCell className="border text-center" rowSpan={2}>0,0000</TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">{media_CMovel}</TableCell>
+                      <TableCell className="border">{desvioPadraoCMovel}</TableCell>
+                      <TableCell className="border text-center" rowSpan={2}>{planezaMedia}</TableCell>
                     </TableRow>
                     <TableRow className="hover:bg-white">
                       <TableCell className="border min-w-24">C. Fixo</TableCell>
                       <TableCell className="border p-0"><input className="p-5" type="number" {...register("cf1")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5" type="number" {...register("cf2")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5" type="number" {...register("cf3")}/></TableCell>
-                      <TableCell className="text-center border p-0 min-w-full">0</TableCell>
-                      <TableCell className="border">#DIV/0!</TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">{media_CFixo}</TableCell>
+                      <TableCell className="border">{desvioPadraoCFixo}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -251,9 +266,9 @@ export default function ResulMicrometro() {
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara1")}/></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
-                      <TableCell className="text-center border p-0 min-w-full">0</TableCell>
-                      <TableCell className="text-center border p-0 min-w-full">0</TableCell>
-                      <TableCell className="text-center border p-0 min-w-full">0,0000</TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">{resultado1}</TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">{nFranjas}</TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">{valorEmMilimetro}</TableCell>
                     </TableRow>
 
                     <TableRow className="hover:bg-white">
@@ -261,7 +276,7 @@ export default function ResulMicrometro() {
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara2")}/></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
-                      <TableCell className="text-center border p-0 min-w-full">0</TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">{resultado2}</TableCell>
                       <TableCell colSpan={2} className="border p-0 min-w-full bg-gray-300"></TableCell>
                     </TableRow>
 
@@ -270,7 +285,7 @@ export default function ResulMicrometro() {
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara3")}/></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
                       <TableCell className="border p-0 min-w-full bg-gray-300"></TableCell>
-                      <TableCell className="text-center border p-0 min-w-full">0</TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">{resultaod3}</TableCell>
                       <TableCell colSpan={2} className="border p-0 min-w-full bg-gray-300"></TableCell>
                     </TableRow>
 
@@ -279,7 +294,7 @@ export default function ResulMicrometro() {
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara4")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara5")}/></TableCell>
                       <TableCell className="border p-0"><input className="p-5 w-full" type="number" {...register("valPara6")}/></TableCell>
-                      <TableCell className="text-center border p-0 min-w-full">0</TableCell>
+                      <TableCell className="text-center border p-0 min-w-full">{resultado4}</TableCell>
                       <TableCell colSpan={2} className="border p-0 min-w-full bg-gray-300"></TableCell>
                     </TableRow>
                   </TableBody>
