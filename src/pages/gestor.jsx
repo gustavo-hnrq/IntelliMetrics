@@ -32,6 +32,7 @@ export default function TelaGestor() {
         <div className="ml-80 px-10">
           <h1 className="text-3xl font-bold mb-4">Seja bem-vindo</h1>
           <div className="flex gap-2">
+            <h1>AAAAAAAAAAAAAA</h1>
             <CardGestor
               numero={27}
               texto={"Propostas Recebidas"}
