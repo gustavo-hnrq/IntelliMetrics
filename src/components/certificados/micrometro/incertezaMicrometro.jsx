@@ -27,7 +27,7 @@ const {
   incerteza_medEader = {incerteza_PD: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
   incerteza_medl1 = {incerteza_medl1: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
   incerteza_medl2 = {incerteza_medl2: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
-  incertezaUC =  {UC: '=DIV/0!', veff: '=DIV/0!', "K=": '=DIV/0!', U: '=DIV/0!'},
+  incertezaUC =  {UC: '=DIV/0!', veff: '=DIV/0!', K: '=DIV/0!', U: '=DIV/0!'},
   incerteza_UP = {incerteza_PD: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
   incerteza_medEres = {incerteza_medERES: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
   incerteza_medPAR = {incerteza_medPAR: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
@@ -39,7 +39,6 @@ const {
   incertezaPlaneza50_100 = { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'}
 } = response || {};
 
-  console.log("md au",incerteza_medAU)
   console.log("response",response)
   return (
   

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import selo from "../../../assets/selo certificado.png";
 import senai from "../../../assets/Senai Logotipo_destaque.png";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -9,6 +9,40 @@ import { useReactToPrint } from "react-to-print" ;
 
 
 export default function CertMicrometro() {
+
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    const storedResponse = localStorage.getItem('response');
+    if (storedResponse) {
+      setResponse(JSON.parse(storedResponse));
+    }
+  }, []);
+
+  const { controleDimensional: {
+    resultadoControle1 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle2 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"},
+    resultadoControle3 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle4 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle5 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle6 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle7 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle8 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle9 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle10 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
+    resultadoControle11 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"} 
+  } = {} } = response || {};
+
+  const { calculoPlaneza: { planezaMedia = 0.00000 } = {} } = response || {};
+  const { calculoParalelismo: { valorEmMilimetro = 0.0000} = {}} = response || {};
+  const {
+    incertezaUC =  {UC: '=DIV/0!', veff: '=DIV/0!', K: '#####', U: '#####'},
+    incertezaPara50_100 = {K: '=DIV/0!', veff: "#####"},
+    incertezaPlaneza50_100 = {K: '=DIV/0!', veff: "#####"}
+
+  } = response || {};
+
+  console.log("eu nao sei",incertezaUC)
 
   // esta função pega as informações da parte citada, para poder imprimir
   const contentDocument = useRef();
@@ -198,61 +232,61 @@ export default function CertMicrometro() {
                         <TableBody>
                           <TableRow>
                               <TableHead>0,00</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
-                              <td rowSpan={11} className="border-l-2 p-10 align-middle [&:has([role=checkbox])]:pr-0">#DIV/0!</td>
-                              <td rowSpan={11} className="border-x-2 p-10 align-middle [&:has([role=checkbox])]:pr-0">#####</td>
-                              <td rowSpan={11} className="p-10 align-middle [&:has([role=checkbox])]:pr-0">#####</td>
+                              <TableCell>{resultadoControle1.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle1.tendência}</TableCell>
+                              <td rowSpan={11} className="border-l-2 p-10 align-middle [&:has([role=checkbox])]:pr-0">{incertezaUC.U}</td>
+                              <td rowSpan={11} className="border-x-2 p-10 align-middle [&:has([role=checkbox])]:pr-0">{incertezaUC.K}</td>
+                              <td rowSpan={11} className="p-10 align-middle [&:has([role=checkbox])]:pr-0">{incertezaUC.veff}</td>
                           </TableRow>
                           <TableRow>
                               <TableHead>1,30</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle2.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle2.tendência}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableHead>1,40</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle3.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle3.tendência}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableHead>20,00</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle4.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle4.tendência}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableHead>50,00</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle5.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle5.tendência}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableHead>100,00</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle6.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle6.tendência}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableHead>100,00</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle7.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle7.tendência}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableHead>100,00</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle8.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle8.tendência}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableHead>100,00</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle9.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle9.tendência}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableHead>100,00</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle10.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle10.tendência}</TableCell>
                           </TableRow>
                           <TableRow>
                               <TableHead>100,00</TableHead>
-                              <TableCell>#DIV/0!</TableCell>
-                              <TableCell>#DIV/0!</TableCell>
+                              <TableCell>{resultadoControle11.mediaValor}</TableCell>
+                              <TableCell>{resultadoControle11.tendência}</TableCell>
                           </TableRow>
                         </TableBody>
                     </Table>
@@ -265,7 +299,7 @@ export default function CertMicrometro() {
                           <TableHeader>
                             <TableRow>
                               <TableHead>Paralelismo</TableHead>
-                              <TableCell>0,000 mm</TableCell>
+                              <TableCell>{valorEmMilimetro} mm</TableCell>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
@@ -275,11 +309,11 @@ export default function CertMicrometro() {
                             </TableRow>
                             <TableRow>
                               <TableCell>K =</TableCell>
-                              <TableCell>...</TableCell>
+                              <TableCell>{incertezaPara50_100.K}</TableCell>
                             </TableRow>
                             <TableRow>
                               <TableCell>Veff =</TableCell>
-                              <TableCell>...</TableCell>
+                              <TableCell>{ incertezaPara50_100.veff}</TableCell>
                             </TableRow>
                           </TableBody>
                         </Table>
@@ -291,7 +325,7 @@ export default function CertMicrometro() {
                           <TableHeader>
                             <TableRow>
                               <TableHead>Planeza</TableHead>
-                              <TableCell>0,000 mm</TableCell>
+                              <TableCell>{planezaMedia} mm</TableCell>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
@@ -301,11 +335,11 @@ export default function CertMicrometro() {
                             </TableRow>
                             <TableRow>
                               <TableCell>K =</TableCell>
-                              <TableCell>...</TableCell>
+                              <TableCell>{incertezaPlaneza50_100.K}</TableCell>
                             </TableRow>
                             <TableRow>
                               <TableCell>Veff =</TableCell>
-                              <TableCell>...</TableCell>
+                              <TableCell>{incertezaPlaneza50_100.veff}</TableCell>
                             </TableRow>
                           </TableBody>
                         </Table>

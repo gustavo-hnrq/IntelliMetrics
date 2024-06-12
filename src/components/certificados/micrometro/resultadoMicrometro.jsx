@@ -112,13 +112,6 @@ export default function ResulMicrometro() {
     }
   }
   
-  // Desestruturação da parte de PLANEZA e definição de repostas nulas caso não haja resposta
-  // let media_CFixo = response.calculoPlaneza?.media_CFixo ?? 0;
-  // let media_CMovel = response.calculoPlaneza?.media_CMovel ?? 0;
-  // let desvpadCFixo = response.calculoPlaneza?.desvioPadraoCFixo ?? "#DIV/0!";
-  // let desvpadCMovel = response.calculoPlaneza?.desvioPadraoCMovel ?? "#DIV/0!";
-  // let planezaMedia = response.calculoPlaneza?.planezaMedia ?? 0.00000;
-
 // Desestruturação da parte de PLANEZA e definição de repostas nulas caso não haja resposta
   const { calculoPlaneza: { media_CFixo = 0, media_CMovel = 0, desvioPadraoCFixo = "#DIV/0!", desvioPadraoCMovel = "#DIV/0!", planezaMedia = 0.00000 } = {} } = response || {};
   // Desestruturação da parte de PARALELISMO e definição de repostas nulas caso não haja resposta
@@ -138,7 +131,6 @@ export default function ResulMicrometro() {
     resultadoControle11 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"} 
   } = {} } = response || {};
   
-console.log("asd", response)
   return (
     <div>
       <form class="flex flex-col w-full items-center">
