@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../axiosConfig"; // Importando o axiosInstance
 import { TabelaFlex } from "@/components/tables/table-flex";
 import ModalInstrumento from "@/components/modals/instrumento";
-import ModalCategoria from "../modals/categoria";
+import ModalVisualizarInstrumento from "../modals/instrumentoVisualizar";
   
 const columns = [
   { key: "pk_idInstrumento", label: "ID" },
@@ -14,6 +14,8 @@ const columns = [
 
 export default function TabelaInstrumentos() {
   const [data, setData] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null); // Estado para armazenar a linha selecionada
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,13 +45,23 @@ export default function TabelaInstrumentos() {
     fetchData();
   }, []);
 
+  const handleVisualizarClick = (rowData) => {
+    setSelectedRow(rowData); // Define a linha selecionada
+  };
+
+  const handleCloseModal = () => {
+    setSelectedRow(null); // Limpa a linha selecionada ao fechar a modal
+  };
+
   return (
     <div>
         <TabelaFlex
           nome={"Adicionar Instrumentos"}
           data={data}
           columns={columns}
-          button={<ModalInstrumento />}
+          buttonAdd={<ModalInstrumento />}
+          buttonVisualizar={<ModalVisualizarInstrumento onClose={handleCloseModal} rowData={selectedRow} />}
+          onVisualizarClick={handleVisualizarClick}
         />
     </div>
   );

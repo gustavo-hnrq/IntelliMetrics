@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../axiosConfig"; 
 import { TabelaFlex } from "@/components/tables/table-flex";
 import ModalPeca from "@/components/modals/peca";
+import ModalVisualizarPeca from "../modals/pecaVisualizar";
 
 const columns = [
   { key: "pk_idPeca", label: "ID" },
@@ -12,6 +13,8 @@ const columns = [
 
 export default function TabelaPecas() {
   const [data, setData] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null); // Estado para armazenar a linha selecionada
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,13 +41,23 @@ export default function TabelaPecas() {
     fetchData();
   }, []);
 
+  const handleVisualizarClick = (rowData) => {
+    setSelectedRow(rowData); // Define a linha selecionada
+  };
+
+  const handleCloseModal = () => {
+    setSelectedRow(null); // Limpa a linha selecionada ao fechar a modal
+  };
+
   return (
     <div>
         <TabelaFlex
           nome={"Adicionar Peça"}
           data={data}
           columns={columns}
-          button={<ModalPeca />}
+          buttonAdd={<ModalPeca />}
+          buttonVisualizar={<ModalVisualizarPeca onClose={handleCloseModal} rowData={selectedRow} />}
+        onVisualizarClick={handleVisualizarClick}
         />
     </div>
   );

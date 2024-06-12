@@ -23,15 +23,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import {
-  DotsHorizontalIcon
-} from "@radix-ui/react-icons"
 
-
-export function TabelaFlex({ nome, data, columns, button }) {
+export function TabelaFlex({ nome, data, columns, buttonAdd, buttonVisualizar, onVisualizarClick }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  const rowsPerPage = 10;
+  const rowsPerPage = 8;
 
   const filteredData = data.filter((item) =>
     Object.values(item).some(
@@ -62,7 +58,7 @@ export function TabelaFlex({ nome, data, columns, button }) {
           value={searchQuery}
           onChange={handleSearch}
         />
-        {button}
+        {buttonAdd}
       </div>
       <div className="rounded-md border bg-white uppercase">
         <Table>
@@ -81,20 +77,10 @@ export function TabelaFlex({ nome, data, columns, button }) {
                 {columns.map((column, columnIndex) => (
                   <TableCell key={columnIndex}>{item[column.key]}</TableCell>
                 ))}
-
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="outline" className="h-7 w-7 p-0">
-                        <span className="sr-only">Open menu</span>
-                        <DotsHorizontalIcon className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem>Alterar</DropdownMenuItem>
-                      <DropdownMenuItem>Deletar</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                <TableCell className="flex justify-end">
+                  <div variant="outline" onClick={() => onVisualizarClick(item)}>
+                    {buttonVisualizar}
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
