@@ -36,10 +36,10 @@ export default function ModalPeca() {
   const [clientes, setClients] = useState([]);
   const [orders, setOrders] = useState([]);
   const estadoEmabalagemOption = [
-    {value: "bom", label: "Bom"},
-    {value: "medio", label: "Médio"},
-    {value: "ruim", label: "Ruim"}
-  ]
+    { value: "bom", label: "Bom" },
+    { value: "medio", label: "Médio" },
+    { value: "ruim", label: "Ruim" },
+  ];
 
   // BIBLIOTECA PARA RETORNAR MENSAGEM DA RESPOSTA DA API
   const Toast = Swal.mixin({
@@ -83,12 +83,21 @@ export default function ModalPeca() {
         title: `${response.data}`,
         icon: "success",
       });
-    } catch (error) {
-      // retorna o erro
-      return Toast.fire({
-        title: `${error}`,
-        icon: "error",
-      });
+    } catch (err) {
+      // retorna o erro de acordo com o status
+      console.log(err.response);
+      if (err.response.status === 400) {
+        return Toast.fire({
+          title: `Erro ao cadastrar peça`,
+          icon: "error",
+        });
+      } else {
+        console.log(err.response);
+        return Toast.fire({
+          title: `Erro interno no servidor`,
+          icon: "error",
+        });
+      }
     }
   }
 
@@ -171,7 +180,6 @@ export default function ModalPeca() {
                   }))}
                   {...register("estadoEmbalagem")}
                 />
-                
 
                 {errors.estadoEmbalagem && (
                   <Error message={errors.estadoEmbalagem.message} />
