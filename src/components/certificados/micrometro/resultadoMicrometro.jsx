@@ -94,7 +94,7 @@ export default function ResulMicrometro() {
         dig_anal: parseInt(data.dig_anal)
       }
 
-      // console.log("data", dataSatanais)
+      // console.log("data", dataCalculo)
       const response = await calcmicrometro(dataCalculo);
       setResponse(response.data)
       localStorage.setItem('response', JSON.stringify(response.data));

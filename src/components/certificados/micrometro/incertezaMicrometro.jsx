@@ -23,23 +23,23 @@ export default function IncertMicrometro() {
 
 // Desestruturação com valores padrão
 const {
-  incertez_medAU = {incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
-  incertez_medEader = {incerteza_PD: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
-  incertez_medl1 = {incerteza_medl1: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
-  incertez_medl2 = {incerteza_medl2: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_medAU = {incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_medEader = {incerteza_PD: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_medl1 = {incerteza_medl1: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
+  incerteza_medl2 = {incerteza_medl2: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
   incertezaUC =  {UC: '=DIV/0!', veff: '=DIV/0!', "K=": '=DIV/0!', U: '=DIV/0!'},
   incerteza_UP = {incerteza_PD: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
   incerteza_medEres = {incerteza_medERES: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
   incerteza_medPAR = {incerteza_medPAR: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
-  incetPara0_25 = {incerteza_AU: '=DIV/0!', incerteza_Ubloco: '=DIV/0!' ,contribuiçao_incerteza: '=DIV/0!', contriIncertezaUbloco: '=DIV/0!' ,contribuiçao_incerteza_Up: '=DIV/0!', contribuoção_incereteza_Eres: '=DIV/0!', Uc: '=DIV/0!', veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
-  incetPara25_50 = {incerteza_AU: '=DIV/0!', incerteza_Ubloco: '=DIV/0!' ,contribuiçao_incerteza: '=DIV/0!', contriIncertezaUbloco: '=DIV/0!' ,contribuiçao_incerteza_Up: '=DIV/0!', contribuoção_incereteza_Eres: '=DIV/0!', Uc: '=DIV/0!', veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
-  incetPara50_100 = {incerteza_AU: '=DIV/0!', incerteza_Ubloco: '=DIV/0!' ,contribuiçao_incerteza: '=DIV/0!', contriIncertezaUbloco: '=DIV/0!' ,contribuiçao_incerteza_Up: '=DIV/0!', contribuoção_incereteza_Eres: '=DIV/0!', Uc: '=DIV/0!', veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
-  incertplaneza0_25 = { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
-  incertplaneza25_50 =  { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
-  incertplaneza50_100 = { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'}
+  incertezaPara0_25 = {incerteza_AU: '=DIV/0!', incerteza_Ubloco: '=DIV/0!' ,contribuiçao_incerteza: '=DIV/0!', contriIncertezaUbloco: '=DIV/0!' ,contribuiçao_incerteza_Up: '=DIV/0!', contribuoção_incereteza_Eres: '=DIV/0!', Uc: '=DIV/0!', veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incertezaPara25_50 = {incerteza_AU: '=DIV/0!', incerteza_Ubloco: '=DIV/0!' ,contribuiçao_incerteza: '=DIV/0!', contriIncertezaUbloco: '=DIV/0!' ,contribuiçao_incerteza_Up: '=DIV/0!', contribuoção_incereteza_Eres: '=DIV/0!', Uc: '=DIV/0!', veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incertezaPara50_100 = {incerteza_AU: '=DIV/0!', incerteza_Ubloco: '=DIV/0!' ,contribuiçao_incerteza: '=DIV/0!', contriIncertezaUbloco: '=DIV/0!' ,contribuiçao_incerteza_Up: '=DIV/0!', contribuoção_incereteza_Eres: '=DIV/0!', Uc: '=DIV/0!', veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incertezaPlaneza0_25 = { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incertezaPlaneza25_50 =  { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'},
+  incertezaPlaneza50_100 = { incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!', contribuiçao_incerteza_Up: '=DIV/0!', contribuiçao_incerteza_Eres: '=DIV/0!', Uc: '=DIV/0!',veff: '=DIV/0!', k: '=DIV/0!', U:'=DIV/0!'}
 } = response || {};
 
-  console.log("md au",incertez_medAU)
+  console.log("md au",incerteza_medAU)
   console.log("response",response)
   return (
   
@@ -517,11 +517,11 @@ const {
                       <TableRow className="text-center">
                         <TableCell className="text-left">UA</TableCell>
                         <TableCell>Repetitividade (uA)</TableCell>
-                        <TableCell>{incertez_medAU.incerteza_AU}</TableCell>
+                        <TableCell>{incerteza_medAU.incerteza_AU}</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>1</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertez_medAU.contribuiçao_incerteza}</TableCell>
+                        <TableCell>{incerteza_medAU.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">2</TableCell>
                       </TableRow>
                       <TableRow className="text-center">
@@ -547,21 +547,21 @@ const {
                       <TableRow className="text-center">
                         <TableCell className="text-left">l1</TableCell>
                         <TableCell>Afastamento de 20°C</TableCell>
-                        <TableCell>{incertez_medl1.incerteza_medl1}</TableCell>
+                        <TableCell>{incerteza_medl1.incerteza_medl1}</TableCell>
                         <TableCell>R</TableCell>
                         <TableCell>1,7321</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertez_medl1.contribuiçao_incerteza}</TableCell>
+                        <TableCell>{incerteza_medl1.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">l2</TableCell>
                         <TableCell>Diferença Temp. mens x pad</TableCell>
-                        <TableCell>{incertez_medl2.incerteza_medl2}</TableCell>
+                        <TableCell>{incerteza_medl2.incerteza_medl2}</TableCell>
                         <TableCell>R</TableCell>
                         <TableCell>1,7321</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertez_medl2.contribuiçao_incerteza}</TableCell>
+                        <TableCell>{incerteza_medl2.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
@@ -577,31 +577,11 @@ const {
                       <TableRow className="text-center">
                         <TableCell className="text-left">E ader.</TableCell>
                         <TableCell>Erro de aderencia</TableCell>
-                        <TableCell>{incertez_medEader.incerteza_PD}</TableCell>
+                        <TableCell>{incerteza_medEader.incerteza_PD}</TableCell>
                         <TableCell>R</TableCell>
                         <TableCell>1,7321</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertez_medEader.contribuiçao_incerteza}</TableCell>
-                        <TableCell className="text-right">infinito </TableCell>
-                      </TableRow>
-                      <TableRow className="text-center">
-                        <TableCell className="text-left">UA</TableCell>
-                        <TableCell>Repetitividade (uA)</TableCell>
-                        <TableCell>=DIV/0!</TableCell>
-                        <TableCell>R</TableCell>
-                        <TableCell>1,7321</TableCell>
-                        <TableCell>1</TableCell>
-                        <TableCell>=DIV/0!</TableCell>
-                        <TableCell className="text-right">infinito </TableCell>
-                      </TableRow>
-                      <TableRow className="text-center">
-                        <TableCell className="text-left">UA</TableCell>
-                        <TableCell>Repetitividade (uA)</TableCell>
-                        <TableCell>=DIV/0!</TableCell>
-                        <TableCell>R</TableCell>
-                        <TableCell>1,7321</TableCell>
-                        <TableCell>1</TableCell>
-                        <TableCell>=DIV/0!</TableCell>
+                        <TableCell>{incerteza_medEader.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
@@ -616,7 +596,7 @@ const {
                         <TableCell colSpan={3}></TableCell>
                         <TableCell colSpan={2}>k = {incertezaUC.K}</TableCell>
                         <TableCell>U(95%)</TableCell>
-                        <TableCell>U = {incertezaUC.U}</TableCell>
+                        <TableCell>{incertezaUC.U}</TableCell>
                         <TableCell className="text-right"></TableCell>
                       </TableRow>
                     </TableBody>
@@ -677,47 +657,47 @@ const {
                       <TableRow className="text-center">
                         <TableCell className="text-left">UA</TableCell>
                         <TableCell>Repetitividade (uA)</TableCell>
-                        <TableCell>{incetPara0_25.incerteza_AU}</TableCell>
+                        <TableCell>{incertezaPara0_25.incerteza_AU}</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>1</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incetPara0_25.contribuiçao_incerteza}</TableCell>
+                        <TableCell>{incertezaPara0_25.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">2</TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">UP</TableCell>
                         <TableCell>Inc. Certificado Paralelo</TableCell>
-                        <TableCell>{incetPara0_25.incerteza_Ubloco}</TableCell>
+                        <TableCell>0.00005</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>2</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incetPara0_25.contribuiçao_incerteza_Up}</TableCell>
+                        <TableCell>{incertezaPara0_25.contribuiçao_incerteza_Up}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">Eres.</TableCell>
                         <TableCell>Erro de Paralelismo Padrão</TableCell>
-                        <TableCell>ta faltando</TableCell>
+                        <TableCell>0.00036</TableCell>
                         <TableCell>R</TableCell>
                         <TableCell>1,7321</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incetPara0_25.contribuoção_incereteza_Eres}</TableCell>
+                        <TableCell>{incertezaPara0_25.contribuiçao_incerteza_Eres}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
 
                       <TableRow className="text-center">
                         <TableCell colSpan={5}></TableCell>
-                        <TableCell>uc= {incetPara0_25.Uc}</TableCell>
-                        <TableCell>=DIV/0!</TableCell>
+                        <TableCell>uc = </TableCell>
+                        <TableCell>{incertezaPara0_25.Uc}</TableCell>
                         <TableCell className="text-right">
-                          Veff = {incetPara0_25.veff}
+                          Veff = {incertezaPara0_25.veff}
                         </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell colSpan={3}></TableCell>
-                        <TableCell colSpan={2}>k = {incetPara0_25.K}</TableCell>
+                        <TableCell colSpan={2}>k = {incertezaPara0_25.K}</TableCell>
                         <TableCell>U(95%)</TableCell>
-                        <TableCell>U = {incetPara0_25.U}</TableCell>
+                        <TableCell>{incertezaPara0_25.U}</TableCell>
                         <TableCell className="text-right"></TableCell>
                       </TableRow>
                     </TableBody>
@@ -778,47 +758,47 @@ const {
                       <TableRow className="text-center">
                         <TableCell className="text-left">UA</TableCell>
                         <TableCell>Repetitividade (uA)</TableCell>
-                        <TableCell>{incertplaneza0_25.incerteza_AU}</TableCell>
+                        <TableCell>{incertezaPlaneza0_25.incerteza_AU}</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>1</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertplaneza0_25.contribuiçao_incerteza}</TableCell>
+                        <TableCell>{incertezaPlaneza0_25.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">2</TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">UP</TableCell>
                         <TableCell>Inc. Certificado Plano</TableCell>
-                        <TableCell>tafaltado</TableCell>
+                        <TableCell>0.00005</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>2</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertplaneza0_25.contribuiçao_incerteza_Up}</TableCell>
+                        <TableCell>{incertezaPlaneza0_25.contribuiçao_incerteza_Up}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">Eres.</TableCell>
                         <TableCell>Erro de Planeza</TableCell>
-                        <TableCell>taFaltando</TableCell>
+                        <TableCell>0.00012</TableCell>
                         <TableCell>R</TableCell>
                         <TableCell>1,7321</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertplaneza0_25.contribuiçao_incerteza_Eres}</TableCell>
+                        <TableCell>{incertezaPlaneza0_25.contribuiçao_incerteza_Eres}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
 
                       <TableRow className="text-center">
                         <TableCell colSpan={5}></TableCell>
                         <TableCell>uc=</TableCell>
-                        <TableCell>{incertplaneza0_25.Uc}</TableCell>
+                        <TableCell>{incertezaPlaneza0_25.Uc}</TableCell>
                         <TableCell className="text-right">
-                          Veff = {incertplaneza0_25.veff}
+                          Veff = {incertezaPlaneza0_25.veff}
                         </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell colSpan={3}></TableCell>
-                        <TableCell colSpan={2}>k = {incertplaneza0_25.K}</TableCell>
+                        <TableCell colSpan={2}>k = {incertezaPlaneza0_25.K}</TableCell>
                         <TableCell>U(95%)</TableCell>
-                        <TableCell>U = {incertplaneza0_25.U}</TableCell>
+                        <TableCell>{incertezaPlaneza0_25.U}</TableCell>
                         <TableCell className="text-right"></TableCell>
                       </TableRow>
                     </TableBody>
@@ -880,47 +860,47 @@ const {
                       <TableRow className="text-center">
                         <TableCell className="text-left">UA</TableCell>
                         <TableCell>Repetitividade (uA)</TableCell>
-                        <TableCell>{ incetPara25_50.incerteza_AU}</TableCell>
+                        <TableCell>{ incertezaPara25_50.incerteza_AU}</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>1</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{ incetPara25_50.contribuiçao_incerteza}</TableCell>
+                        <TableCell>{ incertezaPara25_50.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">2</TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">UP</TableCell>
                         <TableCell>Inc. Certificado Paralelo</TableCell>
-                        <TableCell>Ta faltando</TableCell>
+                        <TableCell>0.00005</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>2</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{ incetPara25_50.contribuiçao_incerteza_Up}</TableCell>
+                        <TableCell>{ incertezaPara25_50.contribuiçao_incerteza_Up}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">Eres.</TableCell>
                         <TableCell>Erro de Paralelismo </TableCell>
-                        <TableCell>Ta faltando</TableCell>
+                        <TableCell>0.00009</TableCell>
                         <TableCell>R</TableCell>
                         <TableCell>1,7321</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{ incetPara25_50.contribuiçao_incerteza_Eres}</TableCell>
+                        <TableCell>{ incertezaPara25_50.contribuiçao_incereteza_Eres}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
 
                       <TableRow className="text-center">
                         <TableCell colSpan={5}></TableCell>
                         <TableCell>uc=</TableCell>
-                        <TableCell>{ incetPara25_50.Uc}</TableCell>
+                        <TableCell>{ incertezaPara25_50.Uc}</TableCell>
                         <TableCell className="text-right">
-                          Veff = { incetPara25_50.veff}
+                          Veff = { incertezaPara25_50.veff}
                         </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell colSpan={3}></TableCell>
-                        <TableCell colSpan={2}>k = { incetPara25_50.K}</TableCell>
+                        <TableCell colSpan={2}>k = { incertezaPara25_50.K}</TableCell>
                         <TableCell>U(95%)</TableCell>
-                        <TableCell>U = { incetPara25_50.U}</TableCell>
+                        <TableCell>{ incertezaPara25_50.U}</TableCell>
                         <TableCell className="text-right"></TableCell>
                       </TableRow>
                     </TableBody>
@@ -982,47 +962,47 @@ const {
                       <TableRow className="text-center">
                         <TableCell className="text-left">UA</TableCell>
                         <TableCell>Repetitividade (uA)</TableCell>
-                        <TableCell>{incertplaneza25_50.incerteza_AU}</TableCell>
+                        <TableCell>{incertezaPlaneza25_50.incerteza_AU}</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>1</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertplaneza25_50.contribuiçao_incerteza}</TableCell>
+                        <TableCell>{incertezaPlaneza25_50.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">2</TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">UP</TableCell>
                         <TableCell>Inc. Certificado Plano</TableCell>
-                        <TableCell>Ta faltando</TableCell>
+                        <TableCell>0.00007</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>2</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertplaneza25_50.contribuiçao_incerteza_Up}</TableCell>
+                        <TableCell>{incertezaPlaneza25_50.contribuiçao_incerteza_Up}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">Eres.</TableCell>
                         <TableCell>Erro de Planeza</TableCell>
-                        <TableCell>Ta faltando</TableCell>
+                        <TableCell>0.00013</TableCell>
                         <TableCell>R</TableCell>
                         <TableCell>1,7321</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertplaneza25_50.contribuiçao_incerteza_Eres}</TableCell>
+                        <TableCell>{incertezaPlaneza25_50.contribuiçao_incerteza_Eres}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
 
                       <TableRow className="text-center">
                         <TableCell colSpan={5}></TableCell>
                         <TableCell>uc=</TableCell>
-                        <TableCell>{incertplaneza25_50.Uc}</TableCell>
+                        <TableCell>{incertezaPlaneza25_50.Uc}</TableCell>
                         <TableCell className="text-right">
-                          Veff = {incertplaneza25_50.veff}
+                          Veff = {incertezaPlaneza25_50.veff}
                         </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell colSpan={3}></TableCell>
-                        <TableCell colSpan={2}>k = {incertplaneza25_50.K}</TableCell>
+                        <TableCell colSpan={2}>k = {incertezaPlaneza25_50.K}</TableCell>
                         <TableCell>U(95%)</TableCell>
-                        <TableCell>{incertplaneza25_50.U}</TableCell>
+                        <TableCell>{incertezaPlaneza25_50.U}</TableCell>
                         <TableCell className="text-right"></TableCell>
                       </TableRow>
                     </TableBody>
@@ -1084,57 +1064,57 @@ const {
                       <TableRow className="text-center">
                         <TableCell className="text-left">UA</TableCell>
                         <TableCell>Repetitividade (uA)</TableCell>
-                        <TableCell>{ incetPara50_100.incerteza_AU}</TableCell>
+                        <TableCell>{ incertezaPara50_100.incerteza_AU}</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>1</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{ incetPara50_100.contribuiçao_incerteza}</TableCell>
+                        <TableCell>{ incertezaPara50_100.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">2</TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">UBloco</TableCell>
                         <TableCell>Inc. Certificado Bloco Padrão</TableCell>
-                        <TableCell>{ incetPara50_100.incerteza_Ubloco}</TableCell>
+                        <TableCell>{ incertezaPara50_100.incerteza_Ubloco}</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>2</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{ incetPara50_100.contriIncertezaUbloco}</TableCell>
+                        <TableCell>{ incertezaPara50_100.contriIncertezaUbloco}</TableCell>
                         <TableCell className="text-right"></TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">UP</TableCell>
                         <TableCell>Inc. Certificado Paralelo</TableCell>
-                        <TableCell>Ta faltando</TableCell>
+                        <TableCell>0.00005</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>2</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{ incetPara50_100.contribuiçao_incerteza_Up}</TableCell>
+                        <TableCell>{ incertezaPara50_100.contribuiçao_incerteza_Up}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">Eres.</TableCell>
                         <TableCell>Erro de Paralelismo </TableCell>
-                        <TableCell>Ta faltando</TableCell>
+                        <TableCell>0.00009</TableCell>
                         <TableCell>R</TableCell>
                         <TableCell>1,7321</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{ incetPara50_100.contribuiçao_incerteza_Eres}</TableCell>
+                        <TableCell>{ incertezaPara50_100.contribuoção_incereteza_Eres}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
 
                       <TableRow className="text-center">
                         <TableCell colSpan={5}></TableCell>
                         <TableCell>uc=</TableCell>
-                        <TableCell>{ incetPara50_100.Uc}</TableCell>
+                        <TableCell>{ incertezaPara50_100.Uc}</TableCell>
                         <TableCell className="text-right">
-                          Veff = { incetPara50_100.veff}
+                          Veff = { incertezaPara50_100.veff}
                         </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell colSpan={3}></TableCell>
-                        <TableCell colSpan={2}>k = { incetPara50_100.K}</TableCell>
+                        <TableCell colSpan={2}>k = { incertezaPara50_100.K}</TableCell>
                         <TableCell>U(95%)</TableCell>
-                        <TableCell>U = { incetPara50_100.U}</TableCell>
+                        <TableCell>{incertezaPara50_100.U}</TableCell>
                         <TableCell className="text-right"></TableCell>
                       </TableRow>
                     </TableBody>
@@ -1196,57 +1176,57 @@ const {
                       <TableRow className="text-center">
                         <TableCell className="text-left">UA</TableCell>
                         <TableCell>Repetitividade (uA)</TableCell>
-                        <TableCell> { incertplaneza50_100.incerteza_AU}</TableCell>
+                        <TableCell> { incertezaPlaneza50_100.incerteza_AU}</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>1</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{ incertplaneza50_100.contribuiçao_incerteza}</TableCell>
+                        <TableCell>{ incertezaPlaneza50_100.contribuiçao_incerteza}</TableCell>
                         <TableCell className="text-right">2</TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">UBloco</TableCell>
                         <TableCell>Inc. Certificado Bloco Padrão</TableCell>
-                        <TableCell>{ incertplaneza50_100.incerteza_Ubloco}</TableCell>
+                        <TableCell>{ incertezaPlaneza50_100.incerteza_Ubloco}</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>2</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{ incertplaneza50_100.contriIncertezaUbloco}</TableCell>
+                        <TableCell>{ incertezaPlaneza50_100.contriIncertezaUbloco}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">UP</TableCell>
                         <TableCell>Inc. Certificado Plano</TableCell>
-                        <TableCell>Ta faltando</TableCell>
+                        <TableCell>0.00007</TableCell>
                         <TableCell>N</TableCell>
                         <TableCell>2</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertplaneza50_100.contribuiçao_incerteza_Up}</TableCell>
+                        <TableCell>{incertezaPlaneza50_100.contribuiçao_incerteza_Up}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell className="text-left">Eres.</TableCell>
                         <TableCell>Erro de Planeza</TableCell>
-                        <TableCell>=Ta faltando</TableCell>
+                        <TableCell>0.00013</TableCell>
                         <TableCell>R</TableCell>
                         <TableCell>1,7321</TableCell>
                         <TableCell>1</TableCell>
-                        <TableCell>{incertplaneza50_100.contribuiçao_incerteza_Eres}</TableCell>
+                        <TableCell>{incertezaPlaneza50_100.contribuiçao_incerteza_Eres}</TableCell>
                         <TableCell className="text-right">infinito </TableCell>
                       </TableRow>
 
                       <TableRow className="text-center">
                         <TableCell colSpan={5}></TableCell>
                         <TableCell>uc=</TableCell>
-                        <TableCell>{incertplaneza50_100.Uc}</TableCell>
+                        <TableCell>{incertezaPlaneza50_100.Uc}</TableCell>
                         <TableCell className="text-right">
-                          Veff = {incertplaneza50_100.veff}
+                          Veff = {incertezaPlaneza50_100.veff}
                         </TableCell>
                       </TableRow>
                       <TableRow className="text-center">
                         <TableCell colSpan={3}></TableCell>
-                        <TableCell colSpan={2}>k = {incertplaneza50_100.K}</TableCell>
+                        <TableCell colSpan={2}>k = {incertezaPlaneza50_100.K}</TableCell>
                         <TableCell>U(95%)</TableCell>
-                        <TableCell>U = {incertplaneza50_100.U}</TableCell>
+                        <TableCell>{incertezaPlaneza50_100.U}</TableCell>
                         <TableCell className="text-right"></TableCell>
                       </TableRow>
                     </TableBody>
