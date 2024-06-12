@@ -50,15 +50,28 @@ export default function ModalCliente() {
       // return response;
       console.log(data);
       return Toast.fire({
-        title: `${response.data}`,
+        title: `Cliente Cadastrado`,
         icon: "success",
       });
     } catch (err) {
-      console.log("Erro: ", err);
-      return Toast.fire({
-        title: `${err.message}`,
-        icon: "error",
-      });
+      console.log(err.response);
+      if (err.response.status === 400) {
+        return Toast.fire({
+          title: `Erro ao cadastrar cliente`,
+          icon: "error",
+        });
+      } else if (err.response.status === 409) {
+        return Toast.fire({
+          title: `Esse cliente já esta cadastrado`,
+          icon: "error",
+        });
+      } else {
+        console.log(err.response);
+        return Toast.fire({
+          title: `Erro interno no servidor`,
+          icon: "error",
+        });
+      }
     }
   }
 

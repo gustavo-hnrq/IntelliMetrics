@@ -16,6 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import Cookies from "js-cookie";
 
 export default function Menu() {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ export default function Menu() {
     localStorage.clear();
     navigate("/");
   };
+
+  // console.log(Cookies.get('usuario'));
 
   return (
     <div>
@@ -108,8 +111,8 @@ export default function Menu() {
         <div className="flex items-center p-2 rounded-lg m-5 fixed bottom-8 space-x-2">
           <UserCircle className="rounded-full w-12 h-12 text-gray-300" />
           <div className="flex flex-col">
-            <p className="font-bold">Ronaldo Freitas</p>
-            <p className="text-sm">ronaldofreitas@sp.senai.br</p>
+            <p className="font-bold">{Cookies.get('usuario').charAt(0).toUpperCase() + Cookies.get('usuario').slice(1)}</p>
+            <p className="text-sm">{Cookies.get('email')}</p>
           </div>
         </div>
         <div className="fixed bottom-1 p-4 w-full">

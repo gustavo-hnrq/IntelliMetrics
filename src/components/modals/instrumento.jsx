@@ -93,12 +93,21 @@ export default function ModalInstrumento() {
         title: `${response.data}`,
         icon: "success",
       });
-    } catch (error) {
-      // retorna o erro
-      return Toast.fire({
-        title: `${error}`,
-        icon: "error",
-      });
+    } catch (err) {
+      // retorna o erro de acordo com o status
+      console.log(err.response);
+      if (err.response.status === 400) {
+        return Toast.fire({
+          title: `Erro ao cadastrar instrumento`,
+          icon: "error",
+        });
+      } else {
+        console.log(err.response);
+        return Toast.fire({
+          title: `Erro interno no servidor`,
+          icon: "error",
+        });
+      }
     }
   }
     

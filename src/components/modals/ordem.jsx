@@ -31,9 +31,7 @@ import { Error } from "@/components/ui/error";
 import { zodResolver } from "@hookform/resolvers/zod";
 // import { ordemValidation } from "@/services/validations/ordemValidations";
 
-
 export default function ModalOrdem() {
-
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -57,17 +55,16 @@ export default function ModalOrdem() {
 
   const tipoOptions = [
     { value: "calibracao", label: "calibracao" },
-    { value: "medicao", label: "medicao" }
-  ]
+    { value: "medicao", label: "medicao" },
+  ];
 
   const statusOptions = [
     { value: "em espera", label: "Em espera" },
-    { value: "concluida", label: "Concluída" }
-  ]
+    { value: "concluida", label: "Concluída" },
+  ];
 
   async function handleRegisterOrder(data) {
     try {
-
       data.idOs = parseInt(data.idOs);
       data.idCliente = parseInt(data.idCliente);
       data.idUsuario = parseInt(data.idUsuario);
@@ -79,15 +76,28 @@ export default function ModalOrdem() {
         title: `${response.data}`,
         icon: "success",
       });
-    } catch (error) {
-      // retorna o erro
-      return Toast.fire({
-        title: `${error}`,
-        icon: "error",
-      });
+    } catch (err) {
+      // retorna o erro de acordo com o stats
+      console.log(err.response);
+      if (err.response.status === 400) {
+        return Toast.fire({
+          title: `Erro ao cadastrar ordem de calibração`,
+          icon: "error",
+        });
+      } else if (err.response.status === 409) {
+        return Toast.fire({
+          title: `ID ja cadastrado`,
+          icon: "error",
+        });
+      } else {
+        console.log(err.response);
+        return Toast.fire({
+          title: `Erro interno no servidor`,
+          icon: "error",
+        });
+      }
     }
   }
-
 
   async function getClientes() {
     try {
@@ -119,24 +129,30 @@ export default function ModalOrdem() {
       </AlertDialogTrigger>
       <AlertDialogContent className="max-w-5xl">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-3xl font-bold mb-3">Ordem de Serviço</AlertDialogTitle>
+          <AlertDialogTitle className="text-3xl font-bold mb-3">
+            Ordem de Serviço
+          </AlertDialogTitle>
           <AlertDialogDescription>
             <div className="grid grid-cols-3 gap-3">
               <div>
                 <Label>N° da Ordem de Serviço</Label>
                 <Input placeholder="Digite aqui " {...register("idOs")} />
               </div>
-              <div >
+              <div>
                 <Label>Titulo</Label>
                 <Input placeholder="Digite aqui " {...register("titulo")} />
               </div>
               <div>
                 <Label>Responsável/Usuario</Label>
                 <SelectA
-                  options={users ? users.map((item) => ({
-                    value: item.pk_idUsuario,
-                    label: item.nome,
-                  })) : []}
+                  options={
+                    users
+                      ? users.map((item) => ({
+                          value: item.pk_idUsuario,
+                          label: item.nome,
+                        }))
+                      : []
+                  }
                   {...register("idUsuario")}
                 />
               </div>
@@ -184,7 +200,10 @@ export default function ModalOrdem() {
               </div>
               <div>
                 <Label>Contratante</Label>
-                <Input placeholder="Digite aqui " {...register("contratante")} />
+                <Input
+                  placeholder="Digite aqui "
+                  {...register("contratante")}
+                />
               </div>
 
               <div>
@@ -199,13 +218,21 @@ export default function ModalOrdem() {
 
             <div className="mt-4">
               <Label>Descrição</Label>
-              <Input className="h-24" placeholder="Digite aqui " {...register("descricao")} />
+              <Input
+                className="h-24"
+                placeholder="Digite aqui "
+                {...register("descricao")}
+              />
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={() => handleSubmit(handleRegisterOrder)()}>Adicionar</AlertDialogAction>
+          <AlertDialogAction
+            onClick={() => handleSubmit(handleRegisterOrder)()}
+          >
+            Adicionar
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
