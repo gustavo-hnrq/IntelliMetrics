@@ -13,10 +13,24 @@ import {
 import { registerCalcPaq } from "@/services/paquimetro";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 export default function ResulPaquimetro() {
   const [response, setResponse] = useState("");
   const { register, handleSubmit } = useForm();
+
+  // BIBLIOTECA PARA RETORNAR MENSAGEM DA RESPOSTA DA API
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
 
   async function handleCalculate(data) {
     try {
@@ -29,42 +43,51 @@ export default function ResulPaquimetro() {
       const valorNominalMedRessalto = [];
       const valorIndicadoMedRessalto = [];
 
-      const valorNominalMedProfundidade = [];
-      const valorIndicadoMedProfundidade = [];
+      const valorNominalMedProf = [];
+      const valorIndicadoMedProf = [];
 
       // MEDIÇÃO DE PROFUNDIDADE
       for (let i = 0; i < 3; i++) {
-        // TODO: funcionando
         const rowValuesIndicado = [];
         const valueNominal = parseFloat(data[`vnmp${i + 1}`]);
 
         for (let j = 0; j < 3; j++) {
           const valueIndicado = parseFloat(data[`vimp${i * 3 + j + 1}`]);
-          rowValuesIndicado.push(valueIndicado);
+          if (!isNaN(valueIndicado)) {
+            rowValuesIndicado.push(valueIndicado);
+          }
         }
 
-        valorNominalMedProfundidade.push(valueNominal);
-        valorIndicadoMedProfundidade.push(rowValuesIndicado);
+        if (!isNaN(valueNominal)) {
+          valorNominalMedProf.push(valueNominal);
+        }
+        if (rowValuesIndicado.length > 0) {
+          valorIndicadoMedProf.push(rowValuesIndicado);
+        }
       }
 
       // MEDIÇÃO INTERNA
       for (let i = 0; i < 3; i++) {
-        // TODO:funcionando
         const rowValuesIndicado = [];
         const valueNominal = parseFloat(data[`vnmi${i + 1}`]);
 
         for (let j = 0; j < 3; j++) {
           const valueIndicado = parseFloat(data[`vimi${i * 3 + j + 1}`]);
-          rowValuesIndicado.push(valueIndicado);
+          if (!isNaN(valueIndicado)) {
+            rowValuesIndicado.push(valueIndicado);
+          }
         }
 
-        valorNominalMedInterna.push(valueNominal);
-        valorIndicadoMedInterna.push(rowValuesIndicado);
+        if (!isNaN(valueNominal)) {
+          valorNominalMedInterna.push(valueNominal);
+        }
+        if (rowValuesIndicado.length > 0) {
+          valorIndicadoMedInterna.push(rowValuesIndicado);
+        }
       }
 
       // MEDIÇÃO DE RESSALTO
       for (let i = 0; i < 3; i++) {
-        // TODO: funcionando
         const rowValuesIndicadoRessalto = [];
         const valueNominalMedRessalto = parseFloat(data[`vnmr${i + 1}`]);
 
@@ -72,67 +95,92 @@ export default function ResulPaquimetro() {
           const valueIndicadoRessalto = parseFloat(
             data[`vimr${i * 3 + j + 1}`]
           );
-          rowValuesIndicadoRessalto.push(valueIndicadoRessalto);
+          if (!isNaN(valueIndicadoRessalto)) {
+            rowValuesIndicadoRessalto.push(valueIndicadoRessalto);
+          }
         }
 
-        valorIndicadoMedRessalto.push(rowValuesIndicadoRessalto);
-
-        valorNominalMedRessalto.push(valueNominalMedRessalto);
+        if (!isNaN(valueNominalMedRessalto)) {
+          valorNominalMedRessalto.push(valueNominalMedRessalto);
+        }
+        if (rowValuesIndicadoRessalto.length > 0) {
+          valorIndicadoMedRessalto.push(rowValuesIndicadoRessalto);
+        }
       }
 
       // MEDIÇÃO EXTERNA
       for (let i = 0; i < 5; i++) {
-        // TODO: TEM QUE ARRUMAR ESSA BOMBAAAAAAAAAAAAAA
-        const rowValuesIndicado = [];
-        const valueNominal = parseFloat(data[`vn${i + 1}`]);
+        const valueNominal1 = parseFloat(data[`vn1${i * 1 + 1}`]); // Dados com índice i + 1
+        const valueNominal2 = parseFloat(data[`vn2${i + 2}`]); // Dados com índice i + 1
 
-        for (let j = 0; j < 6; j++) {
-          const valueIndicado = parseFloat(data[`vi${i * 3 + j + 1}`]);
-          rowValuesIndicado.push(valueIndicado);
+        if (!isNaN(valueNominal1)) {
+          valorNominalMedExterna.push(valueNominal1);
+        }
+        if (!isNaN(valueNominal2)) {
+          valorNominalMedExterna.push(valueNominal2);
         }
 
-        valorNominalMedExterna.push(valueNominal);
-        valorIndicado.push(rowValuesIndicado);
+        const rowValuesIndicado = [];
+        for (let j = 0; j < 6; j++) {
+          const valueIndicado = parseFloat(data[`vi${i * 6 + j + 1}`]);
+          if (!isNaN(valueIndicado)) {
+            rowValuesIndicado.push(valueIndicado);
+          }
+        }
+
+        if (rowValuesIndicado.length > 0) {
+          valorIndicado.push(rowValuesIndicado);
+        }
       }
 
       // VALOR INDICADO PROXIMO DA ORELHA
       const valorIndicadoProxOrelhas = [
-        // TODO: funcionando
         [
           parseFloat(data.vipo1),
           parseFloat(data.vipo2),
           parseFloat(data.vipo3),
         ],
+      ].map((arr) => arr.filter((value) => !isNaN(value)));
+
+      // VALOR INDICADO PROXIMO DA BICOS
+      const valorIndicadoProxBicos = [
         [
           parseFloat(data.vipo4),
           parseFloat(data.vipo5),
           parseFloat(data.vipo6),
         ],
-      ];
+      ].map((arr) => arr.filter((value) => !isNaN(value)));
 
       // VALOR INDICADO AFASTADO DA ORELHA
       const valorIndicadoAfasOrelhas = [
-        // TODO: funcionando
         [
           parseFloat(data.viao1),
           parseFloat(data.viao2),
           parseFloat(data.viao3),
         ],
+      ].map((arr) => arr.filter((value) => !isNaN(value)));
+
+      // VALOR INDICADO AFASTADO DA BICO
+      const valorIndicadoAfasBicos = [
         [
           parseFloat(data.viao4),
           parseFloat(data.viao5),
           parseFloat(data.viao6),
         ],
-      ];
+      ].map((arr) => arr.filter((value) => !isNaN(value)));
 
       // VALOR NOMINAL PARARELISMO
-      // TODO: funcionando
-      const valorNominalPara = [parseFloat(data.vnp1), parseFloat(data.vnp2)];
+      const valorNominalPara = [
+        parseFloat(data.vnp1),
+        parseFloat(data.vnp2),
+      ].filter((value) => !isNaN(value));
 
       // Estrutura os dados totais a serem enviados para a API
       const dataTotal = {
         valorIndicado,
         valorNominalMedExterna,
+        valorIndicadoProxBicos,
+        valorIndicadoAfasBicos,
         valorIndicadoProxOrelhas,
         valorIndicadoAfasOrelhas,
         valorNominalPara,
@@ -140,21 +188,19 @@ export default function ResulPaquimetro() {
         valorNominalMedInterna,
         valorNominalMedRessalto,
         valorIndicadoMedRessalto,
-        valorIndicadoMedProfundidade,
-        valorNominalMedProfundidade,
+        valorIndicadoMedProf,
+        valorNominalMedProf,
       };
 
-      console.log(dataTotal);
+      const response = await registerCalcPaq(dataTotal);
+      console.log(response.data);
+      setResponse(response.data);
 
-      // const response = await registerCalcPaq(dataTotal);
-      // setResponse(response.data);
-
-      // return Toast.fire({
-      //   title: `${response.data}`,
-      //   icon: "success",
-      // });
+      return Toast.fire({
+        title: `Calculos realizados`,
+        icon: "success",
+      });
     } catch (error) {
-      // Retorna o erro
       return Toast.fire({
         title: `${error}`,
         icon: "error",
@@ -168,7 +214,6 @@ export default function ResulPaquimetro() {
       {/* form */}
       <form
         className="flex flex-col w-full items-center "
-        onSubmit={handleSubmit(handleCalculate)}
       >
         <div className="flex flex-col justify-between w-[90%] rounded-lg bg-white shadow-lg  box-shadow">
           {/* informações dos inputs */}
@@ -345,7 +390,7 @@ export default function ResulPaquimetro() {
                       <input
                         className="p-5 w-full h-full"
                         type="text"
-                        {...register(`vn${index + 1}`)}
+                        {...register(`vn1${index + 1}`)}
                       />
                     </TableCell>
                     {/* Valores de vi para as orelhas */}
@@ -353,51 +398,50 @@ export default function ResulPaquimetro() {
                       <input
                         className="p-5 w-full h-full"
                         type="text"
-                        {...register(`vi${index * 3 + 1}`)}
+                        {...register(`vi${index * 6 + 1}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
                         type="text"
-                        {...register(`vi${index * 3 + 2}`)}
+                        {...register(`vi${index * 6 + 2}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
                         type="text"
-                        {...register(`vi${index * 3 + 3}`)}
+                        {...register(`vi${index * 6 + 3}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center "></TableCell>
-                    {/* Valores de vi para os bicos */}
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
                         type="text"
-                        {...register(`vn${index + 1}`)}
+                        {...register(`vn2${index + 2}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
                         type="text"
-                        {...register(`vi${index * 3 + 4}`)}
+                        {...register(`vi${index * 6 + 4}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
                         type="text"
-                        {...register(`vi${index * 3 + 5}`)}
+                        {...register(`vi${index * 6 + 5}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
                         type="text"
-                        {...register(`vi${index * 3 + 6}`)}
+                        {...register(`vi${index * 6 + 6}`)}
                       />
                     </TableCell>
                     <TableCell className="border text-center"></TableCell>
@@ -971,6 +1015,9 @@ export default function ResulPaquimetro() {
           {/* BOTÕES DO FORMULÁRIO */}
         </div>
         <div className="w-[90%] flex flex-row justify-end items-center py-5 gap-3">
+          <Button className="w-[200px]" type="submit" onClick={handleSubmit(handleCalculate)}>
+            Calcular
+          </Button>
           <Button className="w-[200px]" type="submit">
             Adicionar
           </Button>

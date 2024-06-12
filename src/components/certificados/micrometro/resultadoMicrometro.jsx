@@ -15,10 +15,24 @@ import { useForm } from "react-hook-form";
 import { calcmicrometro } from "@/services/micrometro";
 import { EscolherData } from "@/components/ui/date-picker";
 import { ptBR } from 'date-fns/locale';
+import Swal from "sweetalert2";
 
 
 
 export default function ResulMicrometro() {
+  // BIBLIOTECA PARA RETORNAR MENSAGEM DA RESPOSTA DA API
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
+
   
   const [response, setResponse] = useState("")
   const [linhas, setLinhas] = useState([
@@ -86,7 +100,7 @@ export default function ResulMicrometro() {
       localStorage.setItem('response', JSON.stringify(response.data));
 
       return Toast.fire({
-        title: `${response.data}`,
+        title: `Calculo realizado com sucesso`,
         icon: "success",
       });
     } catch (error) {
