@@ -18,7 +18,7 @@ export default function TelaRelatorios() {
   return (
     <div>
       <Menu />
-      <div className=" h-full bg-backgroundcinza pt-10">
+      <div className="h-full bg-backgroundcinza pt-10 max-md:pt-20">
         <TabelaRelatorios />
       </div>
     </div>

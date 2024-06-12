@@ -1,12 +1,33 @@
 import logo1 from "@/assets/logo1.svg";
 import SideBarMobile from "@/components/layout/sidebar-mobile";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { UserCircle } from "lucide-react";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function Menu() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <div>
       <SideBarMobile />
-      {/* INICIO MENU LATERAL */}
       <div className="fixed top-0 left-0 bottom-0 w-80 text-azul transition-transform -translate-x-full md:translate-x-0 bg-white border-r-2 border-slate-200">
         <div className="p-4">
           <ul className="space-y-2 font-medium">
@@ -16,7 +37,8 @@ export default function Menu() {
               </Link>
             </div>
             <li>
-              <Link to="/gestor"
+              <Link
+                to="/gestor"
                 className="flex items-center p-2 transition-all	ease-in	text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="ms-3">Início</span>
@@ -83,19 +105,37 @@ export default function Menu() {
           </ul>
         </div>
 
-        <div className="flex items-center p-2 rounded-lg m-5 fixed bottom-0 space-x-2">
-          <img
-            className="rounded-full w-12 h-12"
-            src="https://static01.nyt.com/newsgraphics/2020/11/12/fake-people/4b806cf591a8a76adfc88d19e90c8c634345bf3d/fallbacks/mobile-03.jpg"
-            alt="profile-icon"
-          />
+        <div className="flex items-center p-2 rounded-lg m-5 fixed bottom-8 space-x-2">
+          <UserCircle className="rounded-full w-12 h-12 text-gray-300" />
           <div className="flex flex-col">
             <p className="font-bold">Ronaldo Freitas</p>
-            <p className="text-sm	">ronaldofreitas@gmail.com</p>
+            <p className="text-sm">ronaldofreitas@sp.senai.br</p>
           </div>
         </div>
+        <div className="fixed bottom-1 p-4 w-full">
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button className="flex gap-2 h-8 w-full" variant="outline">
+                Sair
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Tem certeza absoluta?</AlertDialogTitle>
+                <AlertDialogDescription>
+                Isso irá desconectar sua conta do sistema.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                <AlertDialogAction onClick={handleLogout}>
+                  Sair
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
       </div>
-      {/* FIM MENU LATERAL */}
     </div>
   );
 }

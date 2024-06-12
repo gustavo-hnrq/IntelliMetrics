@@ -20,7 +20,7 @@ export default function TelaInstrumentos() {
     <div>
       <Menu />
       
-      <div className="h-screen bg-backgroundcinza pt-10">
+      <div className="h-screen bg-backgroundcinza pt-10 max-md:pt-20">
          <div className="float-right mr-10"><ModalCategoria/></div>
         <TabelaInstrumentos />
         

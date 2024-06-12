@@ -22,9 +22,9 @@ export default function TelaOrdenseRecebidos() {
   return (
     <div>
       <Menu />
-      <div className=" h-full bg-backgroundcinza pt-10">
+      <div className=" h-full bg-backgroundcinza pt-10 max-md:pt-20">
         <Tabs defaultValue="Ordem">
-          <TabsList className="ml-80 pl-10">
+          <TabsList className="ml-80 max-md:ml-0 pl-10">
             <TabsTrigger value="Ordem">Ordens de Serviço</TabsTrigger>
             <TabsTrigger value="Recebido">Itens Recebidos</TabsTrigger>
           </TabsList>
