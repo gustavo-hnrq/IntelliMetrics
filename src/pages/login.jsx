@@ -37,8 +37,8 @@ export default function LoginPage() {
   });
 
   useEffect(() => {
-    Cookies.remove('token')
-  }, [])
+    Cookies.remove("token");
+  }, []);
 
   async function handleSubimitForm(data) {
     try {
@@ -46,43 +46,41 @@ export default function LoginPage() {
       if (response && response.token) {
         Cookies.set("token", response.token, { expires: 1 });
         navigate("/gestor");
+        Cookies.set("usuario", response.Nome);
+        Cookies.set("email", response.email);
+        Cookies.set("usuario", response.Nome);
         return Toast.fire({
           title: `${response.mensagem}`,
-          text: `Bem vindo ${response.Nome}`,
+          text: `Bem vindo ${Cookies.get('usuario').charAt(0).toUpperCase() + Cookies.get('usuario').slice(1)}`,
           icon: "success",
         });
       }
     } catch (error) {
-      
-      if(error.response.status === 401){
+      if (error.response.status === 401) {
         return Toast.fire({
           title: `Credenciais Inválidas`,
           icon: "error",
         });
-      }
-      else if(error.response.status === 403){
+      } else if (error.response.status === 403) {
         return Toast.fire({
           title: `Usuário não autorizado`,
           text: "status: Inativo",
           icon: "error",
         });
-      }
-      else if(error.response.status === 404){
+      } else if (error.response.status === 404) {
         return Toast.fire({
           title: `Usuário não encontrado`,
           icon: "error",
         });
-      }else{
+      } else {
         console.log(error.response);
         return Toast.fire({
           title: `Erro interno no servidor`,
           icon: "error",
         });
       }
-
     }
   }
-
 
   return (
     <div className="flex flex-wrap max-sm:">
@@ -137,7 +135,11 @@ export default function LoginPage() {
               <Label>Manter logado</Label>
             </div>
             <Button type="submit">Logar</Button>
-            <Link href="#" className="hover:underline text-blue-600 text-sm" to={"/forgot"}>
+            <Link
+              href="#"
+              className="hover:underline text-blue-600 text-sm"
+              to={"/forgot"}
+            >
               Esqueceu a sua senha?
             </Link>
           </form>
