@@ -209,7 +209,17 @@ export default function ResulPaquimetro() {
     }
   }
 
-  const { medicaoExterna: { resultado1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}} = {} } = response || {}; 
+  const { medicaoExterna: { resultado1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+                            resultado2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+                            resultado3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+                            resultado4 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+                            resultado5 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+                            resultado6 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+                            resultado7 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+                            resultado8 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+                            resultado9 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+                            resultado10 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
+                          } = {} } = response || {}; 
     
   console.log("asdsa", resultado1)
   return (
