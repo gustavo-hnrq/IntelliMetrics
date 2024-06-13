@@ -56,7 +56,7 @@ export default function TabelaRelatorios() {
         nome={"Adicionar Relatório"}
         data={data}
         columns={columns}
-        button={
+        buttonAdd={
           <Link to="/relatorioadd">
             <Button>
               <PlusCircle className="mr-2 h-4 w-4" /> Adicionar Relatório
