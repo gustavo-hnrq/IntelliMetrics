@@ -132,15 +132,7 @@ export default function ForgotPassword() {
           </form>
         </div>
       </div>
-      <div className="pointer-events-none relative hidden h-screen select-none bg-gradient-to-r from-blue-800 to-indigo-900 md:block md:w-1/2 ">
-        <div className="absolute bottom-0 z-10 px-8 text-white opacity-100">
-          <p className="mb-8 text-3xl font-semibold leading-10">
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-            officiis ratione ad quas, blanditiis minus ut! Dolorem voluptatum
-            cumque mollitia illo explicabo".
-          </p>
-        </div>
-      </div>
+      <div className="pointer-events-none relative hidden h-screen select-none bg-cover bg-[url('@/assets/gear.png')] md:block md:w-1/2 "/>
     </div>
   );
 }
