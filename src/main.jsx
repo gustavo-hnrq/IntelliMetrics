@@ -11,7 +11,6 @@ import TelaRelatorios from "./pages/Tela-relatorios";
 import TelaOrdenseRecebidos from "./pages/Tela-ordemerecebido";
 import AddCertificadoPaqui from "./pages/add-certificado_paqui";
 import AddCertificadoMicro from "./pages/add-certificado_micro";
-import AddRecebimento from './pages/add-recebimento';
 import TelaGestor from "./pages/gestor";  
 import { App } from './App.jsx';
 import TelaInstrumentos from './pages/Tela-instrumento';
@@ -58,10 +57,6 @@ const router = createBrowserRouter([
       {
         path: "/micrometro",
         element: <AddCertificadoMicro />
-      },
-      {
-        path: "/recebimento",
-        element: <AddRecebimento/>
       },
       {
         path: "/relatorioadd",
