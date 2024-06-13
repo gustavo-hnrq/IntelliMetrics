@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../axiosConfig"; 
 import { TabelaFlex } from "@/components/tables/table-flex";
-import ModalOrdem from "@/components/modals/ordem";
-import { Link } from "react-router-dom";
-import { Button } from "../ui/button";
+import ModalReceba from "../modals/receba";
+import ModalVisualizarReceba from "../modals/recebaVisualizar";
 const columns = [
   { key: "pk_idRecebimento", label: "ID" },
   { key: "setor", label: "Setor" },
   { key: "recebidoNaPrevisao", label: "Recebido na Previsão"},
   { key: "clienteConcorda", label: "Cliente Concorda"},
-  { key: "pessoaContatada", label: "Pessoa Concorda"}
+  { key: "pessoaContatada", label: "Pessoa Contatada"}
 ];
 
 export default function TabelaRecebidos() {
   const [data, setData] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null); // Estado para armazenar a linha selecionada
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,13 +30,23 @@ export default function TabelaRecebidos() {
     fetchData();
   }, []);
 
+  const handleVisualizarClick = (rowData) => {
+    setSelectedRow(rowData); // Define a linha selecionada
+  };
+
+  const handleCloseModal = () => {
+    setSelectedRow(null); // Limpa a linha selecionada ao fechar a modal
+  };
+
   return (
     <div>
       <TabelaFlex
         nome={"Itens Recebidos"}
         data={data}
         columns={columns}
-        button={<Link to="/recebimento"><Button>Adicionar Recebimento</Button></Link>}
+        buttonAdd={<ModalReceba/>}
+        buttonVisualizar={<ModalVisualizarReceba onClose={handleCloseModal} rowData={selectedRow} />}
+        onVisualizarClick={handleVisualizarClick}
       />
     </div>
   );

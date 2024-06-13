@@ -16,8 +16,6 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { EscolherData } from "@/components/ui/date-picker";
 import { PlusCircle } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { SelectA } from "../ui/select2";
 
 import { getAllClient } from "@/services/cliente";
@@ -27,9 +25,6 @@ import { regiserOrders } from "@/services/ordemServico";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-import { Error } from "@/components/ui/error";
-import { zodResolver } from "@hookform/resolvers/zod";
-// import { ordemValidation } from "@/services/validations/ordemValidations";
 
 export default function ModalOrdem() {
   const Toast = Swal.mixin({
