@@ -15,7 +15,7 @@ export default function CertPaquimetro() {
               <div className="flex flex-col justify-between w-[90%] border  rounded-lg bg-[#FCFCFC]">
                 <div className="p-6">
                   <h1 className="text-black font-bold text-3xl">
-                    Resultado de Medição de Paquimetro
+                    Incerteza De Medição De Paquimetro
                   </h1>
                 </div>
 
