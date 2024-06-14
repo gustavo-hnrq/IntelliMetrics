@@ -31,7 +31,7 @@ export default function TelaGestor() {
         <div className="py-3">
           <Tabs defaultValue="tabela-membro">
             <TabsList className="ml-80 max-md:ml-0 pl-10">
-              <TabsTrigger value="tabela-membro">Membros</TabsTrigger>
+              <TabsTrigger value="tabela-membro">Membrossss</TabsTrigger>
               <TabsTrigger value="tabela-clientes">Clientes</TabsTrigger>
             </TabsList>
 
