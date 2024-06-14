@@ -24,11 +24,8 @@ export default function Menu() {
   const handleLogout = () => {
     localStorage.clear();
     Cookies.remove("token");
-    // console.log('token: ', Cookies.get('token'));
     navigate("/");
   };
-
-  // console.log(Cookies.get('usuario'));
 
   return (
     <div>
