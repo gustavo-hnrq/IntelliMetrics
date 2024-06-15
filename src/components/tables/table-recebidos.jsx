@@ -3,6 +3,7 @@ import axiosInstance from "../../../axiosConfig";
 import { TabelaFlex } from "@/components/tables/table-flex";
 import ModalReceba from "../modals/receba";
 import ModalVisualizarReceba from "../modals/recebaVisualizar";
+
 const columns = [
   { key: "pk_idRecebimento", label: "ID" },
   { key: "setor", label: "Setor" },
@@ -31,11 +32,11 @@ export default function TabelaRecebidos() {
   }, []);
 
   const handleVisualizarClick = (rowData) => {
-    setSelectedRow(rowData); // Define a linha selecionada
+    setSelectedRow(rowData);
   };
 
   const handleCloseModal = () => {
-    setSelectedRow(null); // Limpa a linha selecionada ao fechar a modal
+    setSelectedRow(null);
   };
 
   return (

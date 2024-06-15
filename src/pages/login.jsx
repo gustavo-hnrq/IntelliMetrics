@@ -83,7 +83,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex flex-wrap max-sm:">
+    <div className="flex flex-wrap h-screen">
       <div className="flex w-full flex-col md:w-1/2">
         <div className="lg:w-[28rem] max-sm:w-[18rem] mx-auto my-auto flex flex-col justify-center pt-32 md:justify-start md:px-6 md:pt-0">
           <p className="text-left text-3xl font-bold">Login</p>

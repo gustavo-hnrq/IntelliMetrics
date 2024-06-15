@@ -13,11 +13,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { PlusCircle } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
 import { registerClient } from "@/services/cliente";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { SelectA } from "../ui/select2";
 
 export default function ModalCliente() {
   const {

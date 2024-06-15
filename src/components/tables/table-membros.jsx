@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../axiosConfig"; // Importando o axiosInstance
 import { TabelaFlex } from "@/components/tables/table-flex";
 import ModalVisualizarMembro from "../modals/membroVisualizar";
+import ModalEditMembro from "../modals/membroEdit";
 import ModalMembro from "../modals/membro";
 
 const columns = [
-  { key: "pk_idUsuario", label: "ID" },
   { key: "nome", label: "Nome" },
   { key: "email", label: "Email" },
   { key: "cargo", label: "Cargo" },
-  { key: "status", label: "Status" },
 ];
 
 export default function TabelaMembros() {
   const [data, setData] = useState([]);
-  const [selectedRow, setSelectedRow] = useState(null); // Estado para armazenar a linha selecionada
+  const [selectedRow, setSelectedRow] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,6 +46,7 @@ export default function TabelaMembros() {
         columns={columns}
         buttonAdd={<ModalMembro />}
         buttonVisualizar={<ModalVisualizarMembro onClose={handleCloseModal} rowData={selectedRow} />}
+        buttonEdit={<ModalEditMembro rowData={selectedRow} />}
         onVisualizarClick={handleVisualizarClick}
       />
     </div>

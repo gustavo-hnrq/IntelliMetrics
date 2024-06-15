@@ -14,7 +14,7 @@ import {
   import { Label } from "@/components/ui/label";
   import { EyeIcon } from "lucide-react";
   
-  export default function ModalVisualizarCliente({ rowData, onClose }) {
+  export default function ModalVisualizarCliente({ rowData }) {
   
     return (
       <AlertDialog>
@@ -63,7 +63,7 @@ import {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-          <AlertDialogCancel onClick={onClose}>Fechar</AlertDialogCancel>
+          <AlertDialogCancel>Fechar</AlertDialogCancel>
         </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

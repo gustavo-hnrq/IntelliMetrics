@@ -29,18 +29,18 @@ export default function TelaGestor() {
           </div>
         </div>
         <div className="py-3">
-          <Tabs defaultValue="tabela-membro">
+          <Tabs defaultValue="tabela-clientes">
             <TabsList className="ml-80 max-md:ml-0 pl-10">
-              <TabsTrigger value="tabela-membro">Membros</TabsTrigger>
               <TabsTrigger value="tabela-clientes">Clientes</TabsTrigger>
+              <TabsTrigger value="tabela-membro">Membro</TabsTrigger>
             </TabsList>
-
-            <TabsContent value="tabela-membro">
-              <TabelaMembros />
-            </TabsContent>
 
             <TabsContent value="tabela-clientes">
               <TabelaClientes />
+            </TabsContent>
+
+            <TabsContent value="tabela-membro">
+              <TabelaMembros />
             </TabsContent>
           </Tabs>
         </div>

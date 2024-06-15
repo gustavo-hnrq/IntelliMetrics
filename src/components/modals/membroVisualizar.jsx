@@ -28,9 +28,7 @@ export default function ModalVisualizarMembro({ rowData, onClose }) {
         </AlertDialogHeader>
         <AlertDialogDescription>
           {rowData && (
-            <div className="grid gap-2">
-              <Label>ID</Label>
-              <Input readOnly defaultValue={rowData.pk_idUsuario} />
+            <div>
               <Label>Nome</Label>
               <Input readOnly defaultValue={rowData.nome} />
               <Label>Email</Label>

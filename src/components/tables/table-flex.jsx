@@ -7,36 +7,23 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
 import { Button } from "@/components/ui/button";
-
 import { Input } from "@/components/ui/input";
-
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export function TabelaFlex({ nome, data, columns, buttonAdd, buttonVisualizar, onVisualizarClick }) {
-  const [currentPage, setCurrentPage] = useState(1);
+export function TabelaFlex({ nome, data, columns, buttonAdd, buttonVisualizar, buttonEdit, onVisualizarClick }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const rowsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredData = data.filter((item) =>
-    Object.values(item).some(
-      (value) =>
-        typeof value === "string" &&
-        value.toLowerCase().includes(searchQuery.toLowerCase())
+  // Filtra os dados com base na pesquisa
+  const filteredData = data.filter(item =>
+    Object.values(item).some(value =>
+      typeof value === "string" &&
+      value.toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
 
+  const rowsPerPage = 8;
   const indexOfLastItem = currentPage * rowsPerPage;
   const indexOfFirstItem = indexOfLastItem - rowsPerPage;
   const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
@@ -44,14 +31,14 @@ export function TabelaFlex({ nome, data, columns, buttonAdd, buttonVisualizar, o
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleSearch = (event) => {
-    setCurrentPage(1);
     setSearchQuery(event.target.value);
+    setCurrentPage(1);
   };
 
   return (
     <div className="ml-80 max-md:ml-0 px-10">
       <h1 className="text-3xl font-bold mb-4">{nome}</h1>
-      <div className="flex justify-between items-center py-4">
+      <div className="flex justify-between max-lg:flex-col items-center py-4">
         <Input
           placeholder="Pesquisar..."
           className="max-w-sm"
@@ -65,7 +52,7 @@ export function TabelaFlex({ nome, data, columns, buttonAdd, buttonVisualizar, o
           <TableHeader>
             <TableRow className="font-bold">
               {columns.map((column, index) => (
-                <TableHead className="font-bold text-md	" key={index}>
+                <TableHead className="font-bold text-md px-10" key={index}>
                   {column.label}
                 </TableHead>
               ))}
@@ -75,11 +62,14 @@ export function TabelaFlex({ nome, data, columns, buttonAdd, buttonVisualizar, o
             {currentData.map((item, index) => (
               <TableRow key={index}>
                 {columns.map((column, columnIndex) => (
-                  <TableCell key={columnIndex}>{item[column.key]}</TableCell>
+                  <TableCell className="px-10" key={columnIndex}>{item[column.key]}</TableCell>
                 ))}
-                <TableCell className="flex justify-end">
-                  <div variant="outline" onClick={() => onVisualizarClick(item)}>
+                <TableCell className="flex gap-x-3">
+                  <div onClick={() => onVisualizarClick(item)}>
                     {buttonVisualizar}
+                  </div>
+                  <div onClick={() => onVisualizarClick(item)}>
+                    {buttonEdit}
                   </div>
                 </TableCell>
               </TableRow>
@@ -97,9 +87,7 @@ export function TabelaFlex({ nome, data, columns, buttonAdd, buttonVisualizar, o
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
-
           <Button
-            className=""
             variant="outline"
             size="sm"
             onClick={() => paginate(currentPage + 1)}

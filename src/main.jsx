@@ -6,16 +6,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // COMPONENTES
 import LoginPage from "./pages/login";
 import ForgotPage from "./pages/forgot-password";
-import AddRelatorio from "./pages/add-relatorio";
-import TelaRelatorios from "./pages/Tela-relatorios";
-import TelaOrdenseRecebidos from "./pages/Tela-ordemerecebido";
 import AddCertificadoPaqui from "./pages/add-certificado_paqui";
 import AddCertificadoMicro from "./pages/add-certificado_micro";
 import TelaGestor from "./pages/gestor";  
 import { App } from './App.jsx';
 import TelaInstrumentos from './pages/Tela-instrumento';
-import TelaPecas from './pages/Tela-pecas';
-import ModalCategoria from './components/modals/categoria';
+import TelaOrdens from './pages/tela-ordens';
+import TelaRecebidos from './pages/tela-recebido';
 
 const router = createBrowserRouter([
   {
@@ -35,20 +32,16 @@ const router = createBrowserRouter([
         element: <TelaGestor />
       },
       {
+        path: "/ordens", 
+        element: <TelaOrdens />
+      },
+      {
         path: "/instrumentos",
         element: <TelaInstrumentos />
       },
       {
-        path: "/pecas",
-        element: <TelaPecas />
-      },
-      {
-        path: "/relatorios",
-        element: <TelaRelatorios />
-      },
-      {
-        path: "/ordenserecebidos",
-        element: <TelaOrdenseRecebidos />
+        path: "/recebidos",
+        element: <TelaRecebidos />
       },
       {
         path: "/paquimetro",
@@ -58,14 +51,6 @@ const router = createBrowserRouter([
         path: "/micrometro",
         element: <AddCertificadoMicro />
       },
-      {
-        path: "/relatorioadd",
-        element: <AddRelatorio/>
-      },
-      {
-        path: "/categoriaadd",
-        element: <ModalCategoria/>
-      }
     ],
   },
 ]);

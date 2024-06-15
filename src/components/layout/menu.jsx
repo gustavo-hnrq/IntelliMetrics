@@ -3,7 +3,6 @@ import SideBarMobile from "@/components/layout/sidebar-mobile";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { UserCircle } from "lucide-react";
 
 import {
   AlertDialog,
@@ -23,10 +22,9 @@ export default function Menu() {
 
   const handleLogout = () => {
     localStorage.clear();
+    Cookies.remove("token");
     navigate("/");
   };
-
-  // console.log(Cookies.get('usuario'));
 
   return (
     <div>
@@ -49,11 +47,21 @@ export default function Menu() {
             </li>
             <li>
               <Link
-                to="/relatorios"
+                to="/ordens"
                 className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
-                  Relatórios
+                  Ordens
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/recebidos"
+                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
+              >
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Recebidos
                 </span>
               </Link>
             </li>
@@ -64,24 +72,6 @@ export default function Menu() {
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Instrumentos
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/pecas"
-                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">Peças</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/ordenserecebidos"
-                className="flex items-center p-2 transition-all	ease-in text-gray-900 rounded-lg hover:bg-primary hover:text-white hover:shadow-md"
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Ordens e Recebidos
                 </span>
               </Link>
             </li>
@@ -109,7 +99,6 @@ export default function Menu() {
         </div>
 
         <div className="flex items-center p-2 rounded-lg m-5 fixed bottom-8 space-x-2">
-          <UserCircle className="rounded-full w-12 h-12 text-gray-300" />
           <div className="flex flex-col">
             <p className="font-bold">{Cookies.get('usuario').charAt(0).toUpperCase() + Cookies.get('usuario').slice(1)}</p>
             <p className="text-sm">{Cookies.get('email')}</p>

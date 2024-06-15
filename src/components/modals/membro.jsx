@@ -30,7 +30,7 @@ export default function ModalMembro() {
     toast: true,
     position: "top-end",
     showConfirmButton: false,
-    timer: 4000,
+    timer: 3000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.onmouseenter = Swal.stopTimer;
@@ -41,9 +41,6 @@ export default function ModalMembro() {
   async function onSubmitForm(data) {
     try {
       const response = await regiserMembro(data);
-      // console.log(data)
-
-      // retorna o resultado com a bliblioteca de alert, que foi definido la em cima
       return Toast.fire({
         title: `${response.data}`,
         icon: "success",
