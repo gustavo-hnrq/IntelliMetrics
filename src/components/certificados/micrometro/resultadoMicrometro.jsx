@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -17,9 +17,64 @@ import { EscolherData } from "@/components/ui/date-picker";
 import { ptBR } from 'date-fns/locale';
 import Swal from "sweetalert2";
 
+import { getAllTools } from "@/services/instrumentos";
+import { getAllUsers } from "@/services/membros";
+import { SelectA } from "@/components/ui/select2";
+
 
 
 export default function ResulMicrometro() {
+
+  const [tools, setTools] = useState([]);
+  const [users, setUsers] = useState([]);
+
+async function getTools() {
+  try {
+    const response = await getAllTools();
+    setTools(response.data);
+  } catch (error) {
+    return error.message;
+  }
+}
+async function getUsuarios() {
+  try {
+    const response = await getAllUsers();
+    setUsers(response.data);
+  } catch (error) {
+    return error.message;
+  }
+}
+useEffect(() => {
+  getTools();
+  getUsuarios();
+}, []);
+
+const faixaCalibradaOption = [
+  {value: "25", label: "0-25"},
+  {value: "50", label: "25-50"},
+  {value: "75", label: "50-75"},
+  {value: "100", label: "75-100"},
+  {value: "125", label: "100-125"},
+  {value: "150", label: "125-150"},
+  {value: "175", label: "150-175"},
+  {value: "200", label: "175-200"},
+]
+
+const unidadeFC = [
+  {value: "mm", label: "mm"},
+  {value: "pol", label: "pol"}
+]
+
+const inspecao = [
+  {value: "ok", label: "ok"},
+  {value: "nok", label: "nok"}
+]
+
+const escala = [
+  {value: "digital", label: "digital"},
+  {value: "analogico", label: "analogico"}
+]
+
   // BIBLIOTECA PARA RETORNAR MENSAGEM DA RESPOSTA DA API
   const Toast = Swal.mixin({
     toast: true,
@@ -148,64 +203,106 @@ export default function ResulMicrometro() {
               {/* SEÇÃO INFORMAÇÕES MICROMETRO */}
               <div className="flex w-full py-6 gap-7 px-4">
                 <div className="grid grid-cols-4 w-full gap-3">
-                  <div className="flex flex-row items-center col-span-4 gap-2">
-                    <Label className="w-[10%]">Interessado</Label>
-                    <Input placeholder="Digite aqui " />
-                  </div>
+                <div className="flex flex-row items-center col-span-4 gap-2">
+                  <Label className="w-[23%]">Nº da OS </Label>
+                  <Input {...register("novaDataCalibracao")} placeholder="xxxx-xx-xx" />
+                  <Label className="w-[23%]">Contratante</Label>
+                  <Input type="number" {...register("nrCertificado")} placeholder="Digite aqui " />
+                </div> 
 
-                  <div className="flex flex-row items-center col-span-4 gap-2">
-                    <Label className="w-[10%]">Endereço</Label>
-                    <Input placeholder="Digite aqui " />
-                  </div>
-
-                  <div className="flex flex-row items-center col-span-4 gap-2">
-                    <Label className="w-[23%]">Contratante</Label>
-                    <Input placeholder="Digite aqui " />
-                    <Label className="w-[23%]">Nº da OS </Label>
-                    <Input placeholder="Digite aqui " />
-                  </div>
-
-                  <div className="flex flex-row items-center col-span-4 gap-2">
-                    <Label className="w-[23%]">Obj. Medido</Label>
-                    <Input placeholder="Digite aqui " />
-                    <Label className="w-[23%]">Nº do Certif.</Label>
-                    <Input placeholder="Digite aqui " />
-                  </div>
-
-                  <div className="flex flex-row items-center col-span-4 gap-2">
-                    <Label className="w-[23%]">Fabricante</Label>
-                    <Input placeholder="Digite aqui " />
-                    <Label className="w-[23%]">Código</Label>
-                    <Input placeholder="Digite aqui " />
-                  </div>
-
-                  <div className="flex flex-row items-center col-span-4 gap-2">
-                    <Label className="w-[23%]">Ident. Cliente</Label>
-                    <Input placeholder="Digite aqui " />
-                    <Label className="w-[23%]">Faixa Nominal</Label>
-                    <Input placeholder="Digite aqui " />
-                  </div>
-
-                  <div className="flex flex-row items-center col-span-4 gap-2">
-                    <Label className="w-[23%]">Resolução</Label>
-                    <Input placeholder="Digite aqui " {...register("valorDivResolucao")}/>
-                    <Label className="w-[23%]">Faixa Calibrada</Label>
-                    <Input placeholder="Digite aqui " {...register("faixaCalibrada")}/>
-                  </div>
-
-                  <div className="flex flex-row items-center col-span-4 gap-2">
-                    <Label className="w-[10%]">Data de Recebimento</Label>
-                    <Input placeholder="Digite aqui " />
-                  </div>
-
-                  <div className="flex flex-row items-center col-span-4 gap-2">
-                    <Label className="w-[23%]">
-                      Inspeção do instrumento (OK / NOK)
+                <div className="flex flex-row items-center col-span-4 gap-2">
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[45%] ">
+                      Faixa Calibrada - FC
                     </Label>
-                    <Input placeholder="Digite aqui " />
-                    <Label className="w-[23%]">Digital ou Analogico?</Label>
-                    <Input placeholder="Digite aqui " {...register("dig_anal")}/>
+                    <SelectA
+                      options={faixaCalibradaOption.map((item) => ({
+                        value: item.value,
+                        label: item.label,
+                      }))}
+                      {...register("novaFaixaCalibradaNum")}
+                    />
                   </div>
+                  
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                      Unidade - FC
+                    </Label>
+                    <SelectA
+                    options={unidadeFC.map((item) => ({
+                      value: item.value,
+                      label: item.label,
+                    }))}
+                    {...register("novaFaixaCalibradaUni")}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-row items-center col-span-4 gap-2">
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                      Inspeção do Instrumento
+                    </Label>
+                    <SelectA
+                      options={inspecao.map((item) => ({
+                        value: item.value,
+                        label: item.label,
+                      }))}
+                      {...register("novaInspecao")}
+                    />
+                </div>
+
+                  
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                      Escala
+                    </Label>
+                    <SelectA
+                    options={escala.map((item) => ({
+                      value: item.value,
+                      label: item.label,
+                    }))}
+                    {...register("novoTipoEscala")}
+                  />
+                  </div>
+                </div>
+        
+                <div className="flex flex-row items-center col-span-4 gap-2">
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                      Responsável
+                    </Label>
+                      <SelectA
+                      options={users.map((item) => ({
+                        value: item.pk_idUsuario,
+                        label: item.nome,
+                      }))}
+                      {...register("alterarTecnico")}
+                    />
+                  </div>
+
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                      Interessado
+                    </Label>
+                    <SelectA
+                    options={tools.map((item) => ({
+                      value: item.pk_idInstrumento,
+                      label: item.nome,
+                    }))}
+                    {...register("idInstrumento")}
+                  />
+                  </div>
+                </div>
+                
+
+                
+               
+                
+
+
+                 
+                  
                 </div>
               </div>
 
@@ -464,62 +561,39 @@ export default function ResulMicrometro() {
               {/* FIM TABELA CONTROLE DIMENSIONAL */}
 
               <div>
-                <div className="flex w-full py-6 gap-7 px-4">
-                  <div className="grid grid-cols-4 w-full gap-3">
-                    <Label className="w-23">Método de medição: IT-SUI-515 </Label>
-                    <div className="flex flex-row items-center col-span-4 gap-2">
-                      <Label className="w-[23%]">Versão</Label>
-                      <Input placeholder="Digite aqui " />
-                      <Label className="w-[23%]">Termômetro</Label>
-                      <Input placeholder="SUI-119" />
-                      <Label className="w-[23%]">Correção </Label>
-                      <Input placeholder="0.5°C " />
-                    </div>
-
-                    <div className="flex flex-row items-center col-span-4 gap-2">
-                      <Label className="w-[30%]">Temperatura inicial</Label>
-                      <Input placeholder="Digite aqui " />
-                      <Label className="w-[30%]">Temperatura final</Label>
-                      <Input placeholder="Digite aqui " />
-                    </div>
-
-                    <div className="flex flex-row items-center col-span-2 gap-2">
-                      <Label className="w-[30%]">Temperatura final</Label>
-                      <Input placeholder="Digite aqui " />
-                    </div>
-                  </div>
+                <div>
+                  <div className="flex w-full py-6 gap-7 px-4">
+                    <div className="flex flex-row grid grid-cols-4 w-full gap-3">
+                      <Label className="col-span-4 w-23">Método de medição: IT-SUI-515 </Label>
+                      <div className="flex flex-row col-span-2 gap-3 w-full items-center">
+                        <Label className=" w-[25%]">Versão</Label>
+                        <Input type="number" {...register("novaDataCalibracao")} placeholder="Digite aqui" />
+                      </div>
+                      <div className="flex flex-row col-span-2 gap-3 w-full items-center">
+                        <Label className="w-[25%]">Tempo Inicial</Label>
+                        <Input type="number" {...register("novoTempInicial")} placeholder="Digite aqui" />
+                      </div>
+                      <div className="flex flex-row col-span-2 gap-3 w-full items-center">
+                        <Label className="w-[25%]">Tempo Final </Label>
+                        <Input type="number" {...register("novoTempFinal")} placeholder="Digite aqui" />
+                      </div>
+                      <div className="flex flex-row col-span-2 gap-3 w-full items-center">
+                      <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                        Assinatura
+                      </Label>
+                      <SelectA
+                      options={users.map((item) => ({
+                        value: item.pk_idUsuario,
+                        label: item.nome,
+                      }))}
+                      {...register("novoResponsável")}
+                      />
+                      </div>   
+                    </div>                                                                                                                                        
+                  </div>      
                 </div>
-
-                <div className="flex w-[30%] py-6 gap-7 px-4">
-                  <div className="w-full gap-3">
-                    <Label>Responsável por Assinar o Certificado:</Label>
-                    <Input placeholder="Digite aqui"></Input>
-                  </div>
-                </div>
-
-                <div className="flex items-center w-full py-2 gap-7 px-4">
-                  <div className="w-full gap-3 items-center">
-                    <Label>Técnico</Label>
-                    <Input placeholder="Digite aqui" />
-                  </div>
-                  <Label>Assinatura</Label>
-                  <div className="border-solid border-b-2 border-gray-300 w-full h-5"></div>
-                  <Label className="w-[50%]">Data da Calibração</Label>
-                  <EscolherData locale={ptBR} />
-                </div>
-
-                <div className="flex items-center w-full py-2 gap-7 px-4">
-                  <div className="w-full gap-3 items-center">
-                    <Label>Verificação/Supervisão</Label>
-                    <Input placeholder="Digite aqui" />
-                  </div>
-                  <Label>Assinatura</Label>
-                  <div className="border-solid border-b-2 border-gray-300 w-full h-5"></div>
-                  <Label className="w-[50%]">Data da Calibração</Label>
-                  <EscolherData locale={ptBR} />
-                </div>
-
               </div>
+
             </div>
           </div>
         </div>
