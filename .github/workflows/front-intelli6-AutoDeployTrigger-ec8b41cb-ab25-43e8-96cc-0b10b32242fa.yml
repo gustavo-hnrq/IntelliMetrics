@@ -1,4 +1,4 @@
-name: Trigger auto deployment for front-intelli3
+name: Trigger auto deployment for front-intelli6
 
 # When this action will be executed
 on:
@@ -8,7 +8,7 @@ on:
       [ main ]
     paths:
     - '**'
-    - '.github/workflows/front-intelli3-AutoDeployTrigger-8aab0c7e-e5cc-494d-8aff-0198c46dba2b.yml'
+    - '.github/workflows/front-intelli6-AutoDeployTrigger-ec8b41cb-ab25-43e8-96cc-0b10b32242fa.yml'
 
   # Allow manual trigger 
   workflow_dispatch:      
@@ -27,20 +27,20 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.FRONTINTELLI3_AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.FRONTINTELLI3_AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.FRONTINTELLI3_AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.FRONTINTELLI6_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.FRONTINTELLI6_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.FRONTINTELLI6_AZURE_SUBSCRIPTION_ID }}
 
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }} 
-          registryUrl: acrtccfrontintelli3.azurecr.io
-          registryUsername: ${{ secrets.FRONTINTELLI3_REGISTRY_USERNAME }}
-          registryPassword: ${{ secrets.FRONTINTELLI3_REGISTRY_PASSWORD }}
-          containerAppName: front-intelli3
+          registryUrl: acrtccfrontintelli6.azurecr.io
+          registryUsername: ${{ secrets.FRONTINTELLI6_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.FRONTINTELLI6_REGISTRY_PASSWORD }}
+          containerAppName: front-intelli6
           resourceGroup: TCC_intelli
-          imageToBuild: acrtccfrontintelli3.azurecr.io/front-intelli3:${{ github.sha }}
+          imageToBuild: acrtccfrontintelli6.azurecr.io/front-intelli6:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
 
