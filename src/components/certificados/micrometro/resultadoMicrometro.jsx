@@ -204,10 +204,10 @@ const escala = [
               <div className="flex w-full py-6 gap-7 px-4">
                 <div className="grid grid-cols-4 w-full gap-3">
                 <div className="flex flex-row items-center col-span-4 gap-2">
-                  <Label className="w-[23%]">Nº da OS </Label>
-                  <Input {...register("novaDataCalibracao")} placeholder="xxxx-xx-xx" />
-                  <Label className="w-[23%]">Contratante</Label>
-                  <Input type="number" {...register("nrCertificado")} placeholder="Digite aqui " />
+                  <Label className="w-[23%]">Nº do Certificado </Label>
+                  <Input {...register("nrCertificado")} placeholder="Digite aqui" />
+                  <Label className="w-[23%]">Data de Calibração</Label>
+                  <Input type="number" {...register("novaDataCalibracao")}{...register("nrCertificado")} placeholder="xxxx-xx-xx" />
                 </div> 
 
                 <div className="flex flex-row items-center col-span-4 gap-2">
