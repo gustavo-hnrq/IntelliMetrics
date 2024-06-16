@@ -5,8 +5,59 @@ import { useState } from "react";
 import selo from "../../../assets/selo certificado.png";
 import senai from "../../../assets/Senai Logotipo_destaque.png";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useForm } from "react-hook-form";
+import { incertezaCalcPaq } from "@/services/paquimetro";
+
 
 export default function CertPaquimetro() {
+
+  const [response, setResponse] = useState("");
+  const [desvpadSave, setDesvpadSave] = useState("")
+  const { handleSubmit } = useForm();
+
+  async function handleCalculate() {
+    const resolucao = localStorage.getItem("resolucao")
+    const faixaNominal = localStorage.getItem("faixaNominal")
+    const desvpads = localStorage.getItem("DesvpadsPac")
+
+    console.log("faixa nominal", faixaNominal)
+   // Passo 2: Converter a string JSON em um objeto JavaScript
+    const desvpadsObj = JSON.parse(desvpads);
+    setDesvpadSave(desvpadsObj)
+
+    // Passo 3: Inicializar uma lista para armazenar os valores
+    const valores = [];
+
+    // Passo 4: Iterar sobre as chaves do objeto e adicionar os valores à lista
+    for (let chave in desvpadsObj) {
+        if (desvpadsObj.hasOwnProperty(chave)) {
+            valores.push(desvpadsObj[chave]);
+        }
+    }
+   
+    const data ={
+      resolucao: resolucao,
+      faixaNominal: parseInt(faixaNominal),
+      desvpad: valores
+
+    }
+
+    const response = await incertezaCalcPaq(data);
+    setResponse(response.data);
+
+  }
+
+  const { incertezaUE = {K: "#DIV/0", UE: "#DIV/0"} } = {} = response || {}
+  const { incerteza_L1 = {Estimativa_L1: 0, incerteza_L1: "#DIV/0", contribuiçao_Incerteza: "#DIV/0"} } = {} = response || {}
+  const { incerteza_L2 = {Estimativa_L2: 0, incerteza_L2: "#DIV/0", contribuiçao_Incerteza: "#DIV/0"} } = {} = response || {}
+  const { incerteza_UA = {estimativa_UA: 0, incerteza_Padrao: "#DIV/0", contribuiçao_Incerteza: "#DIV/0"}} = {} = response || {}
+  const { incerteza_UC = {UC: 0, veff: "#DIV/0"}} = {} = response || {}
+  const { incerteza_UP_EA = {Estimativa_UP_EA: 0, incerteza_Padrao: "#DIV/0", contribuiçao_Incertezao_UP: "#DIV/0", incerteza_EA: "#DIV/0", contribuiçao_Incertezao_EA: "#DIV/0"} } = {} = response || {}
+  const { inceteza_ERES = {Estimativa_ERES: 0, incerteza_ERES: "#DIV/0", contribuiçao_Incerteza: "#DIV/0"} } = {} = response || {}
+
+ 
+  console.log("response incer", response)
+  console.log("des", desvpadSave.resultado1)
 
     return (
 
@@ -110,62 +161,62 @@ export default function CertPaquimetro() {
                         </TableRow>
                         <TableRow>
                             <TableHead className="text-center">UA</TableHead>
-                            <TableCell className="text-center" colSpan={2}>0,000  mm</TableCell>
-                            <TableCell className="text-center">0,00000</TableCell>
+                            <TableCell className="text-center" colSpan={2}>{incerteza_UA.estimativa_UA}  mm</TableCell>
+                            <TableCell className="text-center">{incerteza_UA.incerteza_Padrao}</TableCell>
                             <TableCell className="text-center">normal</TableCell>
                             <TableCell className="text-center">1</TableCell>
                             <TableCell className="text-center">1</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{incerteza_UA.contribuiçao_Incerteza}</TableCell>
                             <TableCell className="text-center">2</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead className="text-center">UP.</TableHead>
-                            <TableCell className="text-center" colSpan={2}>0  mm</TableCell>
-                            <TableCell className="text-center">0,00000</TableCell>
+                            <TableCell className="text-center" colSpan={2}>{incerteza_UP_EA.Estimativa_UP_EA}  mm</TableCell>
+                            <TableCell className="text-center">{incerteza_UP_EA.incerteza_Padrao}</TableCell>
                             <TableCell className="text-center">normal</TableCell>
                             <TableCell className="text-center">2</TableCell>
                             <TableCell className="text-center">1</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{incerteza_UP_EA.contribuiçao_Incertezao_UP}</TableCell>
                             <TableCell className="text-center">Infinito</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead className="text-center">Ea</TableHead>
-                            <TableCell className="text-center" colSpan={2}>0  mm</TableCell>
+                            <TableCell className="text-center" colSpan={2}>{incerteza_UP_EA.incerteza_EA}  mm</TableCell>
                             <TableCell className="text-center">0,00014</TableCell>
                             <TableCell className="text-center">retangular</TableCell>
                             <TableCell className="text-center">1,732</TableCell>
                             <TableCell className="text-center">1</TableCell>
-                            <TableCell className="text-center">0,0001</TableCell>
+                            <TableCell className="text-center">{incerteza_UP_EA.contribuiçao_Incertezao_EA}</TableCell>
                             <TableCell className="text-center">Infinito</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead className="text-center">Eres.</TableHead>
-                            <TableCell className="text-center" colSpan={2}>0  mm</TableCell>
-                            <TableCell className="text-center">0,00000</TableCell>
+                            <TableCell className="text-center" colSpan={2}>{inceteza_ERES.Estimativa_ERES}  mm</TableCell>
+                            <TableCell className="text-center">{inceteza_ERES.incerteza_ERES}</TableCell>
                             <TableCell className="text-center">retangular</TableCell>
                             <TableCell className="text-center">1,732</TableCell>
                             <TableCell className="text-center">1</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{inceteza_ERES.contribuiçao_Incerteza}</TableCell>
                             <TableCell className="text-center">Infinito</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead className="text-center">l1</TableHead>
-                            <TableCell className="text-center" colSpan={2}>0  mmx10-6x2°C-1</TableCell>
-                            <TableCell className="text-center">0,00000</TableCell>
+                            <TableCell className="text-center" colSpan={2}>{incerteza_L1.Estimativa_L1}  mmx10-6x2°C-1</TableCell>
+                            <TableCell className="text-center">{incerteza_L1.incerteza_L1}</TableCell>
                             <TableCell className="text-center">retangular</TableCell>
                             <TableCell className="text-center">1,732</TableCell>
                             <TableCell className="text-center">1</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{incerteza_L1.contribuiçao_Incerteza}</TableCell>
                             <TableCell className="text-center">Infinito</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead className="text-center">l2</TableHead>
                             <TableCell className="text-center" colSpan={2}>maior compr x[(11.5x10-6ºC-1+11.5x10-6ºC-1)/2]x1ºC</TableCell>
-                            <TableCell className="text-center">0,00000</TableCell>
+                            <TableCell className="text-center">{incerteza_L2.incerteza_L2}</TableCell>
                             <TableCell className="text-center">retangular</TableCell>
                             <TableCell className="text-center">1,732</TableCell>
                             <TableCell className="text-center">1</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{incerteza_L2.contribuiçao_Incerteza}</TableCell>
                             <TableCell className="text-center">Infinito</TableCell>
                         </TableRow>
                         <TableRow>
@@ -176,17 +227,17 @@ export default function CertPaquimetro() {
                             <TableCell className="text-center"> <input type="text" className="bg-gray-200 w-24 justify-center"/> </TableCell>
                             <TableCell className="text-center"> <input type="text" className="bg-gray-200 w-24 justify-center"/> </TableCell>
                             <TableCell className="text-center">Uc=</TableCell>
-                            <TableCell className="text-center">0,0001</TableCell>
-                            <TableCell className="text-center">Veff = #DIV/0!</TableCell>
+                            <TableCell className="text-center">{incerteza_UC.UC}</TableCell>
+                            <TableCell className="text-center">Veff = {incerteza_UC.veff}</TableCell>
                         </TableRow>
                         <TableRow>
                           <TableHead className="text-center">UF</TableHead>
                           <TableCell className="text-center">0</TableCell>
                           <TableCell className="text-center"> <input type="text" className="bg-gray-200 w-24 justify-center"/> </TableCell>
                           <TableCell className="text-center"> <input type="text" className="bg-gray-200 w-24 justify-center"/> </TableCell>
-                          <TableCell className="text-center" colSpan={2}>K=   #DIV/0!</TableCell>
+                          <TableCell className="text-center" colSpan={2}>K=  {incertezaUE.K}</TableCell>
                           <TableCell className="text-center">UF=</TableCell>
-                          <TableCell className="text-center">#DIV/0!</TableCell>
+                          <TableCell className="text-center">{incertezaUE.UE}</TableCell>
                           <TableCell className="text-center"> <input type="text" className="bg-gray-200 w-24 justify-center"/> </TableCell>
                         </TableRow>
                       </TableBody>
@@ -218,58 +269,58 @@ export default function CertPaquimetro() {
                       <TableBody>
                         <TableRow>
                             <TableCell className="text-center">0,00</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado1}</TableCell>
                             <TableCell className="text-center">150,00</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado7}</TableCell>
                             <TableCell className="text-center">Medição da orelha</TableCell>
                             <TableCell className="text-center"></TableCell>
                             <TableCell className="text-center">Medição interna</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultadoMedIn1}</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultadoMedIn2}</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultadoMedIn3}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="text-center">1,30</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
-                            <TableCell className="text-center">0,00</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado2}</TableCell>
+                            <TableCell className="text-center">6,00</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado8}</TableCell>
                             <TableCell className="text-center">Valor ind. próximo da escala</TableCell>
                             <TableCell className="text-center">0,0000</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="text-center">1,40</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
-                            <TableCell className="text-center">0,00</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado3}</TableCell>
+                            <TableCell className="text-center">0,70</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado9}</TableCell>
                             <TableCell className="text-center">Valor ind. afastado da escala</TableCell>
                             <TableCell className="text-center">0,0000</TableCell>
                             <TableCell className="text-center">Medição de prof.</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultadoProf1}</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultadoProf2}</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultadoProf3}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="text-center">20,00</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
-                            <TableCell className="text-center">0,00</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado4}</TableCell>
+                            <TableCell className="text-center">10,00</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado10}</TableCell>
                             <TableCell className="text-center">Medição do bico</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="text-center">50,00</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado5}</TableCell>
                             <TableCell className="text-center"> <input type="text" className="bg-gray-200 w-24 justify-center"/> </TableCell>
                             <TableCell className="text-center"> <input type="text" className="bg-gray-200 w-24 justify-center"/> </TableCell>
                             <TableCell className="text-center">Valor ind. próximo da escala</TableCell>
                             <TableCell className="text-center">0,0000</TableCell>
                             <TableCell className="text-center">Medição de Ressalto</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultadoResal1}</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultadoResal2}</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultadoResal3}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className="text-center">100,00</TableCell>
-                            <TableCell className="text-center">0,0000</TableCell>
+                            <TableCell className="text-center">{desvpadSave.resultado6}</TableCell>
                             <TableCell className="text-center"> <input type="text" className="bg-gray-200 w-24 justify-center"/> </TableCell>
                             <TableCell className="text-center"> <input type="text" className="bg-gray-200 w-24 justify-center"/> </TableCell>
                             <TableCell className="text-center">Valor ind. afastado da escala</TableCell>
@@ -285,6 +336,9 @@ export default function CertPaquimetro() {
 
 
           <div className="w-[90%] flex flex-row justify-end items-center py-5 gap-3">
+          <Button className="w-[200px]" type="submit" onClick={handleSubmit(handleCalculate)}>
+            Calcular
+          </Button>
             <Button className="w-[200px]">Adicionar</Button>
             <Button className="w-[200px] border-[#858585] border-2 bg-transparent text-[#949494] font-semibold hover:bg-[#858585] hover:text-white">
               Cancelar

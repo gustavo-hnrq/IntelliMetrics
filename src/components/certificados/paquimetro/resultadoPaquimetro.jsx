@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { registerCalcPaq } from "@/services/paquimetro";
+import { resultadoCalcPaq } from "@/services/paquimetro";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -120,7 +120,6 @@ export default function ResulPaquimetro() {
           valorNominalMedExterna.push(valueNominal2);
         }
 
-        const rowValuesIndicado = [];
         const rowValuesIndicado1 = [];
         const  rowValuesIndicado2 = [];
        // Coleta dos valores indicados
@@ -193,6 +192,11 @@ export default function ResulPaquimetro() {
         parseFloat(data.vnp2),
       ].filter((value) => !isNaN(value));
 
+      // salva a faixa e a resolucao no local storage para ser usada em incerteza
+      localStorage.setItem("faixaNominal", data.faixaNominal)
+      localStorage.setItem("resolucao", data.resolucao)
+    
+
       // Estrutura os dados totais a serem enviados para a API
       const dataTotal = {
         valorIndicado,
@@ -210,10 +214,8 @@ export default function ResulPaquimetro() {
         valorNominalMedProf,
       };
       // console.log("data", dataTotal.valorIndicado)
-      const response = await registerCalcPaq(dataTotal);
+      const response = await resultadoCalcPaq(dataTotal);
       setResponse(response.data);
-      // console.log(response);
-
      
       return Toast.fire({
         title: `Calculos realizados`,
@@ -275,24 +277,27 @@ export default function ResulPaquimetro() {
 
   const desvpads = {};
 
-// Função para extrair os desvpads de um objeto e adicionar ao objeto desvpads
-const extractDesvpads = (obj) => {
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key) && obj[key].hasOwnProperty('desvpad')) {
-      desvpads[key] = obj[key].desvpad;
+  // Função para extrair os desvpads de um objeto e adicionar ao objeto desvpads
+  const extractDesvpads = (obj) => {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key) && obj[key].hasOwnProperty('desvpad')) {
+        desvpads[key] = obj[key].desvpad;
+      }
     }
-  }
-};
+  };
 
-// Percorre os diferentes grupos de resultados em response e extrai os desvpads
-extractDesvpads(response.medicaoExterna);
-extractDesvpads(response.calculos_Pararelismo_Orelhas);
-extractDesvpads(response.calculos_Pararelismo_Bicos);
-extractDesvpads(response.tendencias_Medicao_Interna);
-extractDesvpads(response.tendencias_Medicao_Ressalto);
-extractDesvpads(response.tendencias_Medicao_Profundidade);
+  // Percorre os diferentes grupos de resultados em response e extrai os desvpads
+  extractDesvpads(response.medicaoExterna);
+  extractDesvpads(response.calculos_Pararelismo_Orelhas);
+  extractDesvpads(response.calculos_Pararelismo_Bicos);
+  extractDesvpads(response.tendencias_Medicao_Interna);
+  extractDesvpads(response.tendencias_Medicao_Ressalto);
+  extractDesvpads(response.tendencias_Medicao_Profundidade);
 
-  console.log("desvpads", desvpads)
+  const desvpadsJSON = JSON.stringify(desvpads)
+  localStorage.setItem("DesvpadsPac", desvpadsJSON)
+
+
   console.log("response", response)
   return (
     <div>
@@ -374,7 +379,7 @@ extractDesvpads(response.tendencias_Medicao_Profundidade);
                   <Label className="font-bold text-[#3F3F3F] text-sm  w-[40%] ">
                     Faixa Nominal
                   </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
+                  <Input type="text" placeholder="Digite o nome..." {...register("faixaNominal")}/>
                 </div>
               </div>
               <div className="flex flex-row w-full justify-between  gap-3 ">
@@ -382,7 +387,7 @@ extractDesvpads(response.tendencias_Medicao_Profundidade);
                   <Label className="font-bold text-[#3F3F3F] text-sm  w-[20%] ">
                     Resolução
                   </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
+                  <Input type="text" placeholder="Digite o nome..." {...register("resolucao")}/>
                 </div>
                 <div className="flex flex-row gap-3 items-center  w-[40%]">
                   <Label className="font-bold text-[#3F3F3F] text-sm w-[40%] ">
