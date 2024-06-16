@@ -121,18 +121,36 @@ export default function ResulPaquimetro() {
         }
 
         const rowValuesIndicado = [];
-        for (let j = 0; j < 6; j++) {
-          const valueIndicado = parseFloat(data[`vi${i * 6 + j + 1}`]);
-          if (!isNaN(valueIndicado)) {
-            rowValuesIndicado.push(valueIndicado);
+        const rowValuesIndicado1 = [];
+        const  rowValuesIndicado2 = [];
+       // Coleta dos valores indicados
+        for (let i = 0; i < 6; i++) {
+    
+          for (let j = 0; j < 3; j++) {
+            const valueIndicado1 = parseFloat(data[`vi${i * 6 + j + 1}`]);
+            if (!isNaN(valueIndicado1)) {
+              rowValuesIndicado1.push(valueIndicado1);
+            }
+          }
+
+          for (let j = 0; j < 3; j++) {
+            const valueIndicado2 = parseFloat(data[`vi${i * 6 + j + 4}`]);
+            if (!isNaN(valueIndicado2)) {
+              rowValuesIndicado2.push(valueIndicado2);
+            }
+          }
+
+          if (rowValuesIndicado1.length > 0) {
+            valorIndicado.push(rowValuesIndicado1);
+          }
+          if (rowValuesIndicado2.length > 0) {
+            valorIndicado.push(rowValuesIndicado2);
           }
         }
-
-        if (rowValuesIndicado.length > 0) {
-          valorIndicado.push(rowValuesIndicado);
-        }
+      // console.log("1",rowValuesIndicado1)
+      // console.log("2",rowValuesIndicado2)
       }
-
+      
       // VALOR INDICADO PROXIMO DA ORELHA
       const valorIndicadoProxOrelhas = [
         [
@@ -191,10 +209,10 @@ export default function ResulPaquimetro() {
         valorIndicadoMedProf,
         valorNominalMedProf,
       };
-
-      const responseAPI = await registerCalcPaq(dataTotal);
-      setResponse(responseAPI.data);
-      console.log(response);
+      // console.log("data", dataTotal.valorIndicado)
+      const response = await registerCalcPaq(dataTotal);
+      setResponse(response.data);
+      // console.log(response);
 
      
       return Toast.fire({
@@ -209,19 +227,73 @@ export default function ResulPaquimetro() {
     }
   }
 
-  const { medicaoExterna: { resultado1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-                            resultado2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-                            resultado3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-                            resultado4 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-                            resultado5 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-                            resultado6 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-                            resultado7 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-                            resultado8 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-                            resultado9 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-                            resultado10 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
-                          } = {} } = response || {}; 
-    
-  console.log("asdsa", resultado1)
+  const { medicaoExterna: { 
+    resultado1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultado2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultado3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultado4 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultado5 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultado6 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultado7 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultado8 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultado9 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultado10 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
+  } = {} } = response || {}; 
+   
+  const {calculos_Pararelismo_Orelhas: {
+    resultado_Orelhas = {tendencia_proximo: "#DIV/0", tendencia_afastado: "#DIV/0", paralelismo_Orelhas: "#DIV/0"}
+  } ={} } = response || {};
+
+  const {calculos_Pararelismo_Bicos: {
+    resultado_Bicos = {tendencia_proximo: "#DIV/0", tendencia_afastado: "#DIV/0",  paralelismo_Orelhas: "#DIV/0"}
+  } ={} } = response || {};
+
+  const {tendencias_Medicao_Interna: {
+    resultadoMedIn1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultadoMedIn2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultadoMedIn3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
+  } = {} } = response || {};
+
+  const {tendencias_Medicao_Ressalto: {
+    resultadoResal1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultadoResal2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultadoResal3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
+  } = {} } = response || {}
+
+  const {tendencias_Medicao_Profundidade: {
+    resultadoProf1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultadoProf2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
+    resultadoProf3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
+  } = {}} = response || {}
+
+  const tendenciasMedEx = [resultado1.tendencia, resultado2.tendencia, resultado3.tendencia, resultado4.tendencia, resultado5.tendencia, resultado6.tendencia]
+  const tendenciasMedEx2 = [resultado7.tendencia, resultado8.tendencia, resultado9.tendencia, resultado10.tendencia, ]
+  const tendenciasProf = [resultadoProf1.tendencia, resultadoProf2.tendencia, resultadoProf3.tendencia];
+  const tendenciasMedIn = [resultadoMedIn1.tendencia, resultadoMedIn2.tendencia, resultadoMedIn3.tendencia ];
+  const tendenciasMedResal = [resultadoResal1.tendencia, resultadoResal2.tendencia, resultadoResal3.tendencia]
+
+
+  const desvpads = {};
+
+// Função para extrair os desvpads de um objeto e adicionar ao objeto desvpads
+const extractDesvpads = (obj) => {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key) && obj[key].hasOwnProperty('desvpad')) {
+      desvpads[key] = obj[key].desvpad;
+    }
+  }
+};
+
+// Percorre os diferentes grupos de resultados em response e extrai os desvpads
+extractDesvpads(response.medicaoExterna);
+extractDesvpads(response.calculos_Pararelismo_Orelhas);
+extractDesvpads(response.calculos_Pararelismo_Bicos);
+extractDesvpads(response.tendencias_Medicao_Interna);
+extractDesvpads(response.tendencias_Medicao_Ressalto);
+extractDesvpads(response.tendencias_Medicao_Profundidade);
+
+  console.log("desvpads", desvpads)
+  console.log("response", response)
   return (
     <div>
       <Menu />
@@ -398,69 +470,36 @@ export default function ResulPaquimetro() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {Array.from({ length: 5 }, (_, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vn1${index + 1}`)}
-                      />
-                    </TableCell>
-                    {/* Valores de vi para as orelhas */}
-                    <TableCell className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 1}`)}
-                      />
-                    </TableCell>
-                    <TableCell className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 2}`)}
-                      />
-                    </TableCell>
-                    <TableCell className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 3}`)}
-                      />
-                    </TableCell>
-                    <TableCell className="border text-center ">{resultado1.tendencia}</TableCell>
-                    <TableCell className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vn2${index + 2}`)}
-                      />
-                    </TableCell>
-                    <TableCell className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 4}`)}
-                      />
-                    </TableCell>
-                    <TableCell className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 5}`)}
-                      />
-                    </TableCell>
-                    <TableCell className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 6}`)}
-                      />
-                    </TableCell>
-                    <TableCell className="border text-center">a</TableCell>
-                  </TableRow>
-                ))}
+              {Array.from({ length: 6 }, (_, index) => (
+              <tr key={index}>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vn1${index + 1}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 1}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 2}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 3}`)} />
+                </td>
+                <td className="border text-center">{tendenciasMedEx[index]}</td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vn2${index + 1}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 4}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 5}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 6}`)} />
+                </td>
+                <td className="border text-center">{tendenciasMedEx2[index]}</td>
+              </tr>
+            ))}
               </TableBody>
             </Table>
           </div>
@@ -536,9 +575,9 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="border text-senter">#DIV/0!</TableCell>
-                  <TableCell className="border  text-center" rowSpan={2}>
-                    #DIV/0!
+                  <TableCell className="border text-senter">{resultado_Orelhas.tendencia_proximo}</TableCell>
+                  <TableCell className="border text-center" rowSpan={2}>
+                   {resultado_Orelhas.paralelismo_Orelhas}
                   </TableCell>
                 </TableRow>
                 <TableRow className="">
@@ -567,7 +606,7 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="text-center border">#DIV/0!</TableCell>
+                  <TableCell className="text-center border">{resultado_Orelhas.tendencia_afastado}</TableCell>
                 </TableRow>
               </TableBody>
 
@@ -636,9 +675,9 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="text-center border">#DIV/0!</TableCell>
+                  <TableCell className="text-center border">{resultado_Bicos.tendencia_proximo}</TableCell>
                   <TableCell className="border text-center" rowSpan={2}>
-                    #DIV/0!
+                    {resultado_Bicos.paralelismo_Orelhas}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -667,7 +706,7 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="border text-center">#DIV/0!</TableCell>
+                  <TableCell className="border text-center">{resultado_Bicos.tendencia_afastado}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -773,7 +812,7 @@ export default function ResulPaquimetro() {
                         {...register(`vimi${index * 3 + 3}`)}
                       />
                     </TableCell>
-                    <TableCell className="border text-center "></TableCell>
+                    <TableCell className="border text-center ">{tendenciasMedIn[index]}</TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
@@ -802,7 +841,7 @@ export default function ResulPaquimetro() {
                         {...register(`vimr${index * 3 + 3}`)}
                       />
                     </TableCell>
-                    <TableCell className="border text-center"></TableCell>
+                    <TableCell className="border text-center">{tendenciasMedResal[index]}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -867,7 +906,7 @@ export default function ResulPaquimetro() {
                             {...register(`vimp${index * 3 + 3}`)}
                           />
                         </TableCell>
-                        <TableCell className="border text-center "></TableCell>
+                        <TableCell className="border text-center ">{tendenciasProf[index]}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
