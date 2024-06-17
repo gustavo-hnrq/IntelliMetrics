@@ -20,16 +20,20 @@ export default function CertPaquimetro() {
     const [response, setResponse] = useState(null);
     const [response2, setResponse2] = useState(null);
     const [response3, setResponse3] = useState(null);
+    const [info, setInfo] = useState("")
 
     useEffect(() => {
       const storedResponse = localStorage.getItem('DesvpadsPac');
       const storedResponse2 = localStorage.getItem('response');
       const storedResponse3 = localStorage.getItem('responsePac');
+      const storedResponse4 = localStorage.getItem('Certificado');
       
-      if (storedResponse && storedResponse2 && storedResponse3) {
+      
+      if (storedResponse && storedResponse2 && storedResponse3 && storedResponse4) {
         setResponse(JSON.parse(storedResponse));
         setResponse2(JSON.parse(storedResponse2));
         setResponse3(JSON.parse(storedResponse3));
+        setInfo(JSON.parse(storedResponse4));
       }
     }, []);
 
@@ -37,7 +41,6 @@ export default function CertPaquimetro() {
     const { incerteza_UC = {UC: 0, veff: "#DIV/0", K: "#DIV/0"}} = {} = response2 || {}
     const { calculos_Pararelismo_Bicos: {
         resultado_Bicos = {paralelismo_Orelhas: "#DIV/0"}} = {} } = response3 || {};
-    console.log("certificado", resultado_Bicos)
 
     return (
       
@@ -62,21 +65,21 @@ export default function CertPaquimetro() {
                     <Label className="font-bold text-[#3F3F3F]  text-md w-[15%] ">
                       Interessado
                     </Label>
-                    <h1 className="text-black text-center font-medium ">0</h1>
+                    <h1 className="text-black text-center font-medium ">{info.contratante}</h1>
                   </div>
 
                   <div className="flex flex-row items-center align-center py-6">
                     <Label className="font-bold text-[#3F3F3F]  text-md w-[15%] ">
                       Endereço
                     </Label>
-                    <h1 className="text-black text-center font-medium ">0</h1>
+                    <h1 className="text-black text-center font-medium ">{info.endereco}</h1>
                   </div>
 
                   <div className="flex flex-row items-center align-center">
                     <Label className="font-bold text-[#3F3F3F] text-md w-[15%] ">
                       Contratante
                     </Label>
-                    <h1 className="text-black text-center font-medium ">0</h1>
+                    <h1 className="text-black text-center font-medium ">{info.contratante}</h1>
                   </div>
                 </div>
 

@@ -235,11 +235,18 @@ export default function ResulPaquimetro() {
         valorIndicadoMedProf,
         valorNominalMedProf,
       };
-      // console.log("data", dataTotal.valorIndicado)
+      // console.log("data", data)
       const response = await resultadoCalcPaq(dataTotal);
       setResponse(response.data);
       localStorage.setItem("responsePac", JSON.stringify(response.data))
       // console.log("medicao externa: ", valorIndicado, medicaoExterna);
+
+      const certificado = {
+        endereco: data.endereco,
+        contratante: data.contratante
+      }
+
+      localStorage.setItem("Certificado", JSON.stringify(certificado))
 
       return Toast.fire({
         title: `Calculos realizados`,
@@ -631,7 +638,20 @@ export default function ResulPaquimetro() {
                     {...register("idInstrumento")}
                   />
                   </div>
+
+                 
                 </div>
+                <div className="flex flex-row items-center col-span-4 gap-2">
+                <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="w-[26%]">Contratante</Label>
+                    <Input  {...register("contratante")}placeholder="Digite aqui" />
+                  </div>
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="w-[26%]">Endereço</Label>
+                    <Input  {...register("endereco")} placeholder="Digite aqui" />
+                  </div>
+                </div>
+               
             </div>
             
           </div>

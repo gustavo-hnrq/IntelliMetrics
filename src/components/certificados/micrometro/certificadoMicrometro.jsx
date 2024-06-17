@@ -11,14 +11,19 @@ import { useReactToPrint } from "react-to-print" ;
 export default function CertMicrometro() {
 
   const [response, setResponse] = useState(null);
+  const [info2, setInfo2] = useState("")
 
   useEffect(() => {
     const storedResponse = localStorage.getItem('response');
-    if (storedResponse) {
+    const storedResponse2 = localStorage.getItem('CertificadoMicro');
+    console.log(storedResponse2)
+      
+    if (storedResponse && storedResponse2) {
       setResponse(JSON.parse(storedResponse));
+      setInfo2(JSON.parse(storedResponse2));
     }
   }, []);
-
+  
   const { controleDimensional: {
     resultadoControle1 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"}, 
     resultadoControle2 = {mediaValor: "#DIV/0", desvioPadrao: "#DIV/0", tendência: "#DIV/0"},
@@ -74,21 +79,21 @@ export default function CertMicrometro() {
                     <Label className="font-bold text-[#3F3F3F]  text-md w-[15%] ">
                       Interessado
                     </Label>
-                    <h1 className="text-black text-center font-medium ">0</h1>
+                    <h1 className="text-black text-center font-medium ">{info2.contratante}</h1>
                   </div>
 
                   <div className="flex flex-row items-center align-center py-6">
                     <Label className="font-bold text-[#3F3F3F]  text-md w-[15%] ">
                       Endereço
                     </Label>
-                    <h1 className="text-black text-center font-medium ">0</h1>
+                    <h1 className="text-black text-center font-medium ">{info2.endereco}</h1>
                   </div>
 
                   <div className="flex flex-row items-center align-center">
                     <Label className="font-bold text-[#3F3F3F] text-md w-[15%] ">
                       Contratante
                     </Label>
-                    <h1 className="text-black text-center font-medium ">0</h1>
+                    <h1 className="text-black text-center font-medium ">{info2.contratante}</h1>
                   </div>
                 </div>
 

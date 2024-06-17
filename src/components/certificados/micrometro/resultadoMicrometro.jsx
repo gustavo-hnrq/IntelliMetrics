@@ -154,6 +154,15 @@ const escala = [
       setResponse(response.data)
       localStorage.setItem('response', JSON.stringify(response.data));
 
+      
+      const certificado = {
+        endereco: data.endereco,
+        contratante: data.contratante
+      }
+
+      console.log(certificado)
+      localStorage.setItem("CertificadoMicro", JSON.stringify(certificado))
+
       return Toast.fire({
         title: `Calculo realizado com sucesso`,
         icon: "success",
@@ -294,6 +303,16 @@ const escala = [
                     }))}
                     {...register("idInstrumento")}
                   />
+                  </div>
+                </div>
+                <div className="flex flex-row items-center col-span-4 gap-2">
+                <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="w-[26%]">Contratante</Label>
+                    <Input  {...register("contratante")}placeholder="Digite aqui" />
+                  </div>
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="w-[26%]">Endereço</Label>
+                    <Input  {...register("endereco")} placeholder="Digite aqui" />
                   </div>
                 </div>
     
