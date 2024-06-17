@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { resultadoCalcPaq } from "@/services/paquimetro";
+import { medicaoExterna, medicaoInterna, medicaoPararelismo, medicaoProfundidade, medicaoRessalto, resultadoCalcPaq } from "@/services/paquimetro";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -121,10 +121,9 @@ export default function ResulPaquimetro() {
         }
 
         const rowValuesIndicado1 = [];
-        const  rowValuesIndicado2 = [];
-       // Coleta dos valores indicados
+        const rowValuesIndicado2 = [];
+        // Coleta dos valores indicados
         for (let i = 0; i < 6; i++) {
-    
           for (let j = 0; j < 3; j++) {
             const valueIndicado1 = parseFloat(data[`vi${i * 6 + j + 1}`]);
             if (!isNaN(valueIndicado1)) {
@@ -146,10 +145,10 @@ export default function ResulPaquimetro() {
             valorIndicado.push(rowValuesIndicado2);
           }
         }
-      // console.log("1",rowValuesIndicado1)
-      // console.log("2",rowValuesIndicado2)
+        // console.log("1",rowValuesIndicado1)
+        // console.log("2",rowValuesIndicado2)
       }
-      
+
       // VALOR INDICADO PROXIMO DA ORELHA
       const valorIndicadoProxOrelhas = [
         [
@@ -193,9 +192,8 @@ export default function ResulPaquimetro() {
       ].filter((value) => !isNaN(value));
 
       // salva a faixa e a resolucao no local storage para ser usada em incerteza
-      localStorage.setItem("faixaNominal", data.faixaNominal)
-      localStorage.setItem("resolucao", data.resolucao)
-    
+      localStorage.setItem("faixaNominal", data.faixaNominal);
+      localStorage.setItem("resolucao", data.resolucao);
 
       // Estrutura os dados totais a serem enviados para a API
       const dataTotal = {
@@ -216,7 +214,9 @@ export default function ResulPaquimetro() {
       // console.log("data", dataTotal.valorIndicado)
       const response = await resultadoCalcPaq(dataTotal);
       setResponse(response.data);
-     
+
+      // console.log("medicao externa: ", valorIndicado, medicaoExterna);
+
       return Toast.fire({
         title: `Calculos realizados`,
         icon: "success",
@@ -229,58 +229,263 @@ export default function ResulPaquimetro() {
     }
   }
 
-  const { medicaoExterna: { 
-    resultado1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultado2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultado3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultado4 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultado5 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultado6 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultado7 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultado8 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultado9 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultado10 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
-  } = {} } = response || {}; 
-   
-  const {calculos_Pararelismo_Orelhas: {
-    resultado_Orelhas = {tendencia_proximo: "#DIV/0", tendencia_afastado: "#DIV/0", paralelismo_Orelhas: "#DIV/0"}
-  } ={} } = response || {};
+  async function handleAdd(data) {
+    try {
+      // TODO: basicamente, como a requisição da api está como na variável abaixo, só tenho que continuar desestruturando e mandar dessa forma
+      const isValidNumber = (num) => (isNaN(num) ? 0 : num);
 
-  const {calculos_Pararelismo_Bicos: {
-    resultado_Bicos = {tendencia_proximo: "#DIV/0", tendencia_afastado: "#DIV/0",  paralelismo_Orelhas: "#DIV/0"}
-  } ={} } = response || {};
+      // MEDIÇÃO INTERNA
+      const dataMedExterna = {
+        novoVn1: isValidNumber(parseFloat(data.vn11)),
+        novoVn1_1: isValidNumber(parseFloat(data.vi1)),
+        novoVn1_2: isValidNumber(parseFloat(data.vi2)),
+        novoVn1_3: isValidNumber(parseFloat(data.vi3)),
+        novoVn2: isValidNumber(parseFloat(data.vn21)),
+        novoVn2_1: isValidNumber(parseFloat(data.vi4)),
+        novoVn2_2: isValidNumber(parseFloat(data.vi5)),
+        novoVn2_3: isValidNumber(parseFloat(data.vi6)),
+        novoVn3: isValidNumber(parseFloat(data.vn12)),
+        novoVn3_1: isValidNumber(parseFloat(data.vi7)),
+        novoVn3_2: isValidNumber(parseFloat(data.vi8)),
+        novoVn3_3: isValidNumber(parseFloat(data.vi9)),
+        novoVn4: isValidNumber(parseFloat(data.vn22)),
+        novoVn4_1: isValidNumber(parseFloat(data.vi10)),
+        novoVn4_2: isValidNumber(parseFloat(data.vi11)),
+        novoVn4_3: isValidNumber(parseFloat(data.vi12)),
+        novoVn5: isValidNumber(parseFloat(data.vn13)),
+        novoVn5_1: isValidNumber(parseFloat(data.vi13)),
+        novoVn5_2: isValidNumber(parseFloat(data.vi14)),
+        novoVn5_3: isValidNumber(parseFloat(data.vi15)),
+        novoVn6: isValidNumber(parseFloat(data.vn23)),
+        novoVn6_1: isValidNumber(parseFloat(data.vi16)),
+        novoVn6_2: isValidNumber(parseFloat(data.vi17)),
+        novoVn6_3: isValidNumber(parseFloat(data.vi18)),
+        novoVn7: isValidNumber(parseFloat(data.vn14)),
+        novoVn8_1: isValidNumber(parseFloat(data.vi19)),
+        novoVn8_2: isValidNumber(parseFloat(data.vi20)),
+        novoVn8_3: isValidNumber(parseFloat(data.vi21)),
+        novoVnExtra1: isValidNumber(parseFloat(data.vn24)),
+        novoVnExtra1_1: isValidNumber(parseFloat(data.vi22)),
+        novoVnExtra1_2: isValidNumber(parseFloat(data.vi23)),
+        novoVnExtra1_3: isValidNumber(parseFloat(data.vi24)),
+        novoVnExtra2: isValidNumber(parseFloat(data.vn15)),
+        novoVnExtra2_1: isValidNumber(parseFloat(data.vi25)),
+        novoVnExtra2_2: isValidNumber(parseFloat(data.vi26)),
+        novoVnExtra2_3: isValidNumber(parseFloat(data.vi27)),
+        novoVnExtra3: isValidNumber(parseFloat(data.vn16)),
+        novoVnExtra3_1: isValidNumber(parseFloat(data.vi28)),
+        novoVnExtra3_2: isValidNumber(parseFloat(data.vi29)),
+        novoVnExtra3_3: isValidNumber(parseFloat(data.vi30)),
+      };
 
-  const {tendencias_Medicao_Interna: {
-    resultadoMedIn1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultadoMedIn2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultadoMedIn3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
-  } = {} } = response || {};
+      // console.log("valores med externa: ", dataMedExterna);
 
-  const {tendencias_Medicao_Ressalto: {
-    resultadoResal1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultadoResal2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultadoResal3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
-  } = {} } = response || {}
+      // PARARELISMO
+      const dataPararelismo = {
+        novoValorNominalOrelha: isValidNumber(parseFloat(data.vnp1)),
+        novoValorProxOrelha1: isValidNumber(parseFloat(data.vipo1)),
+        novoValorProxOrelha2: isValidNumber(parseFloat(data.vipo2)),
+        novoValorProxOrelha3: isValidNumber(parseFloat(data.vipo3)),
+        novoValorAfasOrelha1: isValidNumber(parseFloat(data.viao1)),
+        novoValorAfasOrelha2: isValidNumber(parseFloat(data.viao2)),
+        novoValorAfasOrelha3: isValidNumber(parseFloat(data.viao3)),
+        novoValorNominalBico: isValidNumber(parseFloat(data.vnp2)),
+        novoValorProxBico1: isValidNumber(parseFloat(data.vipo4)),
+        novoValorProxBico2: isValidNumber(parseFloat(data.vipo5)),
+        novoValorProxBico3: isValidNumber(parseFloat(data.vipo6)),
+        novoValorAfasBico1: isValidNumber(parseFloat(data.viao4)),
+        novoValorAfasBico2: isValidNumber(parseFloat(data.viao5)),
+        novoValorAfasBico3: isValidNumber(parseFloat(data.viao6)),
+      };
 
-  const {tendencias_Medicao_Profundidade: {
-    resultadoProf1 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultadoProf2 = {tendencia: "#DIV/0", desvpad: "#DIV/0"},
-    resultadoProf3 = {tendencia: "#DIV/0", desvpad: "#DIV/0"}
-  } = {}} = response || {}
+      // console.log("valores pararelismo: ", dataPararelismo);
 
-  const tendenciasMedEx = [resultado1.tendencia, resultado2.tendencia, resultado3.tendencia, resultado4.tendencia, resultado5.tendencia, resultado6.tendencia]
-  const tendenciasMedEx2 = [resultado7.tendencia, resultado8.tendencia, resultado9.tendencia, resultado10.tendencia, ]
-  const tendenciasProf = [resultadoProf1.tendencia, resultadoProf2.tendencia, resultadoProf3.tendencia];
-  const tendenciasMedIn = [resultadoMedIn1.tendencia, resultadoMedIn2.tendencia, resultadoMedIn3.tendencia ];
-  const tendenciasMedResal = [resultadoResal1.tendencia, resultadoResal2.tendencia, resultadoResal3.tendencia]
+      // MEDIÇÃO INTERNA
+      const dataMedInterna = {
+        novaPrimeiraMedida:   isValidNumber(parseFloat(data.vnmi1)),
+        novoValorNominal1_1:  isValidNumber(parseFloat(data.vimi1)),
+        novoValorNominal1_2:  isValidNumber(parseFloat(data.vimi2)),
+        novoValorNominal1_3:  isValidNumber(parseFloat(data.vimi3)),
+        novaSegundaMedida:    isValidNumber(parseFloat(data.vnmi2)),
+        novoValorNominal2_1:  isValidNumber(parseFloat(data.vimi4)),
+        novoValorNominal2_2:  isValidNumber(parseFloat(data.vimi5)),
+        novoValorNominal2_3:  isValidNumber(parseFloat(data.vimi6)),
+        novaTerceiraMedida:   isValidNumber(parseFloat(data.vnmi3)),
+        novoValorNominal3_1:  isValidNumber(parseFloat(data.vimi7)),
+        novoValorNominal3_2:  isValidNumber(parseFloat(data.vimi8)),
+        novoValorNominal3_3:  isValidNumber(parseFloat(data.vimi9)),
+      };
 
+      // console.log("valores med interna: : ", dataMedInterna);
+
+      // MEDIÇÃO RESSALTO
+      const dataMedRessalto = {
+        novaPrimeiraMedida:   isValidNumber(parseFloat(data.vnmr1)),
+        novoValorNominal1_1:  isValidNumber(parseFloat(data.vimr1)),
+        novoValorNominal1_2:  isValidNumber(parseFloat(data.vimr2)),
+        novoValorNominal1_3:  isValidNumber(parseFloat(data.vimr3)),
+        novaSegundaMedida:    isValidNumber(parseFloat(data.vnmr2)),
+        novoValorNominal2_1:  isValidNumber(parseFloat(data.vimr4)),
+        novoValorNominal2_2:  isValidNumber(parseFloat(data.vimr5)),
+        novoValorNominal2_3:  isValidNumber(parseFloat(data.vimr6)),
+        novaTerceiraMedida:   isValidNumber(parseFloat(data.vnmr3)),
+        novoValorNominal3_1:  isValidNumber(parseFloat(data.vimr7)),
+        novoValorNominal3_2:  isValidNumber(parseFloat(data.vimr8)),
+        novoValorNominal3_3:  isValidNumber(parseFloat(data.vimr9)),
+      };
+
+      // console.log("valores med ressalto: : ", dataMedRessalto);
+
+      // MEDIÇÃO PROFUNDIDADE
+      const dataProfundidade = {
+        nova_primeiraMedida: isValidNumber(parseFloat(data.vnmp1)),
+        novo_valorNominal1_1: isValidNumber(parseFloat(data.vimp1)),
+        novo_valorNominal1_2: isValidNumber(parseFloat(data.vimp2)),
+        novo_valorNominal1_3: isValidNumber(parseFloat(data.vimp3)),
+        nova_segundaMedida: isValidNumber(parseFloat(data.vnmp2)),
+        novo_valorNominal2_1: isValidNumber(parseFloat(data.vimp4)),
+        novo_valorNominal2_2: isValidNumber(parseFloat(data.vimp5)),
+        novo_valorNominal2_3: isValidNumber(parseFloat(data.vimp6)),
+        nova_terceiraMedida: isValidNumber(parseFloat(data.vnmp3)),
+        novo_valorNominal3_1: isValidNumber(parseFloat(data.vimp7)),
+        novo_valorNominal3_2: isValidNumber(parseFloat(data.vimp8)),
+        novo_valorNominal3_3: isValidNumber(parseFloat(data.vimp9)),
+      };
+
+      // console.log("valores profundidade: ", dataProfundidade);
+
+      // TODO: Fazer a requisição da api individual para cada valor e colocar com um nome que seja entendível...
+      const resExterna = await medicaoExterna(dataMedExterna);
+      // const resInterna = await medicaoInterna(dataMedInterna);
+      // const resProfundidade = await medicaoProfundidade(dataProfundidade);
+      // const resParelismo = await medicaoPararelismo(dataPararelismo);
+      // const resRessalto = await medicaoRessalto(dataMedRessalto);
+
+      // console.log("resposta medição externa: ", resExterna);
+      // console.log("resposta medição interna: ", resInterna);
+      // console.log("resposta medição profundidade: ", resProfundidade);
+      // console.log("resposta medição pararelismo: ", resParelismo);
+      // console.log("resposta medição ressalto: ", resRessalto);
+
+      // console.log(data);
+      return Toast.fire({
+        title: `Dados registrados com sucesso`,
+        icon: "success",
+      });
+
+
+    } catch (err) {
+      console.log("Erro: ", err.response);
+      if (err.response.status === 400) {
+        return Toast.fire({
+          title: `Erro ao inserir`,
+          icon: "error",
+        });
+      } else {
+        console.log(err.response);
+        return Toast.fire({
+          title: `Erro interno no servidor`,
+          icon: "error",
+        });
+      }
+    }
+  }
+
+  const {
+    medicaoExterna: {
+      resultado1 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultado2 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultado3 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultado4 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultado5 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultado6 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultado7 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultado8 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultado9 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultado10 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+    } = {},
+  } = response || {};
+
+  const {
+    calculos_Pararelismo_Orelhas: {
+      resultado_Orelhas = {
+        tendencia_proximo: "#DIV/0",
+        tendencia_afastado: "#DIV/0",
+        paralelismo_Orelhas: "#DIV/0",
+      },
+    } = {},
+  } = response || {};
+
+  const {
+    calculos_Pararelismo_Bicos: {
+      resultado_Bicos = {
+        tendencia_proximo: "#DIV/0",
+        tendencia_afastado: "#DIV/0",
+        paralelismo_Orelhas: "#DIV/0",
+      },
+    } = {},
+  } = response || {};
+
+  const {
+    tendencias_Medicao_Interna: {
+      resultadoMedIn1 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultadoMedIn2 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultadoMedIn3 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+    } = {},
+  } = response || {};
+
+  const {
+    tendencias_Medicao_Ressalto: {
+      resultadoResal1 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultadoResal2 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultadoResal3 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+    } = {},
+  } = response || {};
+
+  const {
+    tendencias_Medicao_Profundidade: {
+      resultadoProf1 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultadoProf2 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+      resultadoProf3 = { tendencia: "#DIV/0", desvpad: "#DIV/0" },
+    } = {},
+  } = response || {};
+
+  const tendenciasMedEx = [
+    resultado1.tendencia,
+    resultado2.tendencia,
+    resultado3.tendencia,
+    resultado4.tendencia,
+    resultado5.tendencia,
+    resultado6.tendencia,
+  ];
+  const tendenciasMedEx2 = [
+    resultado7.tendencia,
+    resultado8.tendencia,
+    resultado9.tendencia,
+    resultado10.tendencia,
+  ];
+  const tendenciasProf = [
+    resultadoProf1.tendencia,
+    resultadoProf2.tendencia,
+    resultadoProf3.tendencia,
+  ];
+  const tendenciasMedIn = [
+    resultadoMedIn1.tendencia,
+    resultadoMedIn2.tendencia,
+    resultadoMedIn3.tendencia,
+  ];
+  const tendenciasMedResal = [
+    resultadoResal1.tendencia,
+    resultadoResal2.tendencia,
+    resultadoResal3.tendencia,
+  ];
 
   const desvpads = {};
 
   // Função para extrair os desvpads de um objeto e adicionar ao objeto desvpads
   const extractDesvpads = (obj) => {
     for (const key in obj) {
-      if (obj.hasOwnProperty(key) && obj[key].hasOwnProperty('desvpad')) {
+      if (obj.hasOwnProperty(key) && obj[key].hasOwnProperty("desvpad")) {
         desvpads[key] = obj[key].desvpad;
       }
     }
@@ -294,23 +499,20 @@ export default function ResulPaquimetro() {
   extractDesvpads(response.tendencias_Medicao_Ressalto);
   extractDesvpads(response.tendencias_Medicao_Profundidade);
 
-  const desvpadsJSON = JSON.stringify(desvpads)
-  localStorage.setItem("DesvpadsPac", desvpadsJSON)
+  const desvpadsJSON = JSON.stringify(desvpads);
+  localStorage.setItem("DesvpadsPac", desvpadsJSON);
 
-
-  console.log("response", response)
+  console.log("response", response);
   return (
     <div>
       <Menu />
       {/* form */}
-      <form
-        className="flex flex-col w-full items-center "
-      >
+      <form className="flex flex-col w-full items-center ">
         <div className="flex flex-col justify-between w-[90%] rounded-lg bg-white shadow-lg  box-shadow">
           {/* informações dos inputs */}
           <div className="py-2 px-10">
             <h1 className="text-black font-bold text-3xl">
-              Resultado de Medição de Paquimetro 
+              Resultado de Medição de Paquimetro
             </h1>
             <div className="gap-5 flex flex-col w-full items-center py-3">
               <div className="flex flex-row gap-3 w-full items-center">
@@ -379,7 +581,11 @@ export default function ResulPaquimetro() {
                   <Label className="font-bold text-[#3F3F3F] text-sm  w-[40%] ">
                     Faixa Nominal
                   </Label>
-                  <Input type="text" placeholder="Digite o nome..." {...register("faixaNominal")}/>
+                  <Input
+                    type="text"
+                    placeholder="Digite o nome..."
+                    {...register("faixaNominal")}
+                  />
                 </div>
               </div>
               <div className="flex flex-row w-full justify-between  gap-3 ">
@@ -387,7 +593,11 @@ export default function ResulPaquimetro() {
                   <Label className="font-bold text-[#3F3F3F] text-sm  w-[20%] ">
                     Resolução
                   </Label>
-                  <Input type="text" placeholder="Digite o nome..." {...register("resolucao")}/>
+                  <Input
+                    type="text"
+                    placeholder="Digite o nome..."
+                    {...register("resolucao")}
+                  />
                 </div>
                 <div className="flex flex-row gap-3 items-center  w-[40%]">
                   <Label className="font-bold text-[#3F3F3F] text-sm w-[40%] ">
@@ -475,36 +685,72 @@ export default function ResulPaquimetro() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-              {Array.from({ length: 6 }, (_, index) => (
-              <tr key={index}>
-                <td className="border text-center p-0">
-                  <input className="p-5 w-full h-full" type="text" {...register(`vn1${index + 1}`)} />
-                </td>
-                <td className="border text-center p-0">
-                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 1}`)} />
-                </td>
-                <td className="border text-center p-0">
-                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 2}`)} />
-                </td>
-                <td className="border text-center p-0">
-                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 3}`)} />
-                </td>
-                <td className="border text-center">{tendenciasMedEx[index]}</td>
-                <td className="border text-center p-0">
-                  <input className="p-5 w-full h-full" type="text" {...register(`vn2${index + 1}`)} />
-                </td>
-                <td className="border text-center p-0">
-                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 4}`)} />
-                </td>
-                <td className="border text-center p-0">
-                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 5}`)} />
-                </td>
-                <td className="border text-center p-0">
-                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 6}`)} />
-                </td>
-                <td className="border text-center">{tendenciasMedEx2[index]}</td>
-              </tr>
-            ))}
+                {Array.from({ length: 6 }, (_, index) => (
+                  <tr key={index}>
+                    <td className="border text-center p-0">
+                      <input
+                        className="p-5 w-full h-full"
+                        type="text"
+                        {...register(`vn1${index + 1}`)}
+                      />
+                    </td>
+                    <td className="border text-center p-0">
+                      <input
+                        className="p-5 w-full h-full"
+                        type="text"
+                        {...register(`vi${index * 6 + 1}`)}
+                      />
+                    </td>
+                    <td className="border text-center p-0">
+                      <input
+                        className="p-5 w-full h-full"
+                        type="text"
+                        {...register(`vi${index * 6 + 2}`)}
+                      />
+                    </td>
+                    <td className="border text-center p-0">
+                      <input
+                        className="p-5 w-full h-full"
+                        type="text"
+                        {...register(`vi${index * 6 + 3}`)}
+                      />
+                    </td>
+                    <td className="border text-center">
+                      {tendenciasMedEx[index]}
+                    </td>
+                    <td className="border text-center p-0">
+                      <input
+                        className="p-5 w-full h-full"
+                        type="text"
+                        {...register(`vn2${index + 1}`)}
+                      />
+                    </td>
+                    <td className="border text-center p-0">
+                      <input
+                        className="p-5 w-full h-full"
+                        type="text"
+                        {...register(`vi${index * 6 + 4}`)}
+                      />
+                    </td>
+                    <td className="border text-center p-0">
+                      <input
+                        className="p-5 w-full h-full"
+                        type="text"
+                        {...register(`vi${index * 6 + 5}`)}
+                      />
+                    </td>
+                    <td className="border text-center p-0">
+                      <input
+                        className="p-5 w-full h-full"
+                        type="text"
+                        {...register(`vi${index * 6 + 6}`)}
+                      />
+                    </td>
+                    <td className="border text-center">
+                      {tendenciasMedEx2[index]}
+                    </td>
+                  </tr>
+                ))}
               </TableBody>
             </Table>
           </div>
@@ -580,9 +826,11 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="border text-senter">{resultado_Orelhas.tendencia_proximo}</TableCell>
+                  <TableCell className="border text-senter">
+                    {resultado_Orelhas.tendencia_proximo}
+                  </TableCell>
                   <TableCell className="border text-center" rowSpan={2}>
-                   {resultado_Orelhas.paralelismo_Orelhas}
+                    {resultado_Orelhas.paralelismo_Orelhas}
                   </TableCell>
                 </TableRow>
                 <TableRow className="">
@@ -611,7 +859,9 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="text-center border">{resultado_Orelhas.tendencia_afastado}</TableCell>
+                  <TableCell className="text-center border">
+                    {resultado_Orelhas.tendencia_afastado}
+                  </TableCell>
                 </TableRow>
               </TableBody>
 
@@ -680,7 +930,9 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="text-center border">{resultado_Bicos.tendencia_proximo}</TableCell>
+                  <TableCell className="text-center border">
+                    {resultado_Bicos.tendencia_proximo}
+                  </TableCell>
                   <TableCell className="border text-center" rowSpan={2}>
                     {resultado_Bicos.paralelismo_Orelhas}
                   </TableCell>
@@ -711,7 +963,9 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="border text-center">{resultado_Bicos.tendencia_afastado}</TableCell>
+                  <TableCell className="border text-center">
+                    {resultado_Bicos.tendencia_afastado}
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -817,7 +1071,9 @@ export default function ResulPaquimetro() {
                         {...register(`vimi${index * 3 + 3}`)}
                       />
                     </TableCell>
-                    <TableCell className="border text-center ">{tendenciasMedIn[index]}</TableCell>
+                    <TableCell className="border text-center ">
+                      {tendenciasMedIn[index]}
+                    </TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
@@ -846,7 +1102,9 @@ export default function ResulPaquimetro() {
                         {...register(`vimr${index * 3 + 3}`)}
                       />
                     </TableCell>
-                    <TableCell className="border text-center">{tendenciasMedResal[index]}</TableCell>
+                    <TableCell className="border text-center">
+                      {tendenciasMedResal[index]}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -911,7 +1169,9 @@ export default function ResulPaquimetro() {
                             {...register(`vimp${index * 3 + 3}`)}
                           />
                         </TableCell>
-                        <TableCell className="border text-center ">{tendenciasProf[index]}</TableCell>
+                        <TableCell className="border text-center ">
+                          {tendenciasProf[index]}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -1073,10 +1333,18 @@ export default function ResulPaquimetro() {
           {/* BOTÕES DO FORMULÁRIO */}
         </div>
         <div className="w-[90%] flex flex-row justify-end items-center py-5 gap-3">
-          <Button className="w-[200px]" type="submit" onClick={handleSubmit(handleCalculate)}>
+          <Button
+            className="w-[200px]"
+            type="submit"
+            onClick={handleSubmit(handleCalculate)}
+          >
             Calcular
           </Button>
-          <Button className="w-[200px]" type="submit">
+          <Button
+            className="w-[200px]"
+            type="submit"
+            onClick={handleSubmit(handleAdd)}
+          >
             Adicionar
           </Button>
           <Button className="w-[200px] border-[#858585] border-2 bg-transparent text-[#949494] font-semibold hover:bg-[#858585] hover:text-white">
