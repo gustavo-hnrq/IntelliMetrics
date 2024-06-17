@@ -207,9 +207,11 @@ const escala = [
                   <Label className="w-[23%]">Nº do Certificado </Label>
                   <Input {...register("nrCertificado")} placeholder="Digite aqui" />
                   <Label className="w-[23%]">Data de Calibração</Label>
-                  <Input type="number" {...register("novaDataCalibracao")}{...register("nrCertificado")} placeholder="xxxx-xx-xx" />
+                  <Input type="number" {...register("novaDataCalibracao")} placeholder="xxxx-xx-xx" />
+                  <Label type="number" className="w-[23%]">Resolução</Label>
+                  <Input type="number" {...register("valorDivResolucao")} placeholder="Digite aqui" />
                 </div> 
-
+                
                 <div className="flex flex-row items-center col-span-4 gap-2">
                   <div className="flex flex-row gap-3 w-full items-center">
                     <Label className="font-bold text-[#3F3F3F] text-sm w-[45%] ">
@@ -283,7 +285,7 @@ const escala = [
 
                   <div className="flex flex-row gap-3 w-full items-center">
                     <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
-                      Interessado
+                      Instrumento
                     </Label>
                     <SelectA
                     options={tools.map((item) => ({
@@ -294,15 +296,7 @@ const escala = [
                   />
                   </div>
                 </div>
-                
-
-                
-               
-                
-
-
-                 
-                  
+    
                 </div>
               </div>
 
@@ -567,7 +561,7 @@ const escala = [
                       <Label className="col-span-4 w-23">Método de medição: IT-SUI-515 </Label>
                       <div className="flex flex-row col-span-2 gap-3 w-full items-center">
                         <Label className=" w-[25%]">Versão</Label>
-                        <Input type="number" {...register("novaDataCalibracao")} placeholder="Digite aqui" />
+                        <Input type="number" {...register("novaVersaoMetodo")} placeholder="Digite aqui" />
                       </div>
                       <div className="flex flex-row col-span-2 gap-3 w-full items-center">
                         <Label className="w-[25%]">Tempo Inicial</Label>
