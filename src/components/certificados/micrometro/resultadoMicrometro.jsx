@@ -71,8 +71,8 @@ const inspecao = [
 ]
 
 const escala = [
-  {value: "digital", label: "digital"},
-  {value: "analogico", label: "analogico"}
+  {value: 1, label: "digital"},
+  {value: 0, label: "analogico"}
 ]
 
   // BIBLIOTECA PARA RETORNAR MENSAGEM DA RESPOSTA DA API
@@ -144,9 +144,9 @@ const escala = [
         cFixo,
         dadosParalelismo,
         dadosControle,
-        faixaCalibrada: parseFloat(data.faixaCalibrada),
+        faixaCalibrada: parseFloat(data.novaFaixaCalibradaNum),
         valorDivResolucao: parseFloat(data.valorDivResolucao),
-        dig_anal: parseInt(data.dig_anal)
+        dig_anal: parseInt(data.novoTipoEscala)
       }
 
       // console.log("data", dataCalculo)

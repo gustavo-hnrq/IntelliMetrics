@@ -21,6 +21,7 @@ export default function IncertMicrometro() {
     }
   }, []);
 
+  console.log("incerteza",response)
 // Desestruturação com valores padrão
 const {
   incerteza_medAU = {incerteza_AU: '=DIV/0!', contribuiçao_incerteza: '=DIV/0!'},
