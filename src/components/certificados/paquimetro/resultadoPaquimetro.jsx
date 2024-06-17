@@ -10,7 +10,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { medicaoExterna, medicaoInterna, medicaoPararelismo, medicaoProfundidade, medicaoRessalto, resultadoCalcPaq } from "@/services/paquimetro";
+import {
+  medicaoExterna,
+  medicaoInterna,
+  medicaoPararelismo,
+  medicaoProfundidade,
+  medicaoRessalto,
+  resultadoCalcPaq,
+} from "@/services/paquimetro";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -261,9 +268,9 @@ export default function ResulPaquimetro() {
         novoVn6_2: isValidNumber(parseFloat(data.vi17)),
         novoVn6_3: isValidNumber(parseFloat(data.vi18)),
         novoVn7: isValidNumber(parseFloat(data.vn14)),
-        novoVn8_1: isValidNumber(parseFloat(data.vi19)),
-        novoVn8_2: isValidNumber(parseFloat(data.vi20)),
-        novoVn8_3: isValidNumber(parseFloat(data.vi21)),
+        novoVn7_1: isValidNumber(parseFloat(data.vi19)),
+        novoVn7_2: isValidNumber(parseFloat(data.vi20)),
+        novoVn7_3: isValidNumber(parseFloat(data.vi21)),
         novoVnExtra1: isValidNumber(parseFloat(data.vn24)),
         novoVnExtra1_1: isValidNumber(parseFloat(data.vi22)),
         novoVnExtra1_2: isValidNumber(parseFloat(data.vi23)),
@@ -273,12 +280,12 @@ export default function ResulPaquimetro() {
         novoVnExtra2_2: isValidNumber(parseFloat(data.vi26)),
         novoVnExtra2_3: isValidNumber(parseFloat(data.vi27)),
         novoVnExtra3: isValidNumber(parseFloat(data.vn16)),
-        novoVnExtra3_1: isValidNumber(parseFloat(data.vi28)),
-        novoVnExtra3_2: isValidNumber(parseFloat(data.vi29)),
-        novoVnExtra3_3: isValidNumber(parseFloat(data.vi30)),
+        novoVnExtra3_1: isValidNumber(parseFloat(data.vi31)),
+        novoVnExtra3_2: isValidNumber(parseFloat(data.vi32)),
+        novoVnExtra3_3: isValidNumber(parseFloat(data.vi33)),
       };
 
-      // console.log("valores med externa: ", dataMedExterna);
+      console.log("valores med externa: ", dataMedExterna);
 
       // PARARELISMO
       const dataPararelismo = {
@@ -298,43 +305,43 @@ export default function ResulPaquimetro() {
         novoValorAfasBico3: isValidNumber(parseFloat(data.viao6)),
       };
 
-      // console.log("valores pararelismo: ", dataPararelismo);
+      console.log("valores pararelismo: ", dataPararelismo);
 
       // MEDIÇÃO INTERNA
       const dataMedInterna = {
-        novaPrimeiraMedida:   isValidNumber(parseFloat(data.vnmi1)),
-        novoValorNominal1_1:  isValidNumber(parseFloat(data.vimi1)),
-        novoValorNominal1_2:  isValidNumber(parseFloat(data.vimi2)),
-        novoValorNominal1_3:  isValidNumber(parseFloat(data.vimi3)),
-        novaSegundaMedida:    isValidNumber(parseFloat(data.vnmi2)),
-        novoValorNominal2_1:  isValidNumber(parseFloat(data.vimi4)),
-        novoValorNominal2_2:  isValidNumber(parseFloat(data.vimi5)),
-        novoValorNominal2_3:  isValidNumber(parseFloat(data.vimi6)),
-        novaTerceiraMedida:   isValidNumber(parseFloat(data.vnmi3)),
-        novoValorNominal3_1:  isValidNumber(parseFloat(data.vimi7)),
-        novoValorNominal3_2:  isValidNumber(parseFloat(data.vimi8)),
-        novoValorNominal3_3:  isValidNumber(parseFloat(data.vimi9)),
+        novaPrimeiraMedida: isValidNumber(parseFloat(data.vnmi1)),
+        novoValorNominal1_1: isValidNumber(parseFloat(data.vimi1)),
+        novoValorNominal1_2: isValidNumber(parseFloat(data.vimi2)),
+        novoValorNominal1_3: isValidNumber(parseFloat(data.vimi3)),
+        novaSegundaMedida: isValidNumber(parseFloat(data.vnmi2)),
+        novoValorNominal2_1: isValidNumber(parseFloat(data.vimi4)),
+        novoValorNominal2_2: isValidNumber(parseFloat(data.vimi5)),
+        novoValorNominal2_3: isValidNumber(parseFloat(data.vimi6)),
+        novaTerceiraMedida: isValidNumber(parseFloat(data.vnmi3)),
+        novoValorNominal3_1: isValidNumber(parseFloat(data.vimi7)),
+        novoValorNominal3_2: isValidNumber(parseFloat(data.vimi8)),
+        novoValorNominal3_3: isValidNumber(parseFloat(data.vimi9)),
       };
 
-      // console.log("valores med interna: : ", dataMedInterna);
+      console.log("valores med interna: : ", dataMedInterna);
 
       // MEDIÇÃO RESSALTO
       const dataMedRessalto = {
-        novaPrimeiraMedida:   isValidNumber(parseFloat(data.vnmr1)),
-        novoValorNominal1_1:  isValidNumber(parseFloat(data.vimr1)),
-        novoValorNominal1_2:  isValidNumber(parseFloat(data.vimr2)),
-        novoValorNominal1_3:  isValidNumber(parseFloat(data.vimr3)),
-        novaSegundaMedida:    isValidNumber(parseFloat(data.vnmr2)),
-        novoValorNominal2_1:  isValidNumber(parseFloat(data.vimr4)),
-        novoValorNominal2_2:  isValidNumber(parseFloat(data.vimr5)),
-        novoValorNominal2_3:  isValidNumber(parseFloat(data.vimr6)),
-        novaTerceiraMedida:   isValidNumber(parseFloat(data.vnmr3)),
-        novoValorNominal3_1:  isValidNumber(parseFloat(data.vimr7)),
-        novoValorNominal3_2:  isValidNumber(parseFloat(data.vimr8)),
-        novoValorNominal3_3:  isValidNumber(parseFloat(data.vimr9)),
+        novaPrimeiraMedida: isValidNumber(parseFloat(data.vnmr1)),
+        novoValorNominal1_1: isValidNumber(parseFloat(data.vimr1)),
+        novoValorNominal1_2: isValidNumber(parseFloat(data.vimr2)),
+        novoValorNominal1_3: isValidNumber(parseFloat(data.vimr3)),
+        novaSegundaMedida: isValidNumber(parseFloat(data.vnmr2)),
+        novoValorNominal2_1: isValidNumber(parseFloat(data.vimr4)),
+        novoValorNominal2_2: isValidNumber(parseFloat(data.vimr5)),
+        novoValorNominal2_3: isValidNumber(parseFloat(data.vimr6)),
+        novaTerceiraMedida: isValidNumber(parseFloat(data.vnmr3)),
+        novoValorNominal3_1: isValidNumber(parseFloat(data.vimr7)),
+        novoValorNominal3_2: isValidNumber(parseFloat(data.vimr8)),
+        novoValorNominal3_3: isValidNumber(parseFloat(data.vimr9)),
       };
 
-      // console.log("valores med ressalto: : ", dataMedRessalto);
+      console.log("valores med ressalto: : ", dataMedRessalto);
 
       // MEDIÇÃO PROFUNDIDADE
       const dataProfundidade = {
@@ -352,28 +359,26 @@ export default function ResulPaquimetro() {
         novo_valorNominal3_3: isValidNumber(parseFloat(data.vimp9)),
       };
 
-      // console.log("valores profundidade: ", dataProfundidade);
+      console.log("valores profundidade: ", dataProfundidade);
 
       // TODO: Fazer a requisição da api individual para cada valor e colocar com um nome que seja entendível...
-      // const resExterna = await medicaoExterna(dataMedExterna);
+      const resExterna = await medicaoExterna(dataMedExterna);
       const resInterna = await medicaoInterna(dataMedInterna);
       const resProfundidade = await medicaoProfundidade(dataProfundidade);
       const resParelismo = await medicaoPararelismo(dataPararelismo);
       const resRessalto = await medicaoRessalto(dataMedRessalto);
 
-      // console.log("resposta medição externa: ", resExterna);
-      // console.log("resposta medição interna: ", resInterna);
-      // console.log("resposta medição profundidade: ", resProfundidade);
-      // console.log("resposta medição pararelismo: ", resParelismo);
-      // console.log("resposta medição ressalto: ", resRessalto);
+      console.log("resposta medição externa: ", resExterna);
+      console.log("resposta medição interna: ", resInterna);
+      console.log("resposta medição profundidade: ", resProfundidade);
+      console.log("resposta medição pararelismo: ", resParelismo);
+      console.log("resposta medição ressalto: ", resRessalto);
 
       // console.log(data);
       return Toast.fire({
         title: `Dados registrados com sucesso`,
         icon: "success",
       });
-
-
     } catch (err) {
       console.log("Erro: ", err.response);
       if (err.response.status === 400) {
@@ -385,6 +390,7 @@ export default function ResulPaquimetro() {
         console.log(err.response);
         return Toast.fire({
           title: `Erro interno no servidor`,
+          text: `Tente novammente mais tarde`,
           icon: "error",
         });
       }
