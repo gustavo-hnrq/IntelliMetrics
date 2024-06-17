@@ -600,7 +600,6 @@ const escala = [
         {/* BOTÕES DO FORMULÁRIO */}
         <div className="w-[90%] flex flex-row justify-end items-center py-5 gap-3">
         <Button className="w-[200px]"  onClick={() => handleSubmit(handleCalculate)()}>Calcular </Button>
-          <Button className="w-[200px]">Adicionar</Button>
           <Button variant="outline">
             Cancelar
           </Button>

@@ -1236,7 +1236,6 @@ const {
             </div>
             {/* div para os botões  */}
             <div className="w-full flex flex-row justify-end items-center py-5 gap-3">
-              <Button className="w-[200px]">Adicionar</Button>
               <Button className="w-[200px] border-[#858585] border-2 bg-transparent text-[#949494] font-semibold hover:bg-[#858585] hover:text-white">
                 Cancelar
               </Button>

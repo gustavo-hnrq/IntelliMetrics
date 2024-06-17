@@ -7,7 +7,19 @@ import senai from "../../../assets/Senai Logotipo_destaque.png";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useForm } from "react-hook-form";
 import { incertezaCalcPaq } from "@/services/paquimetro";
+import Swal from "sweetalert2";
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  },
+});
 
 export default function CertPaquimetro() {
 
@@ -16,35 +28,46 @@ export default function CertPaquimetro() {
   const { handleSubmit } = useForm();
 
   async function handleCalculate() {
-    const resolucao = localStorage.getItem("resolucao")
-    const faixaNominal = localStorage.getItem("faixaNominal")
-    const desvpads = localStorage.getItem("DesvpadsPac")
+    try{
+        const resolucao = localStorage.getItem("resolucao")
+        const faixaNominal = localStorage.getItem("faixaNominal")
+        const desvpads = localStorage.getItem("DesvpadsPac")
 
-    console.log("faixa nominal", faixaNominal)
-   // Passo 2: Converter a string JSON em um objeto JavaScript
-    const desvpadsObj = JSON.parse(desvpads);
-    setDesvpadSave(desvpadsObj)
+        console.log("faixa nominal", faixaNominal)
+      // Passo 2: Converter a string JSON em um objeto JavaScript
+        const desvpadsObj = JSON.parse(desvpads);
+        setDesvpadSave(desvpadsObj)
 
-    // Passo 3: Inicializar uma lista para armazenar os valores
-    const valores = [];
+        // Passo 3: Inicializar uma lista para armazenar os valores
+        const valores = [];
 
-    // Passo 4: Iterar sobre as chaves do objeto e adicionar os valores à lista
-    for (let chave in desvpadsObj) {
-        if (desvpadsObj.hasOwnProperty(chave)) {
-            valores.push(desvpadsObj[chave]);
+        // Passo 4: Iterar sobre as chaves do objeto e adicionar os valores à lista
+        for (let chave in desvpadsObj) {
+            if (desvpadsObj.hasOwnProperty(chave)) {
+                valores.push(desvpadsObj[chave]);
+            }
         }
+      
+        const data ={
+          resolucao: resolucao,
+          faixaNominal: parseInt(faixaNominal),
+          desvpad: valores
+
+        }
+
+        const response = await incertezaCalcPaq(data);
+        setResponse(response.data);
+
+      return Toast.fire({
+        title: `Calculos realizados`,
+        icon: "success",
+      });
+    } catch (error) {
+      return Toast.fire({
+        title: `${error}`,
+        icon: "error",
+      });
     }
-   
-    const data ={
-      resolucao: resolucao,
-      faixaNominal: parseInt(faixaNominal),
-      desvpad: valores
-
-    }
-
-    const response = await incertezaCalcPaq(data);
-    setResponse(response.data);
-
   }
 
   const { incertezaUE = {K: "#DIV/0", UE: "#DIV/0"} } = {} = response || {}
@@ -56,8 +79,8 @@ export default function CertPaquimetro() {
   const { inceteza_ERES = {Estimativa_ERES: 0, incerteza_ERES: "#DIV/0", contribuiçao_Incerteza: "#DIV/0"} } = {} = response || {}
 
  
-  console.log("response incer", response)
-  console.log("des", desvpadSave.resultado1)
+  // console.log("response incer", response)
+  // console.log("des", desvpadSave.resultado1)
 
     return (
 
@@ -339,7 +362,6 @@ export default function CertPaquimetro() {
           <Button className="w-[200px]" type="submit" onClick={handleSubmit(handleCalculate)}>
             Calcular
           </Button>
-            <Button className="w-[200px]">Adicionar</Button>
             <Button className="w-[200px] border-[#858585] border-2 bg-transparent text-[#949494] font-semibold hover:bg-[#858585] hover:text-white">
               Cancelar
             </Button>

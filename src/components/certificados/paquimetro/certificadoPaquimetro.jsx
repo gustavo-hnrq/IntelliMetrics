@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import selo from "../../../assets/selo certificado.png";
 import senai from "../../../assets/Senai Logotipo_destaque.png";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -16,6 +16,28 @@ export default function CertPaquimetro() {
     const handlePrint = useReactToPrint({
       content: () => contentDocument.current
     })
+
+    const [response, setResponse] = useState(null);
+    const [response2, setResponse2] = useState(null);
+    const [response3, setResponse3] = useState(null);
+
+    useEffect(() => {
+      const storedResponse = localStorage.getItem('DesvpadsPac');
+      const storedResponse2 = localStorage.getItem('response');
+      const storedResponse3 = localStorage.getItem('responsePac');
+      
+      if (storedResponse && storedResponse2 && storedResponse3) {
+        setResponse(JSON.parse(storedResponse));
+        setResponse2(JSON.parse(storedResponse2));
+        setResponse3(JSON.parse(storedResponse3));
+      }
+    }, []);
+
+    const { resultado1 = "#DIV/0", resultado2 = "#DIV/0", resultado3 = "#DIV/0", resultado4 = "#DIV/0", resultado5 = "#DIV/0", resultado6 = "#DIV/0" } = {} = response || {};
+    const { incerteza_UC = {UC: 0, veff: "#DIV/0", K: "#DIV/0"}} = {} = response2 || {}
+    const { calculos_Pararelismo_Bicos: {
+        resultado_Bicos = {paralelismo_Orelhas: "#DIV/0"}} = {} } = response3 || {};
+    console.log("certificado", resultado_Bicos)
 
     return (
       
@@ -215,45 +237,45 @@ export default function CertPaquimetro() {
                       <TableBody>
                         <TableRow>
                             <TableHead>0,00</TableHead>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
+                            <TableCell>{resultado1}</TableCell>
+                            <TableCell>{incerteza_UC.UC}</TableCell>
+                            <TableCell>{incerteza_UC.K}</TableCell>
+                            <TableCell>{incerteza_UC.veff}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead>1,30</TableHead>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
+                            <TableCell>{resultado2}</TableCell>
+                            <TableCell>{incerteza_UC.UC}</TableCell>
+                            <TableCell>{incerteza_UC.K}</TableCell>
+                            <TableCell>{incerteza_UC.veff}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead>1,40</TableHead>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
+                            <TableCell>{resultado3}</TableCell>
+                            <TableCell>{incerteza_UC.UC}</TableCell>
+                            <TableCell>{incerteza_UC.K}</TableCell>
+                            <TableCell>{incerteza_UC.veff}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead>20,00</TableHead>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
+                            <TableCell>{resultado4}</TableCell>
+                            <TableCell>{incerteza_UC.UC}</TableCell>
+                            <TableCell>{incerteza_UC.K}</TableCell>
+                            <TableCell>{incerteza_UC.veff}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead>50,00</TableHead>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
+                            <TableCell>{resultado5}</TableCell>
+                            <TableCell>{incerteza_UC.UC}</TableCell>
+                            <TableCell>{incerteza_UC.K}</TableCell>
+                            <TableCell>{incerteza_UC.veff}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableHead>100,00</TableHead>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
+                            <TableCell>{resultado6}</TableCell>
+                            <TableCell>{incerteza_UC.UC}</TableCell>
+                            <TableCell>{incerteza_UC.K}</TableCell>
+                            <TableCell>{incerteza_UC.veff}</TableCell>
                         </TableRow>
                       </TableBody>
                   </Table>
@@ -275,10 +297,10 @@ export default function CertPaquimetro() {
                       <TableBody>
                         <TableRow>
                             <TableHead>Bicos</TableHead>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
-                            <TableCell>#DIV/0!</TableCell>
+                            <TableCell>{resultado_Bicos.paralelismo_Orelhas}</TableCell>
+                            <TableCell>0,0000</TableCell>
+                            <TableCell>{incerteza_UC.K}</TableCell>
+                            <TableCell>{incerteza_UC.veff}</TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
@@ -348,7 +370,6 @@ export default function CertPaquimetro() {
 
 
           <div className="w-[90%] flex flex-row justify-end items-center py-5 gap-3">
-            <Button className="w-[200px]">Adicionar</Button>
             <Button className="w-[200px] border-[#858585] border-2 bg-transparent text-[#949494] font-semibold hover:bg-[#858585] hover:text-white">
               Cancelar
             </Button>

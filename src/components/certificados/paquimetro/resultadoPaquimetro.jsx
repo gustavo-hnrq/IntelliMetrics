@@ -222,7 +222,7 @@ export default function ResulPaquimetro() {
       // console.log("data", dataTotal.valorIndicado)
       const response = await resultadoCalcPaq(dataTotal);
       setResponse(response.data);
-
+      localStorage.setItem("responsePac", JSON.stringify(response.data))
       // console.log("medicao externa: ", valorIndicado, medicaoExterna);
 
       return Toast.fire({
@@ -236,7 +236,7 @@ export default function ResulPaquimetro() {
       });
     }
   }
-
+ 
   // FUNÇÃO PARA ENVIAR OS DADOS PARA O BANCO
   async function handleAdd(data) {
     try {
