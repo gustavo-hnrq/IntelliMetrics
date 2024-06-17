@@ -355,11 +355,11 @@ export default function ResulPaquimetro() {
       // console.log("valores profundidade: ", dataProfundidade);
 
       // TODO: Fazer a requisição da api individual para cada valor e colocar com um nome que seja entendível...
-      const resExterna = await medicaoExterna(dataMedExterna);
-      // const resInterna = await medicaoInterna(dataMedInterna);
-      // const resProfundidade = await medicaoProfundidade(dataProfundidade);
-      // const resParelismo = await medicaoPararelismo(dataPararelismo);
-      // const resRessalto = await medicaoRessalto(dataMedRessalto);
+      // const resExterna = await medicaoExterna(dataMedExterna);
+      const resInterna = await medicaoInterna(dataMedInterna);
+      const resProfundidade = await medicaoProfundidade(dataProfundidade);
+      const resParelismo = await medicaoPararelismo(dataPararelismo);
+      const resRessalto = await medicaoRessalto(dataMedRessalto);
 
       // console.log("resposta medição externa: ", resExterna);
       // console.log("resposta medição interna: ", resInterna);
