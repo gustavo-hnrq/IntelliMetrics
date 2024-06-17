@@ -22,9 +22,24 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
+import { getAllTools } from "@/services/instrumentos";
+import { getAllUsers } from "@/services/membros";
+
 export default function ResulPaquimetro() {
   const [response, setResponse] = useState("");
   const { register, handleSubmit } = useForm();
+
+  
+  const inspecao = [
+    {value: "ok", label: "ok"},
+    {value: "nok", label: "nok"}
+  ]
+  
+  const escala = [
+    {value: "digital", label: "digital"},
+    {value: "analogico", label: "analogico"}
+  ]
+
 
   // BIBLIOTECA PARA RETORNAR MENSAGEM DA RESPOSTA DA API
   const Toast = Swal.mixin({
@@ -514,130 +529,110 @@ export default function ResulPaquimetro() {
   localStorage.setItem("DesvpadsPac", desvpadsJSON);
 
   console.log("response", response);
+
+  const [tools, setTools] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  async function getTools() {
+    try {
+      const response = await getAllTools();
+      setTools(response.data);
+    } catch (error) {
+      return error.message;
+    }
+  }
+  async function getUsuarios() {
+    try {
+      const response = await getAllUsers();
+      setUsers(response.data);
+    } catch (error) {
+      return error.message;
+    }
+  }
+  useEffect(() => {
+    getTools();
+    getUsuarios();
+  }, []);
+  
   return (
     <div>
       <Menu />
       {/* form */}
-      <form className="flex flex-col w-full items-center ">
+      <form
+        className="flex flex-col w-full items-center "
+      >
         <div className="flex flex-col justify-between w-[90%] rounded-lg bg-white shadow-lg  box-shadow">
           {/* informações dos inputs */}
           <div className="py-2 px-10">
             <h1 className="text-black font-bold text-3xl">
-              Resultado de Medição de Paquimetro
+              Resultado de Medição de Paquimetro 
             </h1>
-            <div className="gap-5 flex flex-col w-full items-center py-3">
-              <div className="flex flex-row gap-3 w-full items-center">
-                <Label className="font-bold text-[#3F3F3F] text-sm w-[11%] ">
-                  Interessado
-                </Label>
-                <Input type="text" placeholder="Digite o nome..." />
-              </div>
-              <div className="flex flex-row gap-3 w-full items-center">
-                <Label className="font-bold text-[#3F3F3F] text-sm w-[11%] ">
-                  Endereço
-                </Label>
-                <Input type="text" placeholder="Digite o nome..." />
-              </div>
+            <div className="mt-5 grid grid-cols-4 w-full gap-3">
+            <div className="flex flex-row items-center col-span-4 gap-2">
+                  <Label className="w-[25%]">Nº do Certificado </Label>
+                  <Input {...register("nrCertificado")} placeholder="Digite aqui" />
+                  <Label className="w-[26%]">Data de Calibração</Label>
+                  <Input type="number" {...register("novaDataCalibracao")}{...register("nrCertificado")} placeholder="xxxx-xx-xx" />
+                </div> 
 
-              <div className="flex flex-row w-full justify-between  gap-3 ">
-                <div className="flex flex-row gap-3 items-center w-[60%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm w-[20%] ">
-                    Contratante
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
+                <div className="flex flex-row items-center col-span-4 gap-2">
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                      Inspeção do Instrumento
+                    </Label>
+                    <SelectA
+                      options={inspecao.map((item) => ({
+                        value: item.value,
+                        label: item.label,
+                      }))}
+                      {...register("novaInspecao")}
+                    />
                 </div>
-                <div className="flex flex-row gap-3 items-center  w-[40%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm w-[40%] ">
-                    N° da OS
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-              </div>
-              <div className="flex flex-row w-full justify-between  gap-3 ">
-                <div className="flex flex-row gap-3 items-center w-[60%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm w-[20%] ">
-                    Obj. Medido
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-                <div className="flex flex-row gap-3 items-center  w-[40%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm  w-[40%] ">
-                    N° Certif.
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-              </div>
-              <div className="flex flex-row w-full justify-between  gap-3 ">
-                <div className="flex flex-row gap-3 items-center w-[60%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm  w-[20%] ">
-                    Fabricante
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-                <div className="flex flex-row gap-3 items-center  w-[40%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm  w-[40%] ">
-                    Código
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-              </div>
-              <div className="flex flex-row w-full justify-between  gap-3 ">
-                <div className="flex flex-row gap-3 items-center w-[60%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm w-[20%] ">
-                    Indent. Cliente
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-                <div className="flex flex-row gap-3 items-center  w-[40%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm  w-[40%] ">
-                    Faixa Nominal
-                  </Label>
-                  <Input
-                    type="text"
-                    placeholder="Digite o nome..."
-                    {...register("faixaNominal")}
+
+                  
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                      Escala
+                    </Label>
+                    <SelectA
+                    options={escala.map((item) => ({
+                      value: item.value,
+                      label: item.label,
+                    }))}
+                    {...register("novoTipoEscala")}
                   />
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row w-full justify-between  gap-3 ">
-                <div className="flex flex-row gap-3 items-center w-[60%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm  w-[20%] ">
-                    Resolução
-                  </Label>
-                  <Input
-                    type="text"
-                    placeholder="Digite o nome..."
-                    {...register("resolucao")}
+        
+                <div className="flex flex-row items-center col-span-4 gap-2">
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                      Responsável
+                    </Label>
+                      <SelectA
+                      options={users.map((item) => ({
+                        value: item.pk_idUsuario,
+                        label: item.nome,
+                      }))}
+                      {...register("novoTecnico")}
+                    />
+                  </div>
+
+                  <div className="flex flex-row gap-3 w-full items-center">
+                    <Label className="font-bold text-[#3F3F3F] text-sm w-[25%] ">
+                      Instrumento
+                    </Label>
+                    <SelectA
+                    options={tools.map((item) => ({
+                      value: item.pk_idInstrumento,
+                      label: item.nome,
+                    }))}
+                    {...register("idInstrumento")}
                   />
+                  </div>
                 </div>
-                <div className="flex flex-row gap-3 items-center  w-[40%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm w-[40%] ">
-                    Faixa Calibrada
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-              </div>
-              <div className="flex flex-row gap-3 w-full items-center">
-                <Label className="font-bold text-[#3F3F3F] text-sm w-[15%] ">
-                  Data Recebimento
-                </Label>
-                <Input type="text" placeholder="Digite o nome..." />
-              </div>
-              <div className="flex flex-row w-full justify-between  gap-3 ">
-                <div className="flex flex-row gap-3 items-center w-[60%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm  w-[70%] ">
-                    Inspeção do instrumento (OK / NOK)
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-                <div className="flex flex-row gap-3 items-center  w-[40%]">
-                  <Label className="font-bold text-[#3F3F3F] text-sm w-[80%] ">
-                    Tipo (analógico / Digital){" "}
-                  </Label>
-                  <Input type="text" placeholder="Digite o nome..." />
-                </div>
-              </div>
             </div>
+            
           </div>
 
           {/* MEDIÇÃO EXTERNA */}
@@ -696,72 +691,36 @@ export default function ResulPaquimetro() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {Array.from({ length: 6 }, (_, index) => (
-                  <tr key={index}>
-                    <td className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vn1${index + 1}`)}
-                      />
-                    </td>
-                    <td className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 1}`)}
-                      />
-                    </td>
-                    <td className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 2}`)}
-                      />
-                    </td>
-                    <td className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 3}`)}
-                      />
-                    </td>
-                    <td className="border text-center">
-                      {tendenciasMedEx[index]}
-                    </td>
-                    <td className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vn2${index + 1}`)}
-                      />
-                    </td>
-                    <td className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 4}`)}
-                      />
-                    </td>
-                    <td className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 5}`)}
-                      />
-                    </td>
-                    <td className="border text-center p-0">
-                      <input
-                        className="p-5 w-full h-full"
-                        type="text"
-                        {...register(`vi${index * 6 + 6}`)}
-                      />
-                    </td>
-                    <td className="border text-center">
-                      {tendenciasMedEx2[index]}
-                    </td>
-                  </tr>
-                ))}
+              {Array.from({ length: 6 }, (_, index) => (
+              <tr key={index}>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vn1${index + 1}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 1}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 2}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 3}`)} />
+                </td>
+                <td className="border text-center">{tendenciasMedEx[index]}</td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vn2${index + 1}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 4}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 5}`)} />
+                </td>
+                <td className="border text-center p-0">
+                  <input className="p-5 w-full h-full" type="text" {...register(`vi${index * 6 + 6}`)} />
+                </td>
+                <td className="border text-center">{tendenciasMedEx2[index]}</td>
+              </tr>
+            ))}
               </TableBody>
             </Table>
           </div>
@@ -837,11 +796,9 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="border text-senter">
-                    {resultado_Orelhas.tendencia_proximo}
-                  </TableCell>
+                  <TableCell className="border text-senter">{resultado_Orelhas.tendencia_proximo}</TableCell>
                   <TableCell className="border text-center" rowSpan={2}>
-                    {resultado_Orelhas.paralelismo_Orelhas}
+                   {resultado_Orelhas.paralelismo_Orelhas}
                   </TableCell>
                 </TableRow>
                 <TableRow className="">
@@ -870,9 +827,7 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="text-center border">
-                    {resultado_Orelhas.tendencia_afastado}
-                  </TableCell>
+                  <TableCell className="text-center border">{resultado_Orelhas.tendencia_afastado}</TableCell>
                 </TableRow>
               </TableBody>
 
@@ -941,9 +896,7 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="text-center border">
-                    {resultado_Bicos.tendencia_proximo}
-                  </TableCell>
+                  <TableCell className="text-center border">{resultado_Bicos.tendencia_proximo}</TableCell>
                   <TableCell className="border text-center" rowSpan={2}>
                     {resultado_Bicos.paralelismo_Orelhas}
                   </TableCell>
@@ -974,9 +927,7 @@ export default function ResulPaquimetro() {
                     />
                   </TableCell>
 
-                  <TableCell className="border text-center">
-                    {resultado_Bicos.tendencia_afastado}
-                  </TableCell>
+                  <TableCell className="border text-center">{resultado_Bicos.tendencia_afastado}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -1082,9 +1033,7 @@ export default function ResulPaquimetro() {
                         {...register(`vimi${index * 3 + 3}`)}
                       />
                     </TableCell>
-                    <TableCell className="border text-center ">
-                      {tendenciasMedIn[index]}
-                    </TableCell>
+                    <TableCell className="border text-center ">{tendenciasMedIn[index]}</TableCell>
                     <TableCell className="border text-center p-0">
                       <input
                         className="p-5 w-full h-full"
@@ -1113,9 +1062,7 @@ export default function ResulPaquimetro() {
                         {...register(`vimr${index * 3 + 3}`)}
                       />
                     </TableCell>
-                    <TableCell className="border text-center">
-                      {tendenciasMedResal[index]}
-                    </TableCell>
+                    <TableCell className="border text-center">{tendenciasMedResal[index]}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -1180,9 +1127,7 @@ export default function ResulPaquimetro() {
                             {...register(`vimp${index * 3 + 3}`)}
                           />
                         </TableCell>
-                        <TableCell className="border text-center ">
-                          {tendenciasProf[index]}
-                        </TableCell>
+                        <TableCell className="border text-center ">{tendenciasProf[index]}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -1244,26 +1189,6 @@ export default function ResulPaquimetro() {
                     <p className=" font-bold	text-md">Validade</p>
                     <span>abr/25</span>
                   </div>
-                  <div className="gap-1 w-full items-center py-2 mt-10">
-                    <Label className="font-bold	text-md">
-                      Responsável por assinar o certificado:
-                    </Label>
-                    <Input type="text" placeholder="Digite o nome..." />
-                  </div>
-                  <div className="flex flex-row gap-3 w-full items-center py-1 mt-12 mb-10">
-                    <Label className="font-bold	text-md w-[20%]">Técnico:</Label>
-                    <Input type="text" placeholder="Digite o nome..." />
-                  </div>
-                  <div className="flex flex-row gap-3 w-full items-center py-1 my-3">
-                    <Label className="font-bold	text-md w-[30%]">
-                      Verificação/Supervisão:
-                    </Label>
-                    <div className="border-solid border-b-2 border-[#5A5A5A] w-[70%] h-5"></div>
-                  </div>
-                  <div className="flex flex-row gap-3 w-full items-center py-1">
-                    <Label className="font-bold	text-md w-[10%]">Data: </Label>
-                    <div className="border-solid border-b-2 border-[#5A5A5A] w-[90%] h-5"></div>
-                  </div>
                 </div>
               </div>
               <div className="w-2/4">
@@ -1307,55 +1232,39 @@ export default function ResulPaquimetro() {
                     <p className=" font-bold	text-md">Validade</p>
                     <span>dez/24</span>
                   </div>
-                  <div className="flex flex-row gap-3 w-full items-center py-1">
-                    <Label className="font-bold	text-md w-[80%]">
-                      Temperatura Inicial:
-                    </Label>
-                    <Input type="text" placeholder="Em °C" />
-                  </div>
-                  <div className="flex flex-row gap-3 w-full items-center py-1">
-                    <Label className="font-bold	text-md w-[80%]">
-                      Temperatura Final:
-                    </Label>
-                    <Input type="text" placeholder="Em °C" />
-                  </div>
-                  <div className="flex flex-row gap-3 w-full items-center py-1 my-10">
-                    <Label className="font-bold	text-md w-[80%]">
-                      Data da Calibração:
-                    </Label>
-                    <Input type="date" placeholder="Em °C" />
-                  </div>
-                  <div className="flex flex-row gap-3 w-full items-center py-1 my-3">
-                    <Label className="font-bold	text-md w-[18%]">
-                      Assinatura:
-                    </Label>
-                    <div className="border-solid border-b-2 border-[#5A5A5A] w-[82%] h-5"></div>
-                  </div>
-                  <div className="flex flex-row gap-3 w-full items-center py-1">
-                    <Label className="font-bold	text-md w-[18%]">
-                      Assinatura:
-                    </Label>
-                    <div className="border-solid border-b-2 border-[#5A5A5A] w-[82%] h-5"></div>
-                  </div>
                 </div>
+                
               </div>
+              
             </div>
+            <div className="mt-5 flex flex-row grid grid-cols-4 w-full gap-3">
+          <div className="flex flex-row col-span-2">
+            <Label className="font-bold	text-md w-[25%]">Temperatura Inicial:</Label>
+            <Input {...register("novoTempInicial")} type="text" placeholder="Em °C" />
           </div>
+          <div className="flex flex-row col-span-2">
+            <Label className="font-bold	text-md w-[25%]">Temperatura Final:</Label>
+            <Input {...register("novoTempFinal")} type="text" placeholder="Em °C" />
+          </div>
+          <div className="flex flex-row col-span-2">
+            <Label className="font-bold	text-md w-[25%]">Versão:</Label>
+            <Input {...register("novaVersaoMetodo")}  placeholder="Digite aqui" />
+          </div>
+          <div className="flex flex-row col-span-2">
+            <Label className="font-bold	text-md w-[20%]">Técnico:</Label>
+            <Input {...register("novoResponsável")} type="text" placeholder="Digite o nome..." />
+          </div>                        
+  </div>
+          </div>
+        
+                  
           {/* BOTÕES DO FORMULÁRIO */}
         </div>
         <div className="w-[90%] flex flex-row justify-end items-center py-5 gap-3">
-          <Button
-            className="w-[200px]"
-            type="submit"
-            onClick={handleSubmit(handleCalculate)}
-          >
+          <Button className="w-[200px]" type="submit" onClick={handleSubmit(handleCalculate)}>
             Calcular
           </Button>
-          <Button
-            className="w-[200px]"
-            type="submit"
-            onClick={handleSubmit(handleAdd)}
-          >
+          <Button className="w-[200px]" type="submit">
             Adicionar
           </Button>
           <Button className="w-[200px] border-[#858585] border-2 bg-transparent text-[#949494] font-semibold hover:bg-[#858585] hover:text-white">
