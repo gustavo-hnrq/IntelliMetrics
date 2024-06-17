@@ -18,9 +18,10 @@ import {
   medicaoRessalto,
   resultadoCalcPaq,
 } from "@/services/paquimetro";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { SelectA } from "@/components/ui/select2";
 
 import { getAllTools } from "@/services/instrumentos";
 import { getAllUsers } from "@/services/membros";
