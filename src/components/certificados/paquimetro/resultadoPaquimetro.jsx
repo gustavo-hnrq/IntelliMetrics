@@ -39,6 +39,7 @@ export default function ResulPaquimetro() {
     },
   });
 
+  // FUNÇÃO PARA O CÁLCULO DO PAQUIMETRO
   async function handleCalculate(data) {
     try {
       const valorIndicado = [];
@@ -236,9 +237,10 @@ export default function ResulPaquimetro() {
     }
   }
 
+  // FUNÇÃO PARA ENVIAR OS DADOS PARA O BANCO
   async function handleAdd(data) {
     try {
-      // TODO: basicamente, como a requisição da api está como na variável abaixo, só tenho que continuar desestruturando e mandar dessa forma
+      // validar se oq está vindo está vazio ou não
       const isValidNumber = (num) => (isNaN(num) ? 0 : num);
 
       // MEDIÇÃO INTERNA
@@ -284,8 +286,8 @@ export default function ResulPaquimetro() {
         novoVnExtra3_2: isValidNumber(parseFloat(data.vi32)),
         novoVnExtra3_3: isValidNumber(parseFloat(data.vi33)),
       };
-
-      console.log("valores med externa: ", dataMedExterna);
+      // para ver como estão indo os dados
+      // console.log("valores med externa: ", dataMedExterna);
 
       // PARARELISMO
       const dataPararelismo = {
@@ -304,8 +306,8 @@ export default function ResulPaquimetro() {
         novoValorAfasBico2: isValidNumber(parseFloat(data.viao5)),
         novoValorAfasBico3: isValidNumber(parseFloat(data.viao6)),
       };
-
-      console.log("valores pararelismo: ", dataPararelismo);
+      // para ver como estão indo os dados
+      // console.log("valores pararelismo: ", dataPararelismo);
 
       // MEDIÇÃO INTERNA
       const dataMedInterna = {
@@ -322,8 +324,8 @@ export default function ResulPaquimetro() {
         novoValorNominal3_2: isValidNumber(parseFloat(data.vimi8)),
         novoValorNominal3_3: isValidNumber(parseFloat(data.vimi9)),
       };
-
-      console.log("valores med interna: : ", dataMedInterna);
+      // para ver como estão indo os dados
+      // console.log("valores med interna: : ", dataMedInterna);
 
       // MEDIÇÃO RESSALTO
       const dataMedRessalto = {
@@ -341,7 +343,8 @@ export default function ResulPaquimetro() {
         novoValorNominal3_3: isValidNumber(parseFloat(data.vimr9)),
       };
 
-      console.log("valores med ressalto: : ", dataMedRessalto);
+            // para ver como estão indo os dados
+      // console.log("valores med ressalto: : ", dataMedRessalto);
 
       // MEDIÇÃO PROFUNDIDADE
       const dataProfundidade = {
@@ -359,20 +362,22 @@ export default function ResulPaquimetro() {
         novo_valorNominal3_3: isValidNumber(parseFloat(data.vimp9)),
       };
 
-      console.log("valores profundidade: ", dataProfundidade);
+      // para ver como estão indo os dados
+      // console.log("valores profundidade: ", dataProfundidade);
 
-      // TODO: Fazer a requisição da api individual para cada valor e colocar com um nome que seja entendível...
+      // Requisições individuas para cada tipo de dados
       const resExterna = await medicaoExterna(dataMedExterna);
       const resInterna = await medicaoInterna(dataMedInterna);
       const resProfundidade = await medicaoProfundidade(dataProfundidade);
       const resParelismo = await medicaoPararelismo(dataPararelismo);
       const resRessalto = await medicaoRessalto(dataMedRessalto);
 
-      console.log("resposta medição externa: ", resExterna);
-      console.log("resposta medição interna: ", resInterna);
-      console.log("resposta medição profundidade: ", resProfundidade);
-      console.log("resposta medição pararelismo: ", resParelismo);
-      console.log("resposta medição ressalto: ", resRessalto);
+      // retorna a resposta de cada requisição
+      // console.log("resposta medição externa: ", resExterna);
+      // console.log("resposta medição interna: ", resInterna);
+      // console.log("resposta medição profundidade: ", resProfundidade);
+      // console.log("resposta medição pararelismo: ", resParelismo);
+      // console.log("resposta medição ressalto: ", resRessalto);
 
       // console.log(data);
       return Toast.fire({
